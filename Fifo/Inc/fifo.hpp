@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include <stdarg.h>
 
-#define FIFO_SIZE		  8
+constexpr uint8_t fifoSize = 8;
 
 typedef enum 
 {
@@ -23,10 +23,10 @@ class Fifo
     uint8_t bufferSize;
     volatile uint8_t readIdx;	      
     volatile uint8_t writeIdx;
-    uint8_t buffer[FIFO_SIZE];
+    uint8_t buffer[fifoSize];
     
     public:
-    Fifo(uint8_t bufferSize);
+    Fifo();
     void enque(const uint8_t byte);
     uint8_t deque();
     bool isEmpty() const;

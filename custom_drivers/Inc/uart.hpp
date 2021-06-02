@@ -3,6 +3,7 @@
 
 #include "fifo.hpp"
 #include "nrf_gpio.h"
+#include "NrfLogger.hpp"
 //#include <string>
 //#include <functional>
 
@@ -131,11 +132,6 @@ typedef enum
 //    uint8_t rxSize;
 //} UartBuffers_t;
 
-typedef struct 
-{
-    uint8_t fifoTx;
-    uint8_t fifoRx;
-} UartBuffers_t;
 
 typedef struct
 {
@@ -178,13 +174,16 @@ typedef struct
     uint32_t		  interruptFlags;
 } UartConfig_t;
 
+//static constexpr uint8_t fifoSize = 8;      // TODO - move elsehwere?!
 class Uart
 {
-    UartBuffers_t	    *pUartBufferInfo;
     UartCommParams_t    *pUartCommParams;
     NRF_UART_Type	    *pUARTx;
-    UartConfig_t	     uartConfig;
-    typedef void	     (uartCallback(void));
+    UartConfig_t	    uartConfig;
+    typedef void	    (uartCallback(void));
+
+    Fifo fifoRx;
+    Fifo fifoTx;
 
     //std::function<void()> callback;
 
@@ -195,9 +194,26 @@ class Uart
     {
         member = value;
     }
-    
+
+    void enableInterrupt(const uint8_t irqPriority);
+    void clearInterrupt(uint32_t mask);
+    void clearNrfEvent(nrf_uart_event_t reg, uint32_t value);
+    void enableUart();
+
+    public:
+    Uart(const UartCommParams_t *commParams, NRF_UART_Type *pUARTx, const uint8_t irqPriority);
+    void uartInit();
+    bool getIrqRegStatus(uint32_t mask);
+    bool getNrfEventStatus(nrf_uart_event_t reg) const;
+    void clearNrfEvent(uint8_t reg);
+    void irqHandler();
+    NRF_UART_Type* const getUartInstance() const	  // TODO - might not need it!
+    {
+        return pUARTx;
+    }
+
     template<typename T>
-    void setNrfEvent(T reg, uint32_t value) // todo - change fctn name
+    void setNrfEvent(T reg, uint32_t value) // TODO - change fctn name
     {
         *((volatile uint32_t *)((uint8_t *)pUARTx + (uint32_t)reg)) = value;
 
@@ -207,14 +223,10 @@ class Uart
         #endif
     }
 
-    void enableInterrupt(const uint8_t irqPriority);
-    void clearInterrupts(uint8_t masks);
-    void clearNrfEvent(nrf_uart_event_t reg, uint32_t value);
-    void enableUart();
-
-    public:
-    Uart(const UartCommParams_t *commParams, NRF_UART_Type *pUARTx, const uint8_t irqPriority);
-    void UartInit();
+    Fifo *getFifoRx()
+    {
+        return &fifoRx;
+    }
 
 };
 

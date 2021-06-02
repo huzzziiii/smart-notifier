@@ -1,0 +1,57 @@
+diff --git a/../../../../../../external/freertos/source/include/FreeRTOS.h b/../../../../SystemView Patched files/FreeRTOS.h
+index dfd89cd..43f1d8a 100644
+--- a/../../../../../../external/freertos/source/include/FreeRTOS.h
++++ b/../../../../SystemView Patched files/FreeRTOS.h	
+@@ -157,6 +157,10 @@ extern "C" {
+ 	#define INCLUDE_uxTaskGetStackHighWaterMark 0
+ #endif
+ 
++#ifndef INCLUDE_pxTaskGetStackStart
++	#define INCLUDE_pxTaskGetStackStart 0
++#endif
++
+ #ifndef INCLUDE_eTaskGetState
+ 	#define INCLUDE_eTaskGetState 0
+ #endif
+@@ -393,6 +397,22 @@ extern "C" {
+ 	#define tracePOST_MOVED_TASK_TO_READY_STATE( pxTCB )
+ #endif
+ 
++#ifndef traceREADDED_TASK_TO_READY_STATE
++	#define traceREADDED_TASK_TO_READY_STATE( pxTCB )	traceMOVED_TASK_TO_READY_STATE( pxTCB )
++#endif
++
++#ifndef traceMOVED_TASK_TO_DELAYED_LIST
++	#define traceMOVED_TASK_TO_DELAYED_LIST()
++#endif
++
++#ifndef traceMOVED_TASK_TO_OVERFLOW_DELAYED_LIST
++	#define traceMOVED_TASK_TO_OVERFLOW_DELAYED_LIST()
++#endif
++
++#ifndef traceMOVED_TASK_TO_SUSPENDED_LIST
++	#define traceMOVED_TASK_TO_SUSPENDED_LIST( pxTCB )
++#endif
++
+ #ifndef traceQUEUE_CREATE
+ 	#define traceQUEUE_CREATE( pxNewQueue )
+ #endif
+@@ -637,6 +657,18 @@ extern "C" {
+ 	#define traceTASK_NOTIFY_GIVE_FROM_ISR()
+ #endif
+ 
++#ifndef traceISR_EXIT_TO_SCHEDULER
++	#define traceISR_EXIT_TO_SCHEDULER()
++#endif
++
++#ifndef traceISR_EXIT
++	#define traceISR_EXIT()
++#endif
++
++#ifndef traceISR_ENTER
++	#define traceISR_ENTER()
++#endif
++
+ #ifndef traceSTREAM_BUFFER_CREATE_FAILED
+ 	#define traceSTREAM_BUFFER_CREATE_FAILED( xIsMessageBuffer )
+ #endif

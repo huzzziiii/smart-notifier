@@ -6,23 +6,24 @@
  - what to do in enque() once queue == full?
 */
 
-Fifo::Fifo(uint8_t bufferSize) : 
-		         bufferSize(bufferSize), 
+Fifo::Fifo() : 
+		         bufferSize(fifoSize), 
 		         readIdx(0), 
 		         writeIdx(0),
-		         mask(bufferSize - 1)
+		         mask(fifoSize - 1)
 {
-    if (bufferSize % 2 != 0)
-    {
-        NRF_LOG_WARNING("Fifo size needs to be power of 2 for now...\n");
-        return;
-    }
-    NRF_LOG_INFO("Fifo of size %d is created\n", bufferSize);
+    //if (bufferSize % 2 != 0)
+    //{
+    //    NRF_LOG_WARNING("Fifo size needs to be power of 2 for now...\n");
+    //    return;
+    //}
+   // NRF_LOG_INFO("Fifo of size %d is created\n", bufferSize);
+   // NRF_LOG_FLUSH();
 }
 
 void Fifo::enque(uint8_t byte)
 {
-    NRF_LOG_DEBUG("Writing %u at index %u\n", byte, writeIdx);
+    //NRF_LOG_DEBUG("Writing %u at index %u\n", byte, writeIdx);
     buffer[writeIdx++] = byte;
     writeIdx &= mask;
 }

@@ -2,15 +2,19 @@
 
 // define static variables
 TaskHandle_t NrfLogger::loggerThread;
-TaskHandle_t NrfLogger::nrfLogTaskMsgBuffer;
+TaskHandle_t NrfLogger::logStreamBuffer;
+uint8_t NrfLogger::buffer[50];
 
 NrfLogger::NrfLogger()
 {
     auto res = NRF_LOG_INIT(NULL);
     APP_ERROR_CHECK(res);
     NRF_LOG_DEFAULT_BACKENDS_INIT();
+        
+    // creating a stream buffer (instead of a queue) because its ability to take variable-sized data
+    logStreamBuffer = xStreamBufferCreate(50, 5);
 
-    // create a task
+    // creating a task
     if (pdPASS != xTaskCreate(NrfLogger::Process, "PROCESS_LOG", 256, this, 5, &NrfLogger::loggerThread))
     {
         APP_ERROR_HANDLER(NRF_ERROR_NO_MEM);
@@ -19,12 +23,11 @@ NrfLogger::NrfLogger()
 
 void NrfLogger::Process(void *arg)
 {
-    //NrfLogger *obj = (NrfLogger*) arg;
-    NrfLogger *obj = static_cast<NrfLogger*>(arg);
-    size_t bytesRead = xStreamBufferReceive(nrfLogTaskMsgBuffer, (void*) obj->getBuffer(), 40, portMAX_DELAY);
+    //NrfLogger *obj = static_cast<NrfLogger*>(arg);
+    size_t bytesRead = xStreamBufferReceive(logStreamBuffer, (void*) buffer, 40, portMAX_DELAY);
 
-    NRF_LOG_INFO("%s\r\n", obj->getBuffer());
-    NRF_LOG_FLUSH();
+    //NRF_LOG_INFO("%s\r\n", buffer); // TODO - fix the multiple printing part!
+    //NRF_LOG_FLUSH();
 }
 
 //template<typename T>

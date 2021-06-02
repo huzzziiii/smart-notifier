@@ -12,8 +12,8 @@
 class NrfLogger 
 {
     static TaskHandle_t loggerThread;
-    static StreamBufferHandle_t nrfLogTaskMsgBuffer;
-    uint8_t buffer[50]; // todo  -- know SIZE in compile time for storing chars?!
+    static StreamBufferHandle_t logStreamBuffer;
+    static uint8_t buffer[50]; // todo  -- know SIZE in compile time for storing chars?!
 
     public:
     NrfLogger();
@@ -21,13 +21,13 @@ class NrfLogger
     const uint8_t *getBuffer() const;
 
     template<typename T>
-    static void writeToLogger(T *data, ...)
+    static void writeToLogger(const T *data, ...)
     {
         char tmp[40] = {0};
         va_list args;
         va_start(args, data);
         vsprintf (tmp, data, args);
-        xStreamBufferSend(nrfLogTaskMsgBuffer, (void*)&tmp, 40, pdFALSE);
+        xStreamBufferSend(logStreamBuffer, (void*)&tmp, 40, pdFALSE);
     }
 };
 #endif

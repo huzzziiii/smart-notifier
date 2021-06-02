@@ -205,9 +205,8 @@ void huzz(void *arg)
     }
 }
 
-void UartInit()
-{
-    UartCommParams_t commParams = 
+// assigning a uart instance to be static so it could be used inside UART IRQ handler
+static UartCommParams_t commParams = 
     {
         .rxPinNo = RX_PIN_NUMBER,
         .txPinNo = TX_PIN_NUMBER,
@@ -217,34 +216,29 @@ void UartInit()
         .useParity = false,
         .baudRate = NRF_UART_BAUDRATE_115200
     };
-    Uart(&commParams, NRF_UART0, APP_IRQ_PRIORITY_LOWEST);
-}
 
+static Uart uart(&commParams, NRF_UART0, APP_IRQ_PRIORITY_LOWEST);
 
 /**@brief Function for application main entry.
  */
 int main(void)
-{
-  //NrfLogger logger;
- 
-  //NrfLogger::writeToLogger<char>("Writing to register address %x", 10);
-  
-  // Initialize modules.  
+{   
+    NrfLogger logger;
+
+    //NrfLogger::writeToLogger<char>("Writing to register address %x", 10);
+
+    // Initialize modules.  
     auto res = NRF_LOG_INIT(NULL);
     APP_ERROR_CHECK(res);
     NRF_LOG_DEFAULT_BACKENDS_INIT();
-    //clock_init();
 
-    //APP_ERROR_CHECK(NRF_LOG_INIT(NULL));
-    //NRF_LOG_DEFAULT_BACKENDS_INIT();
-    
-    NRF_LOG_INFO("====== WELCOME =====\n");
-    NRF_LOG_FLUSH();
-    
-    UartInit();
+    clock_init();
 
-    while(1);
-/*     
+    vTaskStartScheduler();	  // Start FreeRTOS scheduler
+
+    //while(1);
+
+    /*
     char buff[6];
     sprintf(buff, "ZUZ%s\n", "i");
 
