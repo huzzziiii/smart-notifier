@@ -21,8 +21,9 @@ class Fifo
     //uint8_t *buffer;
     uint8_t mask;
     uint8_t bufferSize;
-    volatile uint8_t readIdx;	      
+    volatile uint8_t readIdx;	      // TODO - volatile?
     volatile uint8_t writeIdx;
+    volatile uint8_t startIdx;      // start index for the user input
     uint8_t buffer[fifoSize];
     
     public:
@@ -30,5 +31,9 @@ class Fifo
     void enque(const uint8_t byte);
     uint8_t deque();
     bool isEmpty() const;
+    uint8_t const getReadIdx() const;
+    void resetStartIdx();
+    uint8_t const *getFifo();
+    uint8_t const getStartIdx() const;
 };
 #endif

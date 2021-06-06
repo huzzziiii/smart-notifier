@@ -5,43 +5,54 @@
 /* todo -
  - what to do in enque() once queue == full?
 */
-static constexpr uint8_t queueSize = 10;
-static constexpr uint8_t itemSize  = 1;
+//static constexpr uint8_t queueSize = 10;
+//static constexpr uint8_t itemSize  = 1;
 
-SystemTask::SystemTask()
+SystemTask::SystemTask(Uart &pUart, QueueHandle_t &systemQueue) : uart(pUart), systemTaskQueue(systemQueue)
 {   
-    // create a queue
-    systemTaskQueue = xQueueCreate(queueSize, itemSize);
-    if (systemTaskQueue == NULL)
-    {
-        APP_ERROR_HANDLER(NRF_ERROR_RESOURCES);
-    }
-
     // create a task
-    if (xTaskCreate(SystemTask::process, "MAIN", 256, this, 0, &taskHandle) != pdPASS)
+    if (xTaskCreate(SystemTask::process, "PROCESS", 256, this, 0, &taskHandle) != pdPASS)	  // TODO - think about stack size!
     {
         APP_ERROR_HANDLER(NRF_ERROR_NO_MEM);
     }   
 }
 
-void SystemTask::process(void* instance)
+void SystemTask::process(void *instance)
 {
     auto pInstance = static_cast<SystemTask*>(instance);
     pInstance->mainThread();
 }
 
 void SystemTask::mainThread()
-{
-    // init peripherals
+{   
+    Messages curMsg;
+
+    // init peripherals?
     
     while(true)
     {
         if (xQueueReceive(systemTaskQueue, &msg, 0) == pdPASS)
         {
-	  
+	  curMsg = static_cast<Messages>(msg);	  // TODO - might as well make msg type --> Message
+
+	  switch(curMsg)
+	  {
+	      case Messages::readTemperature:
+		
+
+		break;
+
+	  }
         }
 
     }
+}
+
+void SystemTask::pushMessage(SystemTask::Messages dataToQueue)
+{
+    BaseType_t xHigherPriorityTaskWoken; // TODO - need?
+    xQueueSendFromISR(systemTaskQueue, &dataToQueue, 0);
+
 }
 
 

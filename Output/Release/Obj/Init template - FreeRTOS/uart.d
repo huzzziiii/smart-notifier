@@ -108,4 +108,5 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/uart.o: \
  ../../../../../../external/freertos/source/include/mpu_wrappers.h \
  ../../../../../../external/freertos/source/include/task.h \
  ../../../../../../external/freertos/source/include/list.h \
- ../../../../../../external/freertos/source/include/stream_buffer.h
+ ../../../../../../external/freertos/source/include/stream_buffer.h \
+ ../../../../../../external/freertos/source/include/queue.h

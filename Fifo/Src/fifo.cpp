@@ -10,7 +10,9 @@ Fifo::Fifo() :
 		         bufferSize(fifoSize), 
 		         readIdx(0), 
 		         writeIdx(0),
-		         mask(fifoSize - 1)
+		         startIdx(0),
+		         mask(fifoSize - 1),
+		         buffer{0}
 {
     //if (bufferSize % 2 != 0)
     //{
@@ -21,7 +23,7 @@ Fifo::Fifo() :
    // NRF_LOG_FLUSH();
 }
 
-void Fifo::enque(uint8_t byte)
+void Fifo::enque(uint8_t byte)      // TODO - change uint8_t -> 32 bits?
 {
     //NRF_LOG_DEBUG("Writing %u at index %u\n", byte, writeIdx);
     buffer[writeIdx++] = byte;
@@ -46,4 +48,24 @@ bool Fifo::isEmpty() const
 {
     NRF_LOG_DEBUG("writeIdx: %u, readIdx: %u\n", writeIdx, readIdx);
     return writeIdx == readIdx;
+}
+
+uint8_t const Fifo::getReadIdx() const
+{
+    return readIdx;
+}
+
+void Fifo::resetStartIdx()
+{
+    startIdx = writeIdx;
+}
+
+uint8_t const *Fifo::getFifo()
+{
+    return buffer;
+}
+
+uint8_t const Fifo::getStartIdx() const
+{
+    return startIdx;
 }

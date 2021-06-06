@@ -89,6 +89,8 @@
 #include "mcp9808.hpp"
 #include "NrfLogger.hpp"
 #include "uart.hpp"
+#include "uart_app.hpp"
+#include "system_task.hpp"
 #include <stdarg.h>
 #include <cstring>
 #include <cstdio>
@@ -204,10 +206,14 @@ void huzz(void *arg)
         //vTaskDelay(2000);
     }
 }
+/* Instantiations */
+static constexpr uint8_t queueSize = 10;
+static constexpr uint8_t itemSize  = 1;
+QueueHandle_t systemQueue = xQueueCreate(queueSize, itemSize);
 
-// assigning a uart instance to be static so it could be used inside UART IRQ handler
-static UartCommParams_t commParams = 
-    {
+// UART - assigning a uart instance to be static so it could be used inside UART IRQ handler
+UartCommParams_t commParams = 
+{
         .rxPinNo = RX_PIN_NUMBER,
         .txPinNo = TX_PIN_NUMBER,
         .rtsPinNo = RTS_PIN_NUMBER,
@@ -215,9 +221,18 @@ static UartCommParams_t commParams =
         .hwFlowCntl = UartHwFcDisabled,
         .useParity = false,
         .baudRate = NRF_UART_BAUDRATE_115200
-    };
+};
 
-static Uart uart(&commParams, NRF_UART0, APP_IRQ_PRIORITY_LOWEST);
+Uart uart(&commParams, NRF_UART0, APP_IRQ_PRIORITY_LOWEST, uartCallback, systemQueue);
+
+
+
+//if (systemTaskQueue == NULL)
+//{
+//    APP_ERROR_HANDLER(NRF_ERROR_RESOURCES);
+//}
+
+SystemTask systemTask(uart, systemQueue);
 
 /**@brief Function for application main entry.
  */
@@ -227,14 +242,24 @@ int main(void)
 
     //NrfLogger::writeToLogger<char>("Writing to register address %x", 10);
 
-    // Initialize modules.  
+    // Initialize modules  
     auto res = NRF_LOG_INIT(NULL);
     APP_ERROR_CHECK(res);
     NRF_LOG_DEFAULT_BACKENDS_INIT();
 
     clock_init();
+     
+    // uint8_t tmp[40];
+    // MCP9808 tmpSensor;
+    //tmpSensor.xferData(tmp, 1);
+    
+    //while(true) 
+    //{
+    //    tmpSensor.read();
+    //    nrf_delay_ms(3000);
+    //}
 
-    vTaskStartScheduler();	  // Start FreeRTOS scheduler
+    vTaskStartScheduler();		// Start FreeRTOS scheduler
 
     //while(1);
 

@@ -167,6 +167,8 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/main.o: \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdarg.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdarg.h \
  custom_drivers/Inc/uart.hpp Fifo/Inc/fifo.hpp \
+ ../../../../../../external/freertos/source/include/queue.h \
+ UartApp/uart_app.hpp SystemTask/system_task.hpp \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/cstring \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_prolog.h \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/debug/_debug.h \

@@ -9,8 +9,8 @@
  */
 __STATIC_INLINE void data_handler(uint8_t *temp)
 {
-    NRF_LOG_INFO("Temperature: %d Celsius degrees.", *temp);
-    NRF_LOG_FLUSH();
+    //NRF_LOG_INFO("Temperature: %d Celsius degrees.", *temp);
+    //NRF_LOG_FLUSH();
 }
 
  /**
@@ -18,14 +18,14 @@ __STATIC_INLINE void data_handler(uint8_t *temp)
  */
 void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)	    // todo 
 {
-    NRF_LOG_INFO("twi_handler()\n");
+    //NRF_LOG_INFO("twi_handler()\n");
 
     switch (p_event->type)
     {
         case NRF_DRV_TWI_EVT_DONE:
             if (p_event->xfer_desc.type == NRF_DRV_TWI_XFER_RX)
             {
-                //data_handler(p_context->getBuffer()); // todo 
+                //data_handler(p_context->getBuffer()); // TODO 
             }
             m_xfer_done = true; // todo
             break;
@@ -78,7 +78,7 @@ void MCP9808::write(uint8_t reg, uint8_t *buffer, uint8_t size)
 {
     //NrfLogger::writeToLogger<char>("Writing to register address %x\n", reg);
 
-    NRF_LOG_INFO("Writing to register address %x\n", reg);
+    //NRF_LOG_INFO("Writing to register address %x\n", reg);
     
     ret_code_t err_code;
 
@@ -96,8 +96,8 @@ uint16_t MCP9808::read()
     APP_ERROR_CHECK(err_code);
     
     ReadTempInC();
-    NRF_LOG_INFO("Temperature: %d, %d, %d Celsius degrees", buffer[0], buffer[1], temp);
-    NRF_LOG_FLUSH();
+    //NRF_LOG_INFO("Temperature: %d, %d, %d Celsius degrees", buffer[0], buffer[1], temp);
+    //NRF_LOG_FLUSH();
     return *buffer;	        // todo 
 }
 

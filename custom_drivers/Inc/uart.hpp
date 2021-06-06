@@ -4,6 +4,7 @@
 #include "fifo.hpp"
 #include "nrf_gpio.h"
 #include "NrfLogger.hpp"
+#include "queue.h"
 //#include <string>
 //#include <functional>
 
@@ -180,7 +181,7 @@ class Uart
     UartCommParams_t    *pUartCommParams;
     NRF_UART_Type	    *pUARTx;
     UartConfig_t	    uartConfig;
-    typedef void	    (uartCallback(void));
+    void		    (*uartCallback)(Fifo &pFifo, QueueHandle_t &systemTaskQueue);
 
     Fifo fifoRx;
     Fifo fifoTx;
@@ -199,9 +200,12 @@ class Uart
     void clearInterrupt(uint32_t mask);
     void clearNrfEvent(nrf_uart_event_t reg, uint32_t value);
     void enableUart();
+    QueueHandle_t &systemTaskQueue;
+    uint8_t startIdx = 0;	      // start index of the current user input
+    bool newInput = true;
 
     public:
-    Uart(const UartCommParams_t *commParams, NRF_UART_Type *pUARTx, const uint8_t irqPriority);
+    Uart(const UartCommParams_t *commParams, NRF_UART_Type *pUARTx, const uint8_t irqPriority, void (*callback)(Fifo &pFifo, QueueHandle_t &systemTaskQueue), QueueHandle_t &queue);
     void uartInit();
     bool getIrqRegStatus(uint32_t mask);
     bool getNrfEventStatus(nrf_uart_event_t reg) const;
@@ -222,12 +226,6 @@ class Uart
         (void)dummy;
         #endif
     }
-
-    Fifo *getFifoRx()
-    {
-        return &fifoRx;
-    }
-
 };
 
 

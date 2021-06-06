@@ -25,16 +25,29 @@ void Uart::irqHandler()
 
     if (isRxdRdyIrqSet && isRxdRdyEvntSet)
     {
+        if (newInput)
+        {
+	  fifoRx.resetStartIdx();
+	  newInput = false;
+        }
+
         setNrfEvent(NRF_UART_EVENT_RXDRDY, StatusDisable);		// clear NRF_UART_EVENT_RXDRDY
         uint32_t data = pUARTx->RXD;				// read off RXD
         fifoRx.enque(data);					// append to FifoRx
+        
+        if (data == '\r')					// if end of data...
+        {
+	  newInput = true;
+	  uartCallback(fifoRx, systemTaskQueue);	          // invoke callback
+        }
     }
     else if (isIrqMaskErrorSet && isEventMaskErrorSet)
     {
         setNrfEvent(NRF_UART_EVENT_ERROR, StatusDisable);		// clear NRF_UART_EVENT_RXDRDY
         clearInterrupt(NRF_UART_INT_MASK_ERROR);
-        setNrfEvent(NRF_UART_TASK_STOPRX, StatusEnable);	        // trigger STOPRX
+        setNrfEvent(NRF_UART_TASK_STOPRX, StatusEnable);		// trigger STOPRX
     }
+    
 
     /* 1. read from the RXD 
          - RXDRDY event is generated indicating byte is received
@@ -45,7 +58,7 @@ void Uart::irqHandler()
 
 bool Uart::getNrfEventStatus(nrf_uart_event_t reg) const
 {
-    return (bool) *(volatile uint32_t *)((uint8_t *)pUARTx + (uint32_t)reg);
+    return (bool) *(volatile uint32_t *)((uint8_t *)pUARTx + (uint32_t)reg);	
 }
 
 bool Uart::getIrqRegStatus(uint32_t mask)
@@ -53,7 +66,9 @@ bool Uart::getIrqRegStatus(uint32_t mask)
     return (bool) (pUARTx->INTENSET & mask);
 }
 
-Uart::Uart(const UartCommParams_t *commParams, NRF_UART_Type *uartInstance, const uint8_t irqPriority)
+Uart::Uart(const UartCommParams_t *commParams, NRF_UART_Type *uartInstance, const uint8_t irqPriority, void (*callback)(Fifo &pFifo, QueueHandle_t &systemTaskQueue),
+	 QueueHandle_t &queue) 
+	  : systemTaskQueue(queue)
 {
     // init comm params
     uartConfig.interruptPriority = irqPriority;
@@ -66,6 +81,7 @@ Uart::Uart(const UartCommParams_t *commParams, NRF_UART_Type *uartInstance, cons
     uartConfig.interruptFlags = NRF_UART_INT_MASK_TXDRDY | NRF_UART_INT_MASK_RXDRDY | NRF_UART_INT_MASK_RXTO;
     pUARTx = uartInstance;
     pInstance = this;
+    uartCallback = callback;
 
     uartInit();
 

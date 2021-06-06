@@ -48,7 +48,7 @@ class MCP9808
     void write(uint8_t address, uint8_t *buffer, uint8_t size);
     //float ReadTempInC();
     void ReadTempInC();
-    float readTempInF();	      // todo
+    float readTempInF();	      // TODO
     uint16_t read();
     
     void xferData(uint8_t *p_buffer, uint8_t size);
