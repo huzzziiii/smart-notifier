@@ -24,7 +24,8 @@ void parseUserInput(Fifo &pFifo)
     if (endPtr != nullptr)	      
     {
         endBytes = endPtr - startBuffer;
-        memcpy(parsedInput, startBuffer, endBytes);
+        pFifo.getChunksOfData(startIdx, endBytes, reinterpret_cast<uint8_t*>(parsedInput));
+        //memcpy(parsedInput, startBuffer, endBytes);
     }
     else								    // if there's a wrap around
     {   

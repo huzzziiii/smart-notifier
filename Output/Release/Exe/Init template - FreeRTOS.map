@@ -23492,11 +23492,6 @@ Discarded input sections
                 0x0000000000000000        0x8 Output/Release/Obj/Init template - FreeRTOS/fifo.o
  .rodata._ZL8fifoSize
                 0x0000000000000000        0x1 Output/Release/Obj/Init template - FreeRTOS/fifo.o
- .rodata        0x0000000000000000       0x3c Output/Release/Obj/Init template - FreeRTOS/fifo.o
- .text._ZN4Fifo5dequeEv
-                0x0000000000000000       0x7c Output/Release/Obj/Init template - FreeRTOS/fifo.o
- .text._ZNK4Fifo7isEmptyEv
-                0x0000000000000000       0x20 Output/Release/Obj/Init template - FreeRTOS/fifo.o
  .text._ZNK4Fifo10getReadIdxEv
                 0x0000000000000000       0x10 Output/Release/Obj/Init template - FreeRTOS/fifo.o
  .debug_macro   0x0000000000000000      0xb86 Output/Release/Obj/Init template - FreeRTOS/fifo.o
@@ -26449,7 +26444,7 @@ Linker script and memory map
                 0x0000000000000001                . = ASSERT (((__init_rodata_start__ == __init_rodata_end__) || ((__init_rodata_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .init_rodata is too large to fit in FLASH memory segment)
                 0x00000000000273d0                __text_load_start__ = ALIGN (__init_rodata_end__, 0x4)
 
-.text           0x00000000000273d0     0xe788
+.text           0x00000000000273d0     0xe87c
                 0x00000000000273d0                __text_start__ = .
  *(.text .text.* .glue_7t .glue_7 .gnu.linkonce.t.* .gcc_except_table .ARM.extab* .gnu.linkonce.armextab.*)
  .glue_7        0x00000000000273d0        0x0 linker stubs
@@ -27963,87 +27958,95 @@ Linker script and memory map
  .text._ZN4Fifo5enqueEh
                 0x000000000003563c       0x3c Output/Release/Obj/Init template - FreeRTOS/fifo.o
                 0x000000000003563c                Fifo::enque(unsigned char)
+ .text._ZN4Fifo5dequeEv
+                0x0000000000035678       0x5e Output/Release/Obj/Init template - FreeRTOS/fifo.o
+                0x0000000000035678                Fifo::deque()
+ .text._ZNK4Fifo7isEmptyEv
+                0x00000000000356d6       0x20 Output/Release/Obj/Init template - FreeRTOS/fifo.o
+                0x00000000000356d6                Fifo::isEmpty() const
  .text._ZN4Fifo13resetStartIdxEv
-                0x0000000000035678       0x14 Output/Release/Obj/Init template - FreeRTOS/fifo.o
-                0x0000000000035678                Fifo::resetStartIdx()
+                0x00000000000356f6       0x14 Output/Release/Obj/Init template - FreeRTOS/fifo.o
+                0x00000000000356f6                Fifo::resetStartIdx()
  .text._ZN4Fifo7getFifoEv
-                0x000000000003568c        0xe Output/Release/Obj/Init template - FreeRTOS/fifo.o
-                0x000000000003568c                Fifo::getFifo()
+                0x000000000003570a        0xe Output/Release/Obj/Init template - FreeRTOS/fifo.o
+                0x000000000003570a                Fifo::getFifo()
  .text._ZNK4Fifo11getStartIdxEv
-                0x000000000003569a       0x10 Output/Release/Obj/Init template - FreeRTOS/fifo.o
-                0x000000000003569a                Fifo::getStartIdx() const
- *fill*         0x00000000000356aa        0x2 
+                0x0000000000035718       0x10 Output/Release/Obj/Init template - FreeRTOS/fifo.o
+                0x0000000000035718                Fifo::getStartIdx() const
+ .text._ZN4Fifo15getChunksOfDataEhhPh
+                0x0000000000035728       0x74 Output/Release/Obj/Init template - FreeRTOS/fifo.o
+                0x0000000000035728                Fifo::getChunksOfData(unsigned char, unsigned char, unsigned char*)
  .text._ZN10SystemTaskC2ER4UartRPv
-                0x00000000000356ac       0x54 Output/Release/Obj/Init template - FreeRTOS/system_task.o
-                0x00000000000356ac                SystemTask::SystemTask(Uart&, void*&)
-                0x00000000000356ac                SystemTask::SystemTask(Uart&, void*&)
+                0x000000000003579c       0x54 Output/Release/Obj/Init template - FreeRTOS/system_task.o
+                0x000000000003579c                SystemTask::SystemTask(Uart&, void*&)
+                0x000000000003579c                SystemTask::SystemTask(Uart&, void*&)
  .text._ZN10SystemTask7processEPv
-                0x0000000000035700       0x18 Output/Release/Obj/Init template - FreeRTOS/system_task.o
-                0x0000000000035700                SystemTask::process(void*)
+                0x00000000000357f0       0x18 Output/Release/Obj/Init template - FreeRTOS/system_task.o
+                0x00000000000357f0                SystemTask::process(void*)
  .text._ZN10SystemTask10mainThreadEv
-                0x0000000000035718       0x34 Output/Release/Obj/Init template - FreeRTOS/system_task.o
-                0x0000000000035718                SystemTask::mainThread()
+                0x0000000000035808       0x34 Output/Release/Obj/Init template - FreeRTOS/system_task.o
+                0x0000000000035808                SystemTask::mainThread()
  .text._Z18validateAndExecutev
-                0x000000000003574c       0x30 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
-                0x000000000003574c                validateAndExecute()
+                0x000000000003583c       0x30 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
+                0x000000000003583c                validateAndExecute()
  .text._Z14parseUserInputR4Fifo
-                0x000000000003577c       0xb0 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
-                0x000000000003577c                parseUserInput(Fifo&)
+                0x000000000003586c       0xb4 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
+                0x000000000003586c                parseUserInput(Fifo&)
  .text._Z12uartCallbackR4FifoRPv
-                0x000000000003582c       0x3c Output/Release/Obj/Init template - FreeRTOS/uart_app.o
-                0x000000000003582c                uartCallback(Fifo&, void*&)
+                0x0000000000035920       0x3c Output/Release/Obj/Init template - FreeRTOS/uart_app.o
+                0x0000000000035920                uartCallback(Fifo&, void*&)
  .text.libc.__RAL_ascii_isctype
-                0x0000000000035868       0x1c /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x000000000003595c       0x1c /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
  .text.libc.__RAL_ascii_toupper
-                0x0000000000035884        0xc /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000035978        0xc /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
  .text.libc.__RAL_ascii_tolower
-                0x0000000000035890        0xc /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000035984        0xc /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
  .text.libc.__RAL_ascii_iswctype
-                0x000000000003589c       0x1c /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000035990       0x1c /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
  .text.libc.__RAL_ascii_towupper
-                0x00000000000358b8        0xc /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x00000000000359ac        0xc /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
  .text.libc.__RAL_ascii_towlower
-                0x00000000000358c4        0xc /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x00000000000359b8        0xc /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
  .text.libc.__RAL_ascii_wctomb
-                0x00000000000358d0        0xe /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x00000000000358d0                __RAL_ascii_wctomb
+                0x00000000000359c4        0xe /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x00000000000359c4                __RAL_ascii_wctomb
  .text.libc.__RAL_ascii_mbtowc
-                0x00000000000358de       0x24 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x00000000000358de                __RAL_ascii_mbtowc
- *fill*         0x0000000000035902        0x2 
+                0x00000000000359d2       0x24 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x00000000000359d2                __RAL_ascii_mbtowc
+ *fill*         0x00000000000359f6        0x2 
  .text.libc.__RAL_isctype
-                0x0000000000035904       0x14 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x0000000000035904                __RAL_isctype
+                0x00000000000359f8       0x14 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x00000000000359f8                __RAL_isctype
  .text.libc.isprint
-                0x0000000000035918        0xa /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x0000000000035918                isprint
+                0x0000000000035a0c        0xa /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000035a0c                isprint
  .text.libc.memcmp
-                0x0000000000035922       0x6e /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x0000000000035922                memcmp
+                0x0000000000035a16       0x6e /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000035a16                memcmp
  .text.libc.strchr
-                0x0000000000035990       0x1e /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x0000000000035990                strchr
+                0x0000000000035a84       0x1e /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000035a84                strchr
  .text.libc.memcpy
-                0x00000000000359ae       0x52 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2_asm.o)
-                0x00000000000359ae                memcpy
-                0x00000000000359ae                __aeabi_memcpy
-                0x00000000000359ba                __aeabi_memcpy4
-                0x00000000000359ba                __aeabi_memcpy8
+                0x0000000000035aa2       0x52 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2_asm.o)
+                0x0000000000035aa2                memcpy
+                0x0000000000035aa2                __aeabi_memcpy
+                0x0000000000035aae                __aeabi_memcpy4
+                0x0000000000035aae                __aeabi_memcpy8
  .text.libc.memset
-                0x0000000000035a00       0x66 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2_asm.o)
-                0x0000000000035a00                memset
+                0x0000000000035af4       0x66 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2_asm.o)
+                0x0000000000035af4                memset
  .text.libc.strcpy
-                0x0000000000035a66       0x44 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2_asm.o)
-                0x0000000000035a66                strcpy
+                0x0000000000035b5a       0x44 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2_asm.o)
+                0x0000000000035b5a                strcpy
  .text.libc.strcmp
-                0x0000000000035aaa       0x4e /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2_asm.o)
-                0x0000000000035aaa                strcmp
+                0x0000000000035b9e       0x4e /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2_asm.o)
+                0x0000000000035b9e                strcmp
  .text.libc.strlen
-                0x0000000000035af8       0x60 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2_asm.o)
-                0x0000000000035af8                strlen
-                0x0000000000035b58                __text_end__ = (__text_start__ + SIZEOF (.text))
-                0x000000000000e788                __text_size__ = SIZEOF (.text)
-                0x0000000000035b58                __text_load_end__ = __text_end__
+                0x0000000000035bec       0x60 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2_asm.o)
+                0x0000000000035bec                strlen
+                0x0000000000035c4c                __text_end__ = (__text_start__ + SIZEOF (.text))
+                0x000000000000e87c                __text_size__ = SIZEOF (.text)
+                0x0000000000035c4c                __text_load_end__ = __text_end__
 
 .vfp11_veneer   0x0000000100000000        0x0
  .vfp11_veneer  0x0000000100000000        0x0 linker stubs
@@ -28054,264 +28057,264 @@ Linker script and memory map
 .iplt           0x0000000100000000        0x0
  .iplt          0x0000000100000000        0x0 Output/Release/Obj/Init template - FreeRTOS/thumb_crt0.o
                 0x0000000000000001                . = ASSERT (((__text_start__ == __text_end__) || ((__text_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .text is too large to fit in FLASH memory segment)
-                0x0000000000035b58                __sdh_soc_observers_load_start__ = ALIGN (__text_end__, 0x4)
+                0x0000000000035c4c                __sdh_soc_observers_load_start__ = ALIGN (__text_end__, 0x4)
 
 .sdh_soc_observers
-                0x0000000000035b58       0x10
-                0x0000000000035b58                __sdh_soc_observers_start__ = .
-                0x0000000000035b58                __start_sdh_soc_observers = __sdh_soc_observers_start__
+                0x0000000000035c4c       0x10
+                0x0000000000035c4c                __sdh_soc_observers_start__ = .
+                0x0000000000035c4c                __start_sdh_soc_observers = __sdh_soc_observers_start__
  *(SORT_BY_NAME(.sdh_soc_observers*))
  .sdh_soc_observers0
-                0x0000000000035b58        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_fstorage_sd.o
+                0x0000000000035c4c        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_fstorage_sd.o
  .sdh_soc_observers0
-                0x0000000000035b60        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_drv_clock.o
-                0x0000000000035b68                __sdh_soc_observers_end__ = (__sdh_soc_observers_start__ + SIZEOF (.sdh_soc_observers))
+                0x0000000000035c54        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_drv_clock.o
+                0x0000000000035c5c                __sdh_soc_observers_end__ = (__sdh_soc_observers_start__ + SIZEOF (.sdh_soc_observers))
                 0x0000000000000010                __sdh_soc_observers_size__ = SIZEOF (.sdh_soc_observers)
-                0x0000000000035b68                __stop_sdh_soc_observers = __sdh_soc_observers_end__
-                0x0000000000035b68                __sdh_soc_observers_load_end__ = __sdh_soc_observers_end__
+                0x0000000000035c5c                __stop_sdh_soc_observers = __sdh_soc_observers_end__
+                0x0000000000035c5c                __sdh_soc_observers_load_end__ = __sdh_soc_observers_end__
                 0x0000000000000001                . = ASSERT (((__sdh_soc_observers_start__ == __sdh_soc_observers_end__) || ((__sdh_soc_observers_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .sdh_soc_observers is too large to fit in FLASH memory segment)
-                0x0000000000035b68                __sdh_ble_observers_load_start__ = ALIGN (__sdh_soc_observers_end__, 0x4)
+                0x0000000000035c5c                __sdh_ble_observers_load_start__ = ALIGN (__sdh_soc_observers_end__, 0x4)
 
 .sdh_ble_observers
-                0x0000000000035b68       0x20
-                0x0000000000035b68                __sdh_ble_observers_start__ = .
-                0x0000000000035b68                __start_sdh_ble_observers = __sdh_ble_observers_start__
+                0x0000000000035c5c       0x20
+                0x0000000000035c5c                __sdh_ble_observers_start__ = .
+                0x0000000000035c5c                __start_sdh_ble_observers = __sdh_ble_observers_start__
  *(SORT_BY_NAME(.sdh_ble_observers*))
  .sdh_ble_observers0
-                0x0000000000035b68        0x8 Output/Release/Obj/Init template - FreeRTOS/ble_conn_state.o
+                0x0000000000035c5c        0x8 Output/Release/Obj/Init template - FreeRTOS/ble_conn_state.o
  .sdh_ble_observers1
-                0x0000000000035b70        0x8 Output/Release/Obj/Init template - FreeRTOS/bsp_btn_ble.o
+                0x0000000000035c64        0x8 Output/Release/Obj/Init template - FreeRTOS/bsp_btn_ble.o
  .sdh_ble_observers1
-                0x0000000000035b78        0x8 Output/Release/Obj/Init template - FreeRTOS/ble_conn_params.o
+                0x0000000000035c6c        0x8 Output/Release/Obj/Init template - FreeRTOS/ble_conn_params.o
  .sdh_ble_observers1
-                0x0000000000035b80        0x8 Output/Release/Obj/Init template - FreeRTOS/peer_manager.o
-                0x0000000000035b88                __sdh_ble_observers_end__ = (__sdh_ble_observers_start__ + SIZEOF (.sdh_ble_observers))
+                0x0000000000035c74        0x8 Output/Release/Obj/Init template - FreeRTOS/peer_manager.o
+                0x0000000000035c7c                __sdh_ble_observers_end__ = (__sdh_ble_observers_start__ + SIZEOF (.sdh_ble_observers))
                 0x0000000000000020                __sdh_ble_observers_size__ = SIZEOF (.sdh_ble_observers)
-                0x0000000000035b88                __stop_sdh_ble_observers = __sdh_ble_observers_end__
-                0x0000000000035b88                __sdh_ble_observers_load_end__ = __sdh_ble_observers_end__
+                0x0000000000035c7c                __stop_sdh_ble_observers = __sdh_ble_observers_end__
+                0x0000000000035c7c                __sdh_ble_observers_load_end__ = __sdh_ble_observers_end__
                 0x0000000000000001                . = ASSERT (((__sdh_ble_observers_start__ == __sdh_ble_observers_end__) || ((__sdh_ble_observers_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .sdh_ble_observers is too large to fit in FLASH memory segment)
-                0x0000000000035b88                __sdh_req_observers_load_start__ = ALIGN (__sdh_ble_observers_end__, 0x4)
+                0x0000000000035c7c                __sdh_req_observers_load_start__ = ALIGN (__sdh_ble_observers_end__, 0x4)
 
 .sdh_req_observers
-                0x0000000000035b88        0x8
-                0x0000000000035b88                __sdh_req_observers_start__ = .
-                0x0000000000035b88                __start_sdh_req_observers = __sdh_req_observers_start__
+                0x0000000000035c7c        0x8
+                0x0000000000035c7c                __sdh_req_observers_start__ = .
+                0x0000000000035c7c                __start_sdh_req_observers = __sdh_req_observers_start__
  *(SORT_BY_NAME(.sdh_req_observers*))
  .sdh_req_observers0
-                0x0000000000035b88        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_fstorage_sd.o
-                0x0000000000035b88                m_req_obs
-                0x0000000000035b90                __sdh_req_observers_end__ = (__sdh_req_observers_start__ + SIZEOF (.sdh_req_observers))
+                0x0000000000035c7c        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_fstorage_sd.o
+                0x0000000000035c7c                m_req_obs
+                0x0000000000035c84                __sdh_req_observers_end__ = (__sdh_req_observers_start__ + SIZEOF (.sdh_req_observers))
                 0x0000000000000008                __sdh_req_observers_size__ = SIZEOF (.sdh_req_observers)
-                0x0000000000035b90                __stop_sdh_req_observers = __sdh_req_observers_end__
-                0x0000000000035b90                __sdh_req_observers_load_end__ = __sdh_req_observers_end__
+                0x0000000000035c84                __stop_sdh_req_observers = __sdh_req_observers_end__
+                0x0000000000035c84                __sdh_req_observers_load_end__ = __sdh_req_observers_end__
                 0x0000000000000001                . = ASSERT (((__sdh_req_observers_start__ == __sdh_req_observers_end__) || ((__sdh_req_observers_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .sdh_req_observers is too large to fit in FLASH memory segment)
-                0x0000000000035b90                __sdh_state_observers_load_start__ = ALIGN (__sdh_req_observers_end__, 0x4)
+                0x0000000000035c84                __sdh_state_observers_load_start__ = ALIGN (__sdh_req_observers_end__, 0x4)
 
 .sdh_state_observers
-                0x0000000000035b90       0x10
-                0x0000000000035b90                __sdh_state_observers_start__ = .
-                0x0000000000035b90                __start_sdh_state_observers = __sdh_state_observers_start__
+                0x0000000000035c84       0x10
+                0x0000000000035c84                __sdh_state_observers_start__ = .
+                0x0000000000035c84                __start_sdh_state_observers = __sdh_state_observers_start__
  *(SORT_BY_NAME(.sdh_state_observers*))
  .sdh_state_observers0
-                0x0000000000035b90        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_fstorage_sd.o
+                0x0000000000035c84        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_fstorage_sd.o
  .sdh_state_observers0
-                0x0000000000035b98        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_drv_clock.o
-                0x0000000000035ba0                __sdh_state_observers_end__ = (__sdh_state_observers_start__ + SIZEOF (.sdh_state_observers))
+                0x0000000000035c8c        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_drv_clock.o
+                0x0000000000035c94                __sdh_state_observers_end__ = (__sdh_state_observers_start__ + SIZEOF (.sdh_state_observers))
                 0x0000000000000010                __sdh_state_observers_size__ = SIZEOF (.sdh_state_observers)
-                0x0000000000035ba0                __stop_sdh_state_observers = __sdh_state_observers_end__
-                0x0000000000035ba0                __sdh_state_observers_load_end__ = __sdh_state_observers_end__
+                0x0000000000035c94                __stop_sdh_state_observers = __sdh_state_observers_end__
+                0x0000000000035c94                __sdh_state_observers_load_end__ = __sdh_state_observers_end__
                 0x0000000000000001                . = ASSERT (((__sdh_state_observers_start__ == __sdh_state_observers_end__) || ((__sdh_state_observers_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .sdh_state_observers is too large to fit in FLASH memory segment)
-                0x0000000000035ba0                __sdh_stack_observers_load_start__ = ALIGN (__sdh_state_observers_end__, 0x4)
+                0x0000000000035c94                __sdh_stack_observers_load_start__ = ALIGN (__sdh_state_observers_end__, 0x4)
 
 .sdh_stack_observers
-                0x0000000000035ba0       0x10
-                0x0000000000035ba0                __sdh_stack_observers_start__ = .
-                0x0000000000035ba0                __start_sdh_stack_observers = __sdh_stack_observers_start__
+                0x0000000000035c94       0x10
+                0x0000000000035c94                __sdh_stack_observers_start__ = .
+                0x0000000000035c94                __start_sdh_stack_observers = __sdh_stack_observers_start__
  *(SORT_BY_NAME(.sdh_stack_observers*))
  .sdh_stack_observers0
-                0x0000000000035ba0        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_ble.o
+                0x0000000000035c94        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_ble.o
  .sdh_stack_observers0
-                0x0000000000035ba8        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_soc.o
-                0x0000000000035bb0                __sdh_stack_observers_end__ = (__sdh_stack_observers_start__ + SIZEOF (.sdh_stack_observers))
+                0x0000000000035c9c        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_soc.o
+                0x0000000000035ca4                __sdh_stack_observers_end__ = (__sdh_stack_observers_start__ + SIZEOF (.sdh_stack_observers))
                 0x0000000000000010                __sdh_stack_observers_size__ = SIZEOF (.sdh_stack_observers)
-                0x0000000000035bb0                __stop_sdh_stack_observers = __sdh_stack_observers_end__
-                0x0000000000035bb0                __sdh_stack_observers_load_end__ = __sdh_stack_observers_end__
+                0x0000000000035ca4                __stop_sdh_stack_observers = __sdh_stack_observers_end__
+                0x0000000000035ca4                __sdh_stack_observers_load_end__ = __sdh_stack_observers_end__
                 0x0000000000000001                . = ASSERT (((__sdh_stack_observers_start__ == __sdh_stack_observers_end__) || ((__sdh_stack_observers_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .sdh_stack_observers is too large to fit in FLASH memory segment)
-                0x0000000000035bb0                __nrf_queue_load_start__ = ALIGN (__sdh_stack_observers_end__, 0x4)
+                0x0000000000035ca4                __nrf_queue_load_start__ = ALIGN (__sdh_stack_observers_end__, 0x4)
 
-.nrf_queue      0x0000000000035bb0        0x0
-                0x0000000000035bb0                __nrf_queue_start__ = .
-                0x0000000000035bb0                __start_nrf_queue = __nrf_queue_start__
+.nrf_queue      0x0000000000035ca4        0x0
+                0x0000000000035ca4                __nrf_queue_start__ = .
+                0x0000000000035ca4                __start_nrf_queue = __nrf_queue_start__
  *(.nrf_queue*)
-                0x0000000000035bb0                __nrf_queue_end__ = (__nrf_queue_start__ + SIZEOF (.nrf_queue))
+                0x0000000000035ca4                __nrf_queue_end__ = (__nrf_queue_start__ + SIZEOF (.nrf_queue))
                 0x0000000000000000                __nrf_queue_size__ = SIZEOF (.nrf_queue)
-                0x0000000000035bb0                __stop_nrf_queue = __nrf_queue_end__
-                0x0000000000035bb0                __nrf_queue_load_end__ = __nrf_queue_end__
+                0x0000000000035ca4                __stop_nrf_queue = __nrf_queue_end__
+                0x0000000000035ca4                __nrf_queue_load_end__ = __nrf_queue_end__
                 0x0000000000000001                . = ASSERT (((__nrf_queue_start__ == __nrf_queue_end__) || ((__nrf_queue_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .nrf_queue is too large to fit in FLASH memory segment)
-                0x0000000000035bb0                __nrf_balloc_load_start__ = ALIGN (__nrf_queue_end__, 0x4)
+                0x0000000000035ca4                __nrf_balloc_load_start__ = ALIGN (__nrf_queue_end__, 0x4)
 
-.nrf_balloc     0x0000000000035bb0       0x14
-                0x0000000000035bb0                __nrf_balloc_start__ = .
-                0x0000000000035bb0                __start_nrf_balloc = __nrf_balloc_start__
+.nrf_balloc     0x0000000000035ca4       0x14
+                0x0000000000035ca4                __nrf_balloc_start__ = .
+                0x0000000000035ca4                __start_nrf_balloc = __nrf_balloc_start__
  *(.nrf_balloc*)
- .nrf_balloc    0x0000000000035bb0       0x14 Output/Release/Obj/Init template - FreeRTOS/nrf_log_frontend.o
-                0x0000000000035bb0                log_mempool
-                0x0000000000035bc4                __nrf_balloc_end__ = (__nrf_balloc_start__ + SIZEOF (.nrf_balloc))
+ .nrf_balloc    0x0000000000035ca4       0x14 Output/Release/Obj/Init template - FreeRTOS/nrf_log_frontend.o
+                0x0000000000035ca4                log_mempool
+                0x0000000000035cb8                __nrf_balloc_end__ = (__nrf_balloc_start__ + SIZEOF (.nrf_balloc))
                 0x0000000000000014                __nrf_balloc_size__ = SIZEOF (.nrf_balloc)
-                0x0000000000035bc4                __stop_nrf_balloc = __nrf_balloc_end__
-                0x0000000000035bc4                __nrf_balloc_load_end__ = __nrf_balloc_end__
+                0x0000000000035cb8                __stop_nrf_balloc = __nrf_balloc_end__
+                0x0000000000035cb8                __nrf_balloc_load_end__ = __nrf_balloc_end__
                 0x0000000000000001                . = ASSERT (((__nrf_balloc_start__ == __nrf_balloc_end__) || ((__nrf_balloc_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .nrf_balloc is too large to fit in FLASH memory segment)
-                0x0000000000035bc4                __cli_command_load_start__ = ALIGN (__nrf_balloc_end__, 0x4)
+                0x0000000000035cb8                __cli_command_load_start__ = ALIGN (__nrf_balloc_end__, 0x4)
 
-.cli_command    0x0000000000035bc4        0x0
-                0x0000000000035bc4                __cli_command_start__ = .
-                0x0000000000035bc4                __start_cli_command = __cli_command_start__
+.cli_command    0x0000000000035cb8        0x0
+                0x0000000000035cb8                __cli_command_start__ = .
+                0x0000000000035cb8                __start_cli_command = __cli_command_start__
  *(.cli_command*)
-                0x0000000000035bc4                __cli_command_end__ = (__cli_command_start__ + SIZEOF (.cli_command))
+                0x0000000000035cb8                __cli_command_end__ = (__cli_command_start__ + SIZEOF (.cli_command))
                 0x0000000000000000                __cli_command_size__ = SIZEOF (.cli_command)
-                0x0000000000035bc4                __stop_cli_command = __cli_command_end__
-                0x0000000000035bc4                __cli_command_load_end__ = __cli_command_end__
+                0x0000000000035cb8                __stop_cli_command = __cli_command_end__
+                0x0000000000035cb8                __cli_command_load_end__ = __cli_command_end__
                 0x0000000000000001                . = ASSERT (((__cli_command_start__ == __cli_command_end__) || ((__cli_command_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .cli_command is too large to fit in FLASH memory segment)
-                0x0000000000035bc4                __crypto_data_load_start__ = ALIGN (__cli_command_end__, 0x4)
+                0x0000000000035cb8                __crypto_data_load_start__ = ALIGN (__cli_command_end__, 0x4)
 
-.crypto_data    0x0000000000035bc4        0x0
-                0x0000000000035bc4                __crypto_data_start__ = .
-                0x0000000000035bc4                __start_crypto_data = __crypto_data_start__
+.crypto_data    0x0000000000035cb8        0x0
+                0x0000000000035cb8                __crypto_data_start__ = .
+                0x0000000000035cb8                __start_crypto_data = __crypto_data_start__
  *(SORT_BY_NAME(.crypto_data*))
-                0x0000000000035bc4                __crypto_data_end__ = (__crypto_data_start__ + SIZEOF (.crypto_data))
+                0x0000000000035cb8                __crypto_data_end__ = (__crypto_data_start__ + SIZEOF (.crypto_data))
                 0x0000000000000000                __crypto_data_size__ = SIZEOF (.crypto_data)
-                0x0000000000035bc4                __stop_crypto_data = __crypto_data_end__
-                0x0000000000035bc4                __crypto_data_load_end__ = __crypto_data_end__
+                0x0000000000035cb8                __stop_crypto_data = __crypto_data_end__
+                0x0000000000035cb8                __crypto_data_load_end__ = __crypto_data_end__
                 0x0000000000000001                . = ASSERT (((__crypto_data_start__ == __crypto_data_end__) || ((__crypto_data_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .crypto_data is too large to fit in FLASH memory segment)
-                0x0000000000035bc4                __pwr_mgmt_data_load_start__ = ALIGN (__crypto_data_end__, 0x4)
+                0x0000000000035cb8                __pwr_mgmt_data_load_start__ = ALIGN (__crypto_data_end__, 0x4)
 
-.pwr_mgmt_data  0x0000000000035bc4        0x0
-                0x0000000000035bc4                __pwr_mgmt_data_start__ = .
-                0x0000000000035bc4                __start_pwr_mgmt_data = __pwr_mgmt_data_start__
+.pwr_mgmt_data  0x0000000000035cb8        0x0
+                0x0000000000035cb8                __pwr_mgmt_data_start__ = .
+                0x0000000000035cb8                __start_pwr_mgmt_data = __pwr_mgmt_data_start__
  *(SORT_BY_NAME(.pwr_mgmt_data*))
-                0x0000000000035bc4                __pwr_mgmt_data_end__ = (__pwr_mgmt_data_start__ + SIZEOF (.pwr_mgmt_data))
+                0x0000000000035cb8                __pwr_mgmt_data_end__ = (__pwr_mgmt_data_start__ + SIZEOF (.pwr_mgmt_data))
                 0x0000000000000000                __pwr_mgmt_data_size__ = SIZEOF (.pwr_mgmt_data)
-                0x0000000000035bc4                __stop_pwr_mgmt_data = __pwr_mgmt_data_end__
-                0x0000000000035bc4                __pwr_mgmt_data_load_end__ = __pwr_mgmt_data_end__
+                0x0000000000035cb8                __stop_pwr_mgmt_data = __pwr_mgmt_data_end__
+                0x0000000000035cb8                __pwr_mgmt_data_load_end__ = __pwr_mgmt_data_end__
                 0x0000000000000001                . = ASSERT (((__pwr_mgmt_data_start__ == __pwr_mgmt_data_end__) || ((__pwr_mgmt_data_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .pwr_mgmt_data is too large to fit in FLASH memory segment)
-                0x0000000000035bc4                __log_const_data_load_start__ = ALIGN (__pwr_mgmt_data_end__, 0x4)
+                0x0000000000035cb8                __log_const_data_load_start__ = ALIGN (__pwr_mgmt_data_end__, 0x4)
 
 .log_const_data
-                0x0000000000035bc4       0xc8
-                0x0000000000035bc4                __log_const_data_start__ = .
-                0x0000000000035bc4                __start_log_const_data = __log_const_data_start__
+                0x0000000000035cb8       0xc8
+                0x0000000000035cb8                __log_const_data_start__ = .
+                0x0000000000035cb8                __start_log_const_data = __log_const_data_start__
  *(SORT_BY_NAME(.log_const_data*))
  .log_const_data_CLOCK
-                0x0000000000035bc4        0x8 Output/Release/Obj/Init template - FreeRTOS/nrfx_clock.o
-                0x0000000000035bc4                m_nrf_log_CLOCK_logs_data_const
+                0x0000000000035cb8        0x8 Output/Release/Obj/Init template - FreeRTOS/nrfx_clock.o
+                0x0000000000035cb8                m_nrf_log_CLOCK_logs_data_const
  .log_const_data_GPIOTE
-                0x0000000000035bcc        0x8 Output/Release/Obj/Init template - FreeRTOS/nrfx_gpiote.o
-                0x0000000000035bcc                m_nrf_log_GPIOTE_logs_data_const
+                0x0000000000035cc0        0x8 Output/Release/Obj/Init template - FreeRTOS/nrfx_gpiote.o
+                0x0000000000035cc0                m_nrf_log_GPIOTE_logs_data_const
  .log_const_data_TWI
-                0x0000000000035bd4        0x8 Output/Release/Obj/Init template - FreeRTOS/nrfx_twi.o
-                0x0000000000035bd4                m_nrf_log_TWI_logs_data_const
+                0x0000000000035cc8        0x8 Output/Release/Obj/Init template - FreeRTOS/nrfx_twi.o
+                0x0000000000035cc8                m_nrf_log_TWI_logs_data_const
  .log_const_data_UART
-                0x0000000000035bdc        0x8 Output/Release/Obj/Init template - FreeRTOS/nrfx_uart.o
-                0x0000000000035bdc                m_nrf_log_UART_logs_data_const
+                0x0000000000035cd0        0x8 Output/Release/Obj/Init template - FreeRTOS/nrfx_uart.o
+                0x0000000000035cd0                m_nrf_log_UART_logs_data_const
  .log_const_data_UARTE
-                0x0000000000035be4        0x8 Output/Release/Obj/Init template - FreeRTOS/nrfx_uarte.o
-                0x0000000000035be4                m_nrf_log_UARTE_logs_data_const
+                0x0000000000035cd8        0x8 Output/Release/Obj/Init template - FreeRTOS/nrfx_uarte.o
+                0x0000000000035cd8                m_nrf_log_UARTE_logs_data_const
  .log_const_data_app
-                0x0000000000035bec        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_log_frontend.o
-                0x0000000000035bec                m_nrf_log_app_logs_data_const
+                0x0000000000035ce0        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_log_frontend.o
+                0x0000000000035ce0                m_nrf_log_app_logs_data_const
  .log_const_data_app_button
-                0x0000000000035bf4        0x8 Output/Release/Obj/Init template - FreeRTOS/app_button.o
-                0x0000000000035bf4                m_nrf_log_app_button_logs_data_const
+                0x0000000000035ce8        0x8 Output/Release/Obj/Init template - FreeRTOS/app_button.o
+                0x0000000000035ce8                m_nrf_log_app_button_logs_data_const
  .log_const_data_ble_bas
-                0x0000000000035bfc        0x8 Output/Release/Obj/Init template - FreeRTOS/ble_bas.o
-                0x0000000000035bfc                m_nrf_log_ble_bas_logs_data_const
+                0x0000000000035cf0        0x8 Output/Release/Obj/Init template - FreeRTOS/ble_bas.o
+                0x0000000000035cf0                m_nrf_log_ble_bas_logs_data_const
  .log_const_data_clock
-                0x0000000000035c04        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_drv_clock.o
-                0x0000000000035c04                m_nrf_log_clock_logs_data_const
+                0x0000000000035cf8        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_drv_clock.o
+                0x0000000000035cf8                m_nrf_log_clock_logs_data_const
  .log_const_data_hardfault
-                0x0000000000035c0c        0x8 Output/Release/Obj/Init template - FreeRTOS/hardfault_implementation.o
-                0x0000000000035c0c                m_nrf_log_hardfault_logs_data_const
+                0x0000000000035d00        0x8 Output/Release/Obj/Init template - FreeRTOS/hardfault_implementation.o
+                0x0000000000035d00                m_nrf_log_hardfault_logs_data_const
  .log_const_data_nrf_ble_gatt
-                0x0000000000035c14        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_ble_gatt.o
-                0x0000000000035c14                m_nrf_log_nrf_ble_gatt_logs_data_const
+                0x0000000000035d08        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_ble_gatt.o
+                0x0000000000035d08                m_nrf_log_nrf_ble_gatt_logs_data_const
  .log_const_data_nrf_fstorage
-                0x0000000000035c1c        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_fstorage.o
-                0x0000000000035c1c                m_nrf_log_nrf_fstorage_logs_data_const
+                0x0000000000035d10        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_fstorage.o
+                0x0000000000035d10                m_nrf_log_nrf_fstorage_logs_data_const
  .log_const_data_nrf_sdh
-                0x0000000000035c24        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh.o
-                0x0000000000035c24                m_nrf_log_nrf_sdh_logs_data_const
+                0x0000000000035d18        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh.o
+                0x0000000000035d18                m_nrf_log_nrf_sdh_logs_data_const
  .log_const_data_nrf_sdh_ble
-                0x0000000000035c2c        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_ble.o
-                0x0000000000035c2c                m_nrf_log_nrf_sdh_ble_logs_data_const
+                0x0000000000035d20        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_ble.o
+                0x0000000000035d20                m_nrf_log_nrf_sdh_ble_logs_data_const
  .log_const_data_nrf_sdh_freertos
-                0x0000000000035c34        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_freertos.o
-                0x0000000000035c34                m_nrf_log_nrf_sdh_freertos_logs_data_const
+                0x0000000000035d28        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_freertos.o
+                0x0000000000035d28                m_nrf_log_nrf_sdh_freertos_logs_data_const
  .log_const_data_nrf_sdh_soc
-                0x0000000000035c3c        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_soc.o
-                0x0000000000035c3c                m_nrf_log_nrf_sdh_soc_logs_data_const
+                0x0000000000035d30        0x8 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_soc.o
+                0x0000000000035d30                m_nrf_log_nrf_sdh_soc_logs_data_const
  .log_const_data_peer_manager
-                0x0000000000035c44        0x8 Output/Release/Obj/Init template - FreeRTOS/peer_manager.o
-                0x0000000000035c44                m_nrf_log_peer_manager_logs_data_const
+                0x0000000000035d38        0x8 Output/Release/Obj/Init template - FreeRTOS/peer_manager.o
+                0x0000000000035d38                m_nrf_log_peer_manager_logs_data_const
  .log_const_data_peer_manager_gcm
-                0x0000000000035c4c        0x8 Output/Release/Obj/Init template - FreeRTOS/gatt_cache_manager.o
-                0x0000000000035c4c                m_nrf_log_peer_manager_gcm_logs_data_const
+                0x0000000000035d40        0x8 Output/Release/Obj/Init template - FreeRTOS/gatt_cache_manager.o
+                0x0000000000035d40                m_nrf_log_peer_manager_gcm_logs_data_const
  .log_const_data_peer_manager_gscm
-                0x0000000000035c54        0x8 Output/Release/Obj/Init template - FreeRTOS/gatts_cache_manager.o
-                0x0000000000035c54                m_nrf_log_peer_manager_gscm_logs_data_const
+                0x0000000000035d48        0x8 Output/Release/Obj/Init template - FreeRTOS/gatts_cache_manager.o
+                0x0000000000035d48                m_nrf_log_peer_manager_gscm_logs_data_const
  .log_const_data_peer_manager_handler
-                0x0000000000035c5c        0x8 Output/Release/Obj/Init template - FreeRTOS/peer_manager_handler.o
-                0x0000000000035c5c                m_nrf_log_peer_manager_handler_logs_data_const
+                0x0000000000035d50        0x8 Output/Release/Obj/Init template - FreeRTOS/peer_manager_handler.o
+                0x0000000000035d50                m_nrf_log_peer_manager_handler_logs_data_const
  .log_const_data_peer_manager_im
-                0x0000000000035c64        0x8 Output/Release/Obj/Init template - FreeRTOS/id_manager.o
-                0x0000000000035c64                m_nrf_log_peer_manager_im_logs_data_const
+                0x0000000000035d58        0x8 Output/Release/Obj/Init template - FreeRTOS/id_manager.o
+                0x0000000000035d58                m_nrf_log_peer_manager_im_logs_data_const
  .log_const_data_peer_manager_pdb
-                0x0000000000035c6c        0x8 Output/Release/Obj/Init template - FreeRTOS/peer_database.o
-                0x0000000000035c6c                m_nrf_log_peer_manager_pdb_logs_data_const
+                0x0000000000035d60        0x8 Output/Release/Obj/Init template - FreeRTOS/peer_database.o
+                0x0000000000035d60                m_nrf_log_peer_manager_pdb_logs_data_const
  .log_const_data_peer_manager_pds
-                0x0000000000035c74        0x8 Output/Release/Obj/Init template - FreeRTOS/peer_data_storage.o
-                0x0000000000035c74                m_nrf_log_peer_manager_pds_logs_data_const
+                0x0000000000035d68        0x8 Output/Release/Obj/Init template - FreeRTOS/peer_data_storage.o
+                0x0000000000035d68                m_nrf_log_peer_manager_pds_logs_data_const
  .log_const_data_peer_manager_sm
-                0x0000000000035c7c        0x8 Output/Release/Obj/Init template - FreeRTOS/security_manager.o
-                0x0000000000035c7c                m_nrf_log_peer_manager_sm_logs_data_const
+                0x0000000000035d70        0x8 Output/Release/Obj/Init template - FreeRTOS/security_manager.o
+                0x0000000000035d70                m_nrf_log_peer_manager_sm_logs_data_const
  .log_const_data_peer_manager_smd
-                0x0000000000035c84        0x8 Output/Release/Obj/Init template - FreeRTOS/security_dispatcher.o
-                0x0000000000035c84                m_nrf_log_peer_manager_smd_logs_data_const
-                0x0000000000035c8c                __log_const_data_end__ = (__log_const_data_start__ + SIZEOF (.log_const_data))
+                0x0000000000035d78        0x8 Output/Release/Obj/Init template - FreeRTOS/security_dispatcher.o
+                0x0000000000035d78                m_nrf_log_peer_manager_smd_logs_data_const
+                0x0000000000035d80                __log_const_data_end__ = (__log_const_data_start__ + SIZEOF (.log_const_data))
                 0x00000000000000c8                __log_const_data_size__ = SIZEOF (.log_const_data)
-                0x0000000000035c8c                __stop_log_const_data = __log_const_data_end__
-                0x0000000000035c8c                __log_const_data_load_end__ = __log_const_data_end__
+                0x0000000000035d80                __stop_log_const_data = __log_const_data_end__
+                0x0000000000035d80                __log_const_data_load_end__ = __log_const_data_end__
                 0x0000000000000001                . = ASSERT (((__log_const_data_start__ == __log_const_data_end__) || ((__log_const_data_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .log_const_data is too large to fit in FLASH memory segment)
-                0x0000000000035c8c                __log_backends_load_start__ = ALIGN (__log_const_data_end__, 0x4)
+                0x0000000000035d80                __log_backends_load_start__ = ALIGN (__log_const_data_end__, 0x4)
 
-.log_backends   0x0000000000035c8c       0x10
-                0x0000000000035c8c                __log_backends_start__ = .
-                0x0000000000035c8c                __start_log_backends = __log_backends_start__
+.log_backends   0x0000000000035d80       0x10
+                0x0000000000035d80                __log_backends_start__ = .
+                0x0000000000035d80                __start_log_backends = __log_backends_start__
  *(SORT_BY_NAME(.log_backends*))
- .log_backends  0x0000000000035c8c       0x10 Output/Release/Obj/Init template - FreeRTOS/nrf_log_default_backends.o
-                0x0000000000035c9c                __log_backends_end__ = (__log_backends_start__ + SIZEOF (.log_backends))
+ .log_backends  0x0000000000035d80       0x10 Output/Release/Obj/Init template - FreeRTOS/nrf_log_default_backends.o
+                0x0000000000035d90                __log_backends_end__ = (__log_backends_start__ + SIZEOF (.log_backends))
                 0x0000000000000010                __log_backends_size__ = SIZEOF (.log_backends)
-                0x0000000000035c9c                __stop_log_backends = __log_backends_end__
-                0x0000000000035c9c                __log_backends_load_end__ = __log_backends_end__
+                0x0000000000035d90                __stop_log_backends = __log_backends_end__
+                0x0000000000035d90                __log_backends_load_end__ = __log_backends_end__
                 0x0000000000000001                . = ASSERT (((__log_backends_start__ == __log_backends_end__) || ((__log_backends_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .log_backends is too large to fit in FLASH memory segment)
-                0x0000000000035c9c                __nrf_sections_load_start__ = ALIGN (__log_backends_end__, 0x4)
+                0x0000000000035d90                __nrf_sections_load_start__ = ALIGN (__log_backends_end__, 0x4)
 
-.nrf_sections   0x0000000000035c9c        0x0
-                0x0000000000035c9c                __nrf_sections_start__ = .
-                0x0000000000035c9c                __start_nrf_sections = __nrf_sections_start__
+.nrf_sections   0x0000000000035d90        0x0
+                0x0000000000035d90                __nrf_sections_start__ = .
+                0x0000000000035d90                __start_nrf_sections = __nrf_sections_start__
  *(.nrf_sections .nrf_sections.*)
-                0x0000000000035c9c                __nrf_sections_end__ = (__nrf_sections_start__ + SIZEOF (.nrf_sections))
+                0x0000000000035d90                __nrf_sections_end__ = (__nrf_sections_start__ + SIZEOF (.nrf_sections))
                 0x0000000000000000                __nrf_sections_size__ = SIZEOF (.nrf_sections)
-                0x0000000000035c9c                __nrf_sections_load_end__ = __nrf_sections_end__
+                0x0000000000035d90                __nrf_sections_load_end__ = __nrf_sections_end__
                 0x0000000000000001                . = ASSERT (((__nrf_sections_start__ == __nrf_sections_end__) || ((__nrf_sections_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .nrf_sections is too large to fit in FLASH memory segment)
-                0x0000000000035c9c                __cli_sorted_cmd_ptrs_load_start__ = ALIGN (__nrf_sections_end__, 0x4)
+                0x0000000000035d90                __cli_sorted_cmd_ptrs_load_start__ = ALIGN (__nrf_sections_end__, 0x4)
 
 .cli_sorted_cmd_ptrs
-                0x0000000020005978        0x0 load address 0x0000000000035c9c
+                0x0000000020005978        0x0 load address 0x0000000000035d90
                 0x0000000020005978                __cli_sorted_cmd_ptrs_start__ = .
  *(.cli_sorted_cmd_ptrs*)
                 0x0000000020005978                __cli_sorted_cmd_ptrs_end__ = (__cli_sorted_cmd_ptrs_start__ + SIZEOF (.cli_sorted_cmd_ptrs))
                 0x0000000000000000                __cli_sorted_cmd_ptrs_size__ = SIZEOF (.cli_sorted_cmd_ptrs)
-                0x0000000000035c9c                __cli_sorted_cmd_ptrs_load_end__ = (__cli_sorted_cmd_ptrs_load_start__ + SIZEOF (.cli_sorted_cmd_ptrs))
+                0x0000000000035d90                __cli_sorted_cmd_ptrs_load_end__ = (__cli_sorted_cmd_ptrs_load_start__ + SIZEOF (.cli_sorted_cmd_ptrs))
                 0x0000000000000001                . = ASSERT (((__cli_sorted_cmd_ptrs_load_start__ == __cli_sorted_cmd_ptrs_load_end__) || ((__cli_sorted_cmd_ptrs_load_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .cli_sorted_cmd_ptrs is too large to fit in FLASH memory segment)
 
 .cli_sorted_cmd_ptrs_run
@@ -28323,16 +28326,16 @@ Linker script and memory map
                 0x0000000020005978                __stop_cli_sorted_cmd_ptrs = __cli_sorted_cmd_ptrs_run_end__
                 0x0000000020005978                __cli_sorted_cmd_ptrs_run_load_end__ = __cli_sorted_cmd_ptrs_run_end__
                 0x0000000000000001                . = ASSERT (((__cli_sorted_cmd_ptrs_run_start__ == __cli_sorted_cmd_ptrs_run_end__) || ((__cli_sorted_cmd_ptrs_run_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__)), error: .cli_sorted_cmd_ptrs_run is too large to fit in RAM1 memory segment)
-                0x0000000000035c9c                __fs_data_load_start__ = ALIGN ((__cli_sorted_cmd_ptrs_load_start__ + SIZEOF (.cli_sorted_cmd_ptrs)), 0x4)
+                0x0000000000035d90                __fs_data_load_start__ = ALIGN ((__cli_sorted_cmd_ptrs_load_start__ + SIZEOF (.cli_sorted_cmd_ptrs)), 0x4)
 
-.fs_data        0x0000000020005978       0x14 load address 0x0000000000035c9c
+.fs_data        0x0000000020005978       0x14 load address 0x0000000000035d90
                 0x0000000020005978                __fs_data_start__ = .
  *(.fs_data*)
  .fs_data       0x0000000020005978       0x14 Output/Release/Obj/Init template - FreeRTOS/fds.o
                 0x0000000020005978                m_fs
                 0x000000002000598c                __fs_data_end__ = (__fs_data_start__ + SIZEOF (.fs_data))
                 0x0000000000000014                __fs_data_size__ = SIZEOF (.fs_data)
-                0x0000000000035cb0                __fs_data_load_end__ = (__fs_data_load_start__ + SIZEOF (.fs_data))
+                0x0000000000035da4                __fs_data_load_end__ = (__fs_data_load_start__ + SIZEOF (.fs_data))
                 0x0000000000000001                . = ASSERT (((__fs_data_load_start__ == __fs_data_load_end__) || ((__fs_data_load_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .fs_data is too large to fit in FLASH memory segment)
 
 .fs_data_run    0x0000000020005978        0x0
@@ -28343,15 +28346,15 @@ Linker script and memory map
                 0x000000002000598c                __stop_fs_data = __fs_data_run_end__
                 0x000000002000598c                __fs_data_run_load_end__ = __fs_data_run_end__
                 0x0000000000000001                . = ASSERT (((__fs_data_run_start__ == __fs_data_run_end__) || ((__fs_data_run_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__)), error: .fs_data_run is too large to fit in RAM1 memory segment)
-                0x0000000000035cb0                __log_dynamic_data_load_start__ = ALIGN ((__fs_data_load_start__ + SIZEOF (.fs_data)), 0x4)
+                0x0000000000035da4                __log_dynamic_data_load_start__ = ALIGN ((__fs_data_load_start__ + SIZEOF (.fs_data)), 0x4)
 
 .log_dynamic_data
-                0x000000002000598c        0x0 load address 0x0000000000035cb0
+                0x000000002000598c        0x0 load address 0x0000000000035da4
                 0x000000002000598c                __log_dynamic_data_start__ = .
  *(SORT_BY_NAME(.log_dynamic_data*))
                 0x000000002000598c                __log_dynamic_data_end__ = (__log_dynamic_data_start__ + SIZEOF (.log_dynamic_data))
                 0x0000000000000000                __log_dynamic_data_size__ = SIZEOF (.log_dynamic_data)
-                0x0000000000035cb0                __log_dynamic_data_load_end__ = (__log_dynamic_data_load_start__ + SIZEOF (.log_dynamic_data))
+                0x0000000000035da4                __log_dynamic_data_load_end__ = (__log_dynamic_data_load_start__ + SIZEOF (.log_dynamic_data))
                 0x0000000000000001                . = ASSERT (((__log_dynamic_data_load_start__ == __log_dynamic_data_load_end__) || ((__log_dynamic_data_load_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .log_dynamic_data is too large to fit in FLASH memory segment)
 
 .log_dynamic_data_run
@@ -28363,15 +28366,15 @@ Linker script and memory map
                 0x000000002000598c                __stop_log_dynamic_data = __log_dynamic_data_run_end__
                 0x000000002000598c                __log_dynamic_data_run_load_end__ = __log_dynamic_data_run_end__
                 0x0000000000000001                . = ASSERT (((__log_dynamic_data_run_start__ == __log_dynamic_data_run_end__) || ((__log_dynamic_data_run_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__)), error: .log_dynamic_data_run is too large to fit in RAM1 memory segment)
-                0x0000000000035cb0                __log_filter_data_load_start__ = ALIGN ((__log_dynamic_data_load_start__ + SIZEOF (.log_dynamic_data)), 0x4)
+                0x0000000000035da4                __log_filter_data_load_start__ = ALIGN ((__log_dynamic_data_load_start__ + SIZEOF (.log_dynamic_data)), 0x4)
 
 .log_filter_data
-                0x000000002000598c        0x0 load address 0x0000000000035cb0
+                0x000000002000598c        0x0 load address 0x0000000000035da4
                 0x000000002000598c                __log_filter_data_start__ = .
  *(SORT_BY_NAME(.log_filter_data*))
                 0x000000002000598c                __log_filter_data_end__ = (__log_filter_data_start__ + SIZEOF (.log_filter_data))
                 0x0000000000000000                __log_filter_data_size__ = SIZEOF (.log_filter_data)
-                0x0000000000035cb0                __log_filter_data_load_end__ = (__log_filter_data_load_start__ + SIZEOF (.log_filter_data))
+                0x0000000000035da4                __log_filter_data_load_end__ = (__log_filter_data_load_start__ + SIZEOF (.log_filter_data))
                 0x0000000000000001                . = ASSERT (((__log_filter_data_load_start__ == __log_filter_data_load_end__) || ((__log_filter_data_load_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .log_filter_data is too large to fit in FLASH memory segment)
 
 .log_filter_data_run
@@ -28394,226 +28397,227 @@ Linker script and memory map
                 0x0000000000000000                __nrf_sections_run_end_size__ = SIZEOF (.nrf_sections_run_end)
                 0x000000002000598c                __nrf_sections_run_end_load_end__ = __nrf_sections_run_end_end__
                 0x0000000000000001                . = ASSERT (((__nrf_sections_run_end_start__ == __nrf_sections_run_end_end__) || ((__nrf_sections_run_end_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__)), error: .nrf_sections_run_end is too large to fit in RAM1 memory segment)
-                0x0000000000035cb0                __dtors_load_start__ = ALIGN ((__log_filter_data_load_start__ + SIZEOF (.log_filter_data)), 0x4)
+                0x0000000000035da4                __dtors_load_start__ = ALIGN ((__log_filter_data_load_start__ + SIZEOF (.log_filter_data)), 0x4)
 
-.dtors          0x0000000000035cb0        0x0
-                0x0000000000035cb0                __dtors_start__ = .
+.dtors          0x0000000000035da4        0x0
+                0x0000000000035da4                __dtors_start__ = .
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
  *(.fini_array)
  *(SORT_BY_NAME(.fini_array.*))
-                0x0000000000035cb0                __dtors_end__ = (__dtors_start__ + SIZEOF (.dtors))
+                0x0000000000035da4                __dtors_end__ = (__dtors_start__ + SIZEOF (.dtors))
                 0x0000000000000000                __dtors_size__ = SIZEOF (.dtors)
-                0x0000000000035cb0                __dtors_load_end__ = __dtors_end__
+                0x0000000000035da4                __dtors_load_end__ = __dtors_end__
                 0x0000000000000001                . = ASSERT (((__dtors_start__ == __dtors_end__) || ((__dtors_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .dtors is too large to fit in FLASH memory segment)
-                0x0000000000035cb0                __ctors_load_start__ = ALIGN (__dtors_end__, 0x4)
+                0x0000000000035da4                __ctors_load_start__ = ALIGN (__dtors_end__, 0x4)
 
-.ctors          0x0000000000035cb0        0x4
-                0x0000000000035cb0                __ctors_start__ = .
+.ctors          0x0000000000035da4        0x4
+                0x0000000000035da4                __ctors_start__ = .
  *(SORT_BY_NAME(.ctors.*))
  *(.ctors)
  *(.init_array)
- .init_array    0x0000000000035cb0        0x4 Output/Release/Obj/Init template - FreeRTOS/main.o
+ .init_array    0x0000000000035da4        0x4 Output/Release/Obj/Init template - FreeRTOS/main.o
  *(SORT_BY_NAME(.init_array.*))
-                0x0000000000035cb4                __ctors_end__ = (__ctors_start__ + SIZEOF (.ctors))
+                0x0000000000035da8                __ctors_end__ = (__ctors_start__ + SIZEOF (.ctors))
                 0x0000000000000004                __ctors_size__ = SIZEOF (.ctors)
-                0x0000000000035cb4                __ctors_load_end__ = __ctors_end__
+                0x0000000000035da8                __ctors_load_end__ = __ctors_end__
                 0x0000000000000001                . = ASSERT (((__ctors_start__ == __ctors_end__) || ((__ctors_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .ctors is too large to fit in FLASH memory segment)
-                0x0000000000035cb4                __rodata_load_start__ = ALIGN (__ctors_end__, 0x4)
+                0x0000000000035da8                __rodata_load_start__ = ALIGN (__ctors_end__, 0x4)
 
-.rodata         0x0000000000035cb4     0x2eaa
-                0x0000000000035cb4                __rodata_start__ = .
+.rodata         0x0000000000035da8     0x2eb6
+                0x0000000000035da8                __rodata_start__ = .
  *(.rodata .rodata.* .gnu.linkonce.r.*)
  .rodata.nrf_log_backend_rtt_api
-                0x0000000000035cb4        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_rtt.o
-                0x0000000000035cb4                nrf_log_backend_rtt_api
+                0x0000000000035da8        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_rtt.o
+                0x0000000000035da8                nrf_log_backend_rtt_api
+ *fill*         0x0000000000035db4        0xc 
  .rodata.delay_machine_code.0
-                0x0000000000035cc0        0x6 Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_rtt.o
- *fill*         0x0000000000035cc6        0x2 
- .rodata        0x0000000000035cc8       0x10 Output/Release/Obj/Init template - FreeRTOS/nrf_log_default_backends.o
+                0x0000000000035dc0        0x6 Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_rtt.o
+ *fill*         0x0000000000035dc6        0x2 
+ .rodata        0x0000000000035dc8       0x10 Output/Release/Obj/Init template - FreeRTOS/nrf_log_default_backends.o
  .rodata.m_log_push_ringbuf
-                0x0000000000035cd8        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_log_frontend.o
- .rodata        0x0000000000035ce4       0x15 Output/Release/Obj/Init template - FreeRTOS/nrf_log_frontend.o
- *fill*         0x0000000000035cf9        0x3 
- .rodata        0x0000000000035cfc       0xaa Output/Release/Obj/Init template - FreeRTOS/nrf_log_str_formatter.o
- *fill*         0x0000000000035da6        0x2 
- .rodata        0x0000000000035da8        0xb Output/Release/Obj/Init template - FreeRTOS/app_button.o
- *fill*         0x0000000000035db3        0x1 
- .rodata        0x0000000000035db4       0x19 Output/Release/Obj/Init template - FreeRTOS/app_error_weak.o
- *fill*         0x0000000000035dcd        0x3 
+                0x0000000000035dd8        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_log_frontend.o
+ .rodata        0x0000000000035de4       0x15 Output/Release/Obj/Init template - FreeRTOS/nrf_log_frontend.o
+ *fill*         0x0000000000035df9        0x3 
+ .rodata        0x0000000000035dfc       0xaa Output/Release/Obj/Init template - FreeRTOS/nrf_log_str_formatter.o
+ *fill*         0x0000000000035ea6        0x2 
+ .rodata        0x0000000000035ea8        0xb Output/Release/Obj/Init template - FreeRTOS/app_button.o
+ *fill*         0x0000000000035eb3        0x1 
+ .rodata        0x0000000000035eb4       0x19 Output/Release/Obj/Init template - FreeRTOS/app_error_weak.o
+ *fill*         0x0000000000035ecd        0x3 
  .rodata.page_tag_swap.7
-                0x0000000000035dd0        0x8 Output/Release/Obj/Init template - FreeRTOS/fds.o
+                0x0000000000035ed0        0x8 Output/Release/Obj/Init template - FreeRTOS/fds.o
  .rodata.page_tag_data.6
-                0x0000000000035dd8        0x8 Output/Release/Obj/Init template - FreeRTOS/fds.o
+                0x0000000000035ed8        0x8 Output/Release/Obj/Init template - FreeRTOS/fds.o
  .rodata.dirty_header.5
-                0x0000000000035de0        0x4 Output/Release/Obj/Init template - FreeRTOS/fds.o
- .rodata        0x0000000000035de4      0x617 Output/Release/Obj/Init template - FreeRTOS/hardfault_implementation.o
- *fill*         0x00000000000363fb        0x1 
+                0x0000000000035ee0        0x4 Output/Release/Obj/Init template - FreeRTOS/fds.o
+ .rodata        0x0000000000035ee4      0x617 Output/Release/Obj/Init template - FreeRTOS/hardfault_implementation.o
+ *fill*         0x00000000000364fb        0x1 
  .rodata._aV2C.0
-                0x00000000000363fc       0x10 Output/Release/Obj/Init template - FreeRTOS/nrf_fprintf_format.o
- .rodata        0x000000000003640c      0x1b3 Output/Release/Obj/Init template - FreeRTOS/nrf_fstorage.o
- *fill*         0x00000000000365bf        0x1 
+                0x00000000000364fc       0x10 Output/Release/Obj/Init template - FreeRTOS/nrf_fprintf_format.o
+ .rodata        0x000000000003650c      0x1b3 Output/Release/Obj/Init template - FreeRTOS/nrf_fstorage.o
+ *fill*         0x00000000000366bf        0x1 
  .rodata.__func__.1
-                0x00000000000365c0       0x13 Output/Release/Obj/Init template - FreeRTOS/nrf_fstorage.o
- *fill*         0x00000000000365d3        0x1 
+                0x00000000000366c0       0x13 Output/Release/Obj/Init template - FreeRTOS/nrf_fstorage.o
+ *fill*         0x00000000000366d3        0x1 
  .rodata.__func__.0
-                0x00000000000365d4       0x13 Output/Release/Obj/Init template - FreeRTOS/nrf_fstorage.o
- *fill*         0x00000000000365e7        0x1 
+                0x00000000000366d4       0x13 Output/Release/Obj/Init template - FreeRTOS/nrf_fstorage.o
+ *fill*         0x00000000000366e7        0x1 
  .rodata.m_unknown_str
-                0x00000000000365e8       0x13 Output/Release/Obj/Init template - FreeRTOS/nrf_strerror.o
- *fill*         0x00000000000365fb        0x1 
- .rodata        0x00000000000365fc      0x3e9 Output/Release/Obj/Init template - FreeRTOS/nrf_strerror.o
- *fill*         0x00000000000369e5        0x3 
+                0x00000000000366e8       0x13 Output/Release/Obj/Init template - FreeRTOS/nrf_strerror.o
+ *fill*         0x00000000000366fb        0x1 
+ .rodata        0x00000000000366fc      0x3e9 Output/Release/Obj/Init template - FreeRTOS/nrf_strerror.o
+ *fill*         0x0000000000036ae5        0x3 
  .rodata.nrf_strerror_array
-                0x00000000000369e8      0x128 Output/Release/Obj/Init template - FreeRTOS/nrf_strerror.o
- .rodata        0x0000000000036b10        0x5 Output/Release/Obj/Init template - FreeRTOS/tasks.o
- *fill*         0x0000000000036b15        0x3 
- .rodata        0x0000000000036b18        0xd Output/Release/Obj/Init template - FreeRTOS/timers.o
- *fill*         0x0000000000036b25        0x3 
- .rodata        0x0000000000036b28        0x6 Output/Release/Obj/Init template - FreeRTOS/nrf_drv_clock.o
- *fill*         0x0000000000036b2e        0x2 
- .rodata        0x0000000000036b30        0x6 Output/Release/Obj/Init template - FreeRTOS/nrfx_clock.o
- *fill*         0x0000000000036b36        0x2 
- .rodata        0x0000000000036b38        0xf Output/Release/Obj/Init template - FreeRTOS/nrfx_gpiote.o
- *fill*         0x0000000000036b47        0x1 
- .rodata        0x0000000000036b48        0x5 Output/Release/Obj/Init template - FreeRTOS/nrfx_uart.o
- *fill*         0x0000000000036b4d        0x3 
- .rodata        0x0000000000036b50        0x6 Output/Release/Obj/Init template - FreeRTOS/nrfx_uarte.o
- *fill*         0x0000000000036b56        0x2 
- .rodata        0x0000000000036b58        0x4 Output/Release/Obj/Init template - FreeRTOS/nrfx_twi.o
- .rodata        0x0000000000036b5c       0x17 Output/Release/Obj/Init template - FreeRTOS/SEGGER_RTT.o
- *fill*         0x0000000000036b73        0x1 
- .rodata        0x0000000000036b74      0x326 Output/Release/Obj/Init template - FreeRTOS/gatt_cache_manager.o
- *fill*         0x0000000000036e9a        0x2 
+                0x0000000000036ae8      0x128 Output/Release/Obj/Init template - FreeRTOS/nrf_strerror.o
+ .rodata        0x0000000000036c10        0x5 Output/Release/Obj/Init template - FreeRTOS/tasks.o
+ *fill*         0x0000000000036c15        0x3 
+ .rodata        0x0000000000036c18        0xd Output/Release/Obj/Init template - FreeRTOS/timers.o
+ *fill*         0x0000000000036c25        0x3 
+ .rodata        0x0000000000036c28        0x6 Output/Release/Obj/Init template - FreeRTOS/nrf_drv_clock.o
+ *fill*         0x0000000000036c2e        0x2 
+ .rodata        0x0000000000036c30        0x6 Output/Release/Obj/Init template - FreeRTOS/nrfx_clock.o
+ *fill*         0x0000000000036c36        0x2 
+ .rodata        0x0000000000036c38        0xf Output/Release/Obj/Init template - FreeRTOS/nrfx_gpiote.o
+ *fill*         0x0000000000036c47        0x1 
+ .rodata        0x0000000000036c48        0x5 Output/Release/Obj/Init template - FreeRTOS/nrfx_uart.o
+ *fill*         0x0000000000036c4d        0x3 
+ .rodata        0x0000000000036c50        0x6 Output/Release/Obj/Init template - FreeRTOS/nrfx_uarte.o
+ *fill*         0x0000000000036c56        0x2 
+ .rodata        0x0000000000036c58        0x4 Output/Release/Obj/Init template - FreeRTOS/nrfx_twi.o
+ .rodata        0x0000000000036c5c       0x17 Output/Release/Obj/Init template - FreeRTOS/SEGGER_RTT.o
+ *fill*         0x0000000000036c73        0x1 
+ .rodata        0x0000000000036c74      0x326 Output/Release/Obj/Init template - FreeRTOS/gatt_cache_manager.o
+ *fill*         0x0000000000036f9a        0x2 
  .rodata.car_value_true.1
-                0x0000000000036e9c        0x4 Output/Release/Obj/Init template - FreeRTOS/gatt_cache_manager.o
+                0x0000000000036f9c        0x4 Output/Release/Obj/Init template - FreeRTOS/gatt_cache_manager.o
  .rodata.car_value_false.0
-                0x0000000000036ea0        0x4 Output/Release/Obj/Init template - FreeRTOS/gatt_cache_manager.o
- .rodata        0x0000000000036ea4      0x1c0 Output/Release/Obj/Init template - FreeRTOS/gatts_cache_manager.o
+                0x0000000000036fa0        0x4 Output/Release/Obj/Init template - FreeRTOS/gatt_cache_manager.o
+ .rodata        0x0000000000036fa4      0x1c0 Output/Release/Obj/Init template - FreeRTOS/gatts_cache_manager.o
  .rodata.service_changed_pending.0
-                0x0000000000037064        0x4 Output/Release/Obj/Init template - FreeRTOS/gatts_cache_manager.o
+                0x0000000000037164        0x4 Output/Release/Obj/Init template - FreeRTOS/gatts_cache_manager.o
  .rodata.service_changed_pending.1
-                0x0000000000037068        0x4 Output/Release/Obj/Init template - FreeRTOS/gatts_cache_manager.o
- .rodata        0x000000000003706c       0xfe Output/Release/Obj/Init template - FreeRTOS/id_manager.o
- *fill*         0x000000000003716a        0x2 
+                0x0000000000037168        0x4 Output/Release/Obj/Init template - FreeRTOS/gatts_cache_manager.o
+ .rodata        0x000000000003716c       0xfe Output/Release/Obj/Init template - FreeRTOS/id_manager.o
+ *fill*         0x000000000003726a        0x2 
  .rodata.m_evt_handlers
-                0x000000000003716c        0x8 Output/Release/Obj/Init template - FreeRTOS/id_manager.o
- .rodata        0x0000000000037174      0x157 Output/Release/Obj/Init template - FreeRTOS/nrf_ble_gatt.o
- *fill*         0x00000000000372cb        0x1 
- .rodata        0x00000000000372cc      0x190 Output/Release/Obj/Init template - FreeRTOS/peer_data_storage.o
- .rodata        0x000000000003745c      0x224 Output/Release/Obj/Init template - FreeRTOS/peer_database.o
+                0x000000000003726c        0x8 Output/Release/Obj/Init template - FreeRTOS/id_manager.o
+ .rodata        0x0000000000037274      0x157 Output/Release/Obj/Init template - FreeRTOS/nrf_ble_gatt.o
+ *fill*         0x00000000000373cb        0x1 
+ .rodata        0x00000000000373cc      0x190 Output/Release/Obj/Init template - FreeRTOS/peer_data_storage.o
+ .rodata        0x000000000003755c      0x224 Output/Release/Obj/Init template - FreeRTOS/peer_database.o
  .rodata.m_evt_handlers
-                0x0000000000037680       0x10 Output/Release/Obj/Init template - FreeRTOS/peer_database.o
- .rodata        0x0000000000037690      0x24c Output/Release/Obj/Init template - FreeRTOS/peer_manager.o
- .rodata        0x00000000000378dc      0x9e6 Output/Release/Obj/Init template - FreeRTOS/peer_manager_handler.o
- *fill*         0x00000000000382c2        0x2 
- .rodata        0x00000000000382c4      0x39e Output/Release/Obj/Init template - FreeRTOS/security_dispatcher.o
- *fill*         0x0000000000038662        0x2 
+                0x0000000000037780       0x10 Output/Release/Obj/Init template - FreeRTOS/peer_database.o
+ .rodata        0x0000000000037790      0x24c Output/Release/Obj/Init template - FreeRTOS/peer_manager.o
+ .rodata        0x00000000000379dc      0x9e6 Output/Release/Obj/Init template - FreeRTOS/peer_manager_handler.o
+ *fill*         0x00000000000383c2        0x2 
+ .rodata        0x00000000000383c4      0x39e Output/Release/Obj/Init template - FreeRTOS/security_dispatcher.o
+ *fill*         0x0000000000038762        0x2 
  .rodata.__func__.0
-                0x0000000000038664       0x10 Output/Release/Obj/Init template - FreeRTOS/security_dispatcher.o
- .rodata        0x0000000000038674      0x1fb Output/Release/Obj/Init template - FreeRTOS/security_manager.o
- *fill*         0x000000000003886f        0x1 
- .rodata        0x0000000000038870        0x8 Output/Release/Obj/Init template - FreeRTOS/ble_bas.o
- .rodata        0x0000000000038878        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_sdh.o
+                0x0000000000038764       0x10 Output/Release/Obj/Init template - FreeRTOS/security_dispatcher.o
+ .rodata        0x0000000000038774      0x1fb Output/Release/Obj/Init template - FreeRTOS/security_manager.o
+ *fill*         0x000000000003896f        0x1 
+ .rodata        0x0000000000038970        0x8 Output/Release/Obj/Init template - FreeRTOS/ble_bas.o
+ .rodata        0x0000000000038978        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_sdh.o
  .rodata.sdh_req_observers
-                0x0000000000038884        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_sdh.o
+                0x0000000000038984        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_sdh.o
  .rodata.sdh_state_observers
-                0x0000000000038890        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_sdh.o
- .rodata        0x000000000003889c        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_ble.o
+                0x0000000000038990        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_sdh.o
+ .rodata        0x000000000003899c        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_ble.o
  .rodata.sdh_ble_observers
-                0x00000000000388a8        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_ble.o
- .rodata        0x00000000000388b4       0x35 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_freertos.o
- *fill*         0x00000000000388e9        0x3 
- .rodata        0x00000000000388ec        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_soc.o
+                0x00000000000389a8        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_ble.o
+ .rodata        0x00000000000389b4       0x35 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_freertos.o
+ *fill*         0x00000000000389e9        0x3 
+ .rodata        0x00000000000389ec        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_soc.o
  .rodata.sdh_soc_observers
-                0x00000000000388f8        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_soc.o
- .rodata        0x0000000000038904        0xc Output/Release/Obj/Init template - FreeRTOS/NrfLogger.o
- .rodata        0x0000000000038910        0x8 Output/Release/Obj/Init template - FreeRTOS/system_task.o
- .rodata        0x0000000000038918        0x5 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
- *fill*         0x000000000003891d        0x3 
+                0x00000000000389f8        0xc Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_soc.o
+ .rodata        0x0000000000038a04        0xc Output/Release/Obj/Init template - FreeRTOS/NrfLogger.o
+ .rodata        0x0000000000038a10        0x8 Output/Release/Obj/Init template - FreeRTOS/system_task.o
+ .rodata        0x0000000000038a18        0x5 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
+ *fill*         0x0000000000038a1d        0x3 
  .rodata.libc.__RAL_find_locale.str1.4
-                0x0000000000038920        0xa /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
- *fill*         0x000000000003892a        0x2 
+                0x0000000000038a20        0xa /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+ *fill*         0x0000000000038a2a        0x2 
  .rodata.libc.__RAL_ascii_ctype_map
-                0x000000000003892c       0x80 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x000000000003892c                __RAL_ascii_ctype_map
+                0x0000000000038a2c       0x80 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000038a2c                __RAL_ascii_ctype_map
  .rodata.libc.__RAL_ascii_ctype_mask
-                0x00000000000389ac        0xd /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
- *fill*         0x00000000000389b9        0x3 
+                0x0000000000038aac        0xd /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+ *fill*         0x0000000000038ab9        0x3 
  .rodata.libc.__RAL_c_locale
-                0x00000000000389bc        0xc /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x00000000000389bc                __RAL_c_locale
+                0x0000000000038abc        0xc /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000038abc                __RAL_c_locale
  .rodata.libc.__RAL_c_locale_abbrev_day_names
-                0x00000000000389c8       0x1d /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x00000000000389c8                __RAL_c_locale_abbrev_day_names
- *fill*         0x00000000000389e5        0x3 
+                0x0000000000038ac8       0x1d /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000038ac8                __RAL_c_locale_abbrev_day_names
+ *fill*         0x0000000000038ae5        0x3 
  .rodata.libc.__RAL_c_locale_abbrev_month_names
-                0x00000000000389e8       0x31 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x00000000000389e8                __RAL_c_locale_abbrev_month_names
- *fill*         0x0000000000038a19        0x3 
+                0x0000000000038ae8       0x31 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000038ae8                __RAL_c_locale_abbrev_month_names
+ *fill*         0x0000000000038b19        0x3 
  .rodata.libc.__RAL_c_locale_am_pm_indicator
-                0x0000000000038a1c        0x7 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x0000000000038a1c                __RAL_c_locale_am_pm_indicator
- *fill*         0x0000000000038a23        0x1 
+                0x0000000000038b1c        0x7 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000038b1c                __RAL_c_locale_am_pm_indicator
+ *fill*         0x0000000000038b23        0x1 
  .rodata.libc.__RAL_c_locale_data
-                0x0000000000038a24       0x58 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x0000000000038a24                __RAL_c_locale_data
+                0x0000000000038b24       0x58 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000038b24                __RAL_c_locale_data
  .rodata.libc.__RAL_c_locale_date_format
-                0x0000000000038a7c        0x9 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x0000000000038a7c                __RAL_c_locale_date_format
- *fill*         0x0000000000038a85        0x3 
+                0x0000000000038b7c        0x9 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000038b7c                __RAL_c_locale_date_format
+ *fill*         0x0000000000038b85        0x3 
  .rodata.libc.__RAL_c_locale_date_time_format
-                0x0000000000038a88        0xf /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x0000000000038a88                __RAL_c_locale_date_time_format
- *fill*         0x0000000000038a97        0x1 
+                0x0000000000038b88        0xf /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000038b88                __RAL_c_locale_date_time_format
+ *fill*         0x0000000000038b97        0x1 
  .rodata.libc.__RAL_c_locale_day_names
-                0x0000000000038a98       0x3a /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x0000000000038a98                __RAL_c_locale_day_names
- *fill*         0x0000000000038ad2        0x2 
+                0x0000000000038b98       0x3a /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000038b98                __RAL_c_locale_day_names
+ *fill*         0x0000000000038bd2        0x2 
  .rodata.libc.__RAL_c_locale_month_names
-                0x0000000000038ad4       0x57 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x0000000000038ad4                __RAL_c_locale_month_names
- *fill*         0x0000000000038b2b        0x1 
+                0x0000000000038bd4       0x57 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000038bd4                __RAL_c_locale_month_names
+ *fill*         0x0000000000038c2b        0x1 
  .rodata.libc.__RAL_c_locale_time_format
-                0x0000000000038b2c        0x9 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x0000000000038b2c                __RAL_c_locale_time_format
- *fill*         0x0000000000038b35        0x3 
+                0x0000000000038c2c        0x9 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000038c2c                __RAL_c_locale_time_format
+ *fill*         0x0000000000038c35        0x3 
  .rodata.libc.__RAL_codeset_ascii
-                0x0000000000038b38       0x20 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x0000000000038b38                __RAL_codeset_ascii
+                0x0000000000038c38       0x20 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000038c38                __RAL_codeset_ascii
  .rodata.libc.__RAL_data_empty_string
-                0x0000000000038b58        0x1 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x0000000000038b58                __RAL_data_empty_string
- *fill*         0x0000000000038b59        0x3 
+                0x0000000000038c58        0x1 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000038c58                __RAL_data_empty_string
+ *fill*         0x0000000000038c59        0x3 
  .rodata.libc.__RAL_data_utf8_period
-                0x0000000000038b5c        0x2 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
-                0x0000000000038b5c                __RAL_data_utf8_period
-                0x0000000000038b5e                __rodata_end__ = (__rodata_start__ + SIZEOF (.rodata))
-                0x0000000000002eaa                __rodata_size__ = SIZEOF (.rodata)
-                0x0000000000038b5e                __rodata_load_end__ = __rodata_end__
+                0x0000000000038c5c        0x2 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
+                0x0000000000038c5c                __RAL_data_utf8_period
+                0x0000000000038c5e                __rodata_end__ = (__rodata_start__ + SIZEOF (.rodata))
+                0x0000000000002eb6                __rodata_size__ = SIZEOF (.rodata)
+                0x0000000000038c5e                __rodata_load_end__ = __rodata_end__
 
-.rel.dyn        0x0000000000038b60        0x0
- .rel.iplt      0x0000000000038b60        0x0 Output/Release/Obj/Init template - FreeRTOS/thumb_crt0.o
+.rel.dyn        0x0000000000038c60        0x0
+ .rel.iplt      0x0000000000038c60        0x0 Output/Release/Obj/Init template - FreeRTOS/thumb_crt0.o
                 0x0000000000000001                . = ASSERT (((__rodata_start__ == __rodata_end__) || ((__rodata_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .rodata is too large to fit in FLASH memory segment)
-                0x0000000000038b60                __ARM.exidx_load_start__ = ALIGN (__rodata_end__, 0x4)
+                0x0000000000038c60                __ARM.exidx_load_start__ = ALIGN (__rodata_end__, 0x4)
 
-.ARM.exidx      0x0000000000038b60        0x0
-                0x0000000000038b60                __ARM.exidx_start__ = .
-                0x0000000000038b60                __exidx_start = __ARM.exidx_start__
+.ARM.exidx      0x0000000000038c60        0x0
+                0x0000000000038c60                __ARM.exidx_start__ = .
+                0x0000000000038c60                __exidx_start = __ARM.exidx_start__
  *(.ARM.exidx .ARM.exidx.*)
-                0x0000000000038b60                __ARM.exidx_end__ = (__ARM.exidx_start__ + SIZEOF (.ARM.exidx))
+                0x0000000000038c60                __ARM.exidx_end__ = (__ARM.exidx_start__ + SIZEOF (.ARM.exidx))
                 0x0000000000000000                __ARM.exidx_size__ = SIZEOF (.ARM.exidx)
-                0x0000000000038b60                __exidx_end = __ARM.exidx_end__
-                0x0000000000038b60                __ARM.exidx_load_end__ = __ARM.exidx_end__
+                0x0000000000038c60                __exidx_end = __ARM.exidx_end__
+                0x0000000000038c60                __ARM.exidx_load_end__ = __ARM.exidx_end__
                 0x0000000000000001                . = ASSERT (((__ARM.exidx_start__ == __ARM.exidx_end__) || ((__ARM.exidx_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .ARM.exidx is too large to fit in FLASH memory segment)
-                0x0000000000038b60                __fast_load_start__ = ALIGN (__ARM.exidx_end__, 0x4)
+                0x0000000000038c60                __fast_load_start__ = ALIGN (__ARM.exidx_end__, 0x4)
 
-.fast           0x000000002000598c        0x0 load address 0x0000000000038b60
+.fast           0x000000002000598c        0x0 load address 0x0000000000038c60
                 0x000000002000598c                __fast_start__ = .
  *(.fast .fast.*)
                 0x000000002000598c                __fast_end__ = (__fast_start__ + SIZEOF (.fast))
                 0x0000000000000000                __fast_size__ = SIZEOF (.fast)
-                0x0000000000038b60                __fast_load_end__ = (__fast_load_start__ + SIZEOF (.fast))
+                0x0000000000038c60                __fast_load_end__ = (__fast_load_start__ + SIZEOF (.fast))
                 0x0000000000000001                . = ASSERT (((__fast_load_start__ == __fast_load_end__) || ((__fast_load_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .fast is too large to fit in FLASH memory segment)
 
 .fast_run       0x000000002000598c        0x0
@@ -28622,9 +28626,9 @@ Linker script and memory map
                 0x0000000000000000                __fast_run_size__ = (__fast_run_end__ - __fast_run_start__)
                 0x000000002000598c                __fast_run_load_end__ = __fast_run_end__
                 0x0000000000000001                . = ASSERT (((__fast_run_start__ == __fast_run_end__) || ((__fast_run_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__)), error: .fast_run is too large to fit in RAM1 memory segment)
-                0x0000000000038b60                __data_load_start__ = ALIGN ((__fast_load_start__ + SIZEOF (.fast)), 0x4)
+                0x0000000000038c60                __data_load_start__ = ALIGN ((__fast_load_start__ + SIZEOF (.fast)), 0x4)
 
-.data           0x000000002000598c       0xf0 load address 0x0000000000038b60
+.data           0x000000002000598c       0xf0 load address 0x0000000000038c60
                 0x000000002000598c                __data_start__ = .
  *(.data .data.* .gnu.linkonce.d.*)
  .data.log_backend_cb_rtt_log_backend
@@ -28671,7 +28675,7 @@ Linker script and memory map
                 0x0000000020005a68                __RAL_global_locale
                 0x0000000020005a7c                __data_end__ = (__data_start__ + SIZEOF (.data))
                 0x00000000000000f0                __data_size__ = SIZEOF (.data)
-                0x0000000000038c50                __data_load_end__ = (__data_load_start__ + SIZEOF (.data))
+                0x0000000000038d50                __data_load_end__ = (__data_load_start__ + SIZEOF (.data))
 
 .igot.plt       0x0000000100000000        0x0
  .igot.plt      0x0000000100000000        0x0 Output/Release/Obj/Init template - FreeRTOS/thumb_crt0.o
@@ -28683,16 +28687,16 @@ Linker script and memory map
                 0x00000000000000f0                __data_run_size__ = (__data_run_end__ - __data_run_start__)
                 0x0000000020005a7c                __data_run_load_end__ = __data_run_end__
                 0x0000000000000001                . = ASSERT (((__data_run_start__ == __data_run_end__) || ((__data_run_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__)), error: .data_run is too large to fit in RAM1 memory segment)
-                0x0000000000038c50                __tdata_load_start__ = ALIGN ((__data_load_start__ + SIZEOF (.data)), 0x4)
+                0x0000000000038d50                __tdata_load_start__ = ALIGN ((__data_load_start__ + SIZEOF (.data)), 0x4)
 
-.tdata          0x0000000020005a7c        0x0 load address 0x0000000000038c50
+.tdata          0x0000000020005a7c        0x0 load address 0x0000000000038d50
                 0x0000000020005a7c                __tdata_start__ = .
  *(.tdata .tdata.*)
                 0x0000000020005a7c                __tdata_end__ = (__tdata_start__ + SIZEOF (.tdata))
                 0x0000000000000000                __tdata_size__ = SIZEOF (.tdata)
-                0x0000000000038c50                __tdata_load_end__ = (__tdata_load_start__ + SIZEOF (.tdata))
-                0x0000000000038c50                __FLASH_segment_used_end__ = (ALIGN ((__data_load_start__ + SIZEOF (.data)), 0x4) + SIZEOF (.tdata))
-                0x0000000000038c50                __FLASH_segment_used_size__ = (__FLASH_segment_used_end__ - __FLASH_segment_start__)
+                0x0000000000038d50                __tdata_load_end__ = (__tdata_load_start__ + SIZEOF (.tdata))
+                0x0000000000038d50                __FLASH_segment_used_end__ = (ALIGN ((__data_load_start__ + SIZEOF (.data)), 0x4) + SIZEOF (.tdata))
+                0x0000000000038d50                __FLASH_segment_used_size__ = (__FLASH_segment_used_end__ - __FLASH_segment_start__)
                 0x0000000000000001                . = ASSERT (((__tdata_load_start__ == __tdata_load_end__) || ((__tdata_load_end__ - __FLASH_segment_start__) <= __FLASH_segment_size__)), error: .tdata is too large to fit in FLASH memory segment)
 
 .tdata_run      0x0000000020005a7c        0x0
@@ -29340,7 +29344,7 @@ LOAD linker stubs
  .comment       0x0000000000000025       0x26 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
  .comment       0x0000000000000025       0x26 /Applications/SEGGER Embedded Studio for ARM 5.42/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a(libc2.o)
 
-.debug_line     0x0000000000000000    0x4e257
+.debug_line     0x0000000000000000    0x4e299
  .debug_line    0x0000000000000000      0x214 Output/Release/Obj/Init template - FreeRTOS/thumb_crt0.o
  .debug_line    0x0000000000000214      0xfa7 Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_rtt.o
  .debug_line    0x00000000000011bb      0xcea Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_serial.o
@@ -29411,11 +29415,11 @@ LOAD linker stubs
  .debug_line    0x000000000004805c      0xbc0 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_soc.o
  .debug_line    0x0000000000048c1c     0x14e5 Output/Release/Obj/Init template - FreeRTOS/uart.o
  .debug_line    0x000000000004a101     0x10fa Output/Release/Obj/Init template - FreeRTOS/NrfLogger.o
- .debug_line    0x000000000004b1fb      0xd97 Output/Release/Obj/Init template - FreeRTOS/fifo.o
- .debug_line    0x000000000004bf92     0x1120 Output/Release/Obj/Init template - FreeRTOS/system_task.o
- .debug_line    0x000000000004d0b2     0x11a5 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
+ .debug_line    0x000000000004b1fb      0xdd9 Output/Release/Obj/Init template - FreeRTOS/fifo.o
+ .debug_line    0x000000000004bfd4     0x1120 Output/Release/Obj/Init template - FreeRTOS/system_task.o
+ .debug_line    0x000000000004d0f4     0x11a5 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
 
-.debug_info     0x0000000000000000    0xab742
+.debug_info     0x0000000000000000    0xab7d3
  .debug_info    0x0000000000000000       0x22 Output/Release/Obj/Init template - FreeRTOS/thumb_crt0.o
  .debug_info    0x0000000000000022     0x1273 Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_rtt.o
  .debug_info    0x0000000000001295     0x149f Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_serial.o
@@ -29462,35 +29466,35 @@ LOAD linker stubs
  .debug_info    0x0000000000038a35     0x2adf Output/Release/Obj/Init template - FreeRTOS/nrfx_twi.o
  .debug_info    0x000000000003b514     0x1836 Output/Release/Obj/Init template - FreeRTOS/bsp.o
  .debug_info    0x000000000003cd4a     0x544e Output/Release/Obj/Init template - FreeRTOS/bsp_btn_ble.o
- .debug_info    0x0000000000042198     0x5a5c Output/Release/Obj/Init template - FreeRTOS/main.o
- .debug_info    0x0000000000047bf4     0x1c05 Output/Release/Obj/Init template - FreeRTOS/SEGGER_RTT.o
- .debug_info    0x00000000000497f9     0x5a48 Output/Release/Obj/Init template - FreeRTOS/ble_conn_params.o
- .debug_info    0x000000000004f241     0x5b1f Output/Release/Obj/Init template - FreeRTOS/ble_conn_state.o
- .debug_info    0x0000000000054d60     0x3639 Output/Release/Obj/Init template - FreeRTOS/ble_srv_common.o
- .debug_info    0x0000000000058399     0x6365 Output/Release/Obj/Init template - FreeRTOS/gatt_cache_manager.o
- .debug_info    0x000000000005e6fe     0x4961 Output/Release/Obj/Init template - FreeRTOS/gatts_cache_manager.o
- .debug_info    0x000000000006305f     0x639c Output/Release/Obj/Init template - FreeRTOS/id_manager.o
- .debug_info    0x00000000000693fb     0x4d7e Output/Release/Obj/Init template - FreeRTOS/nrf_ble_gatt.o
- .debug_info    0x000000000006e179     0x4fe0 Output/Release/Obj/Init template - FreeRTOS/peer_data_storage.o
- .debug_info    0x0000000000073159     0x4db6 Output/Release/Obj/Init template - FreeRTOS/peer_database.o
- .debug_info    0x0000000000077f0f     0x4025 Output/Release/Obj/Init template - FreeRTOS/peer_id.o
- .debug_info    0x000000000007bf34     0x692c Output/Release/Obj/Init template - FreeRTOS/peer_manager.o
- .debug_info    0x0000000000082860     0x5dda Output/Release/Obj/Init template - FreeRTOS/peer_manager_handler.o
- .debug_info    0x000000000008863a      0x50c Output/Release/Obj/Init template - FreeRTOS/pm_buffer.o
- .debug_info    0x0000000000088b46     0x63f2 Output/Release/Obj/Init template - FreeRTOS/security_dispatcher.o
- .debug_info    0x000000000008ef38     0x6275 Output/Release/Obj/Init template - FreeRTOS/security_manager.o
- .debug_info    0x00000000000951ad     0x4d88 Output/Release/Obj/Init template - FreeRTOS/ble_bas.o
- .debug_info    0x0000000000099f35     0x1d41 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh.o
- .debug_info    0x000000000009bc76     0x4e1d Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_ble.o
- .debug_info    0x00000000000a0a93     0x12bd Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_freertos.o
- .debug_info    0x00000000000a1d50     0x122c Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_soc.o
- .debug_info    0x00000000000a2f7c     0x248f Output/Release/Obj/Init template - FreeRTOS/uart.o
- .debug_info    0x00000000000a540b     0x1944 Output/Release/Obj/Init template - FreeRTOS/NrfLogger.o
- .debug_info    0x00000000000a6d4f     0x1377 Output/Release/Obj/Init template - FreeRTOS/fifo.o
- .debug_info    0x00000000000a80c6     0x1b22 Output/Release/Obj/Init template - FreeRTOS/system_task.o
- .debug_info    0x00000000000a9be8     0x1b5a Output/Release/Obj/Init template - FreeRTOS/uart_app.o
+ .debug_info    0x0000000000042198     0x5a8a Output/Release/Obj/Init template - FreeRTOS/main.o
+ .debug_info    0x0000000000047c22     0x1c05 Output/Release/Obj/Init template - FreeRTOS/SEGGER_RTT.o
+ .debug_info    0x0000000000049827     0x5a48 Output/Release/Obj/Init template - FreeRTOS/ble_conn_params.o
+ .debug_info    0x000000000004f26f     0x5b1f Output/Release/Obj/Init template - FreeRTOS/ble_conn_state.o
+ .debug_info    0x0000000000054d8e     0x3639 Output/Release/Obj/Init template - FreeRTOS/ble_srv_common.o
+ .debug_info    0x00000000000583c7     0x6365 Output/Release/Obj/Init template - FreeRTOS/gatt_cache_manager.o
+ .debug_info    0x000000000005e72c     0x4961 Output/Release/Obj/Init template - FreeRTOS/gatts_cache_manager.o
+ .debug_info    0x000000000006308d     0x639c Output/Release/Obj/Init template - FreeRTOS/id_manager.o
+ .debug_info    0x0000000000069429     0x4d7e Output/Release/Obj/Init template - FreeRTOS/nrf_ble_gatt.o
+ .debug_info    0x000000000006e1a7     0x4fe0 Output/Release/Obj/Init template - FreeRTOS/peer_data_storage.o
+ .debug_info    0x0000000000073187     0x4db6 Output/Release/Obj/Init template - FreeRTOS/peer_database.o
+ .debug_info    0x0000000000077f3d     0x4025 Output/Release/Obj/Init template - FreeRTOS/peer_id.o
+ .debug_info    0x000000000007bf62     0x692c Output/Release/Obj/Init template - FreeRTOS/peer_manager.o
+ .debug_info    0x000000000008288e     0x5dda Output/Release/Obj/Init template - FreeRTOS/peer_manager_handler.o
+ .debug_info    0x0000000000088668      0x50c Output/Release/Obj/Init template - FreeRTOS/pm_buffer.o
+ .debug_info    0x0000000000088b74     0x63f2 Output/Release/Obj/Init template - FreeRTOS/security_dispatcher.o
+ .debug_info    0x000000000008ef66     0x6275 Output/Release/Obj/Init template - FreeRTOS/security_manager.o
+ .debug_info    0x00000000000951db     0x4d88 Output/Release/Obj/Init template - FreeRTOS/ble_bas.o
+ .debug_info    0x0000000000099f63     0x1d41 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh.o
+ .debug_info    0x000000000009bca4     0x4e1d Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_ble.o
+ .debug_info    0x00000000000a0ac1     0x12bd Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_freertos.o
+ .debug_info    0x00000000000a1d7e     0x122c Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_soc.o
+ .debug_info    0x00000000000a2faa     0x24bd Output/Release/Obj/Init template - FreeRTOS/uart.o
+ .debug_info    0x00000000000a5467     0x1944 Output/Release/Obj/Init template - FreeRTOS/NrfLogger.o
+ .debug_info    0x00000000000a6dab     0x1350 Output/Release/Obj/Init template - FreeRTOS/fifo.o
+ .debug_info    0x00000000000a80fb     0x1b50 Output/Release/Obj/Init template - FreeRTOS/system_task.o
+ .debug_info    0x00000000000a9c4b     0x1b88 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
 
-.debug_abbrev   0x0000000000000000     0xd1ca
+.debug_abbrev   0x0000000000000000     0xd1b5
  .debug_abbrev  0x0000000000000000       0x12 Output/Release/Obj/Init template - FreeRTOS/thumb_crt0.o
  .debug_abbrev  0x0000000000000012      0x281 Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_rtt.o
  .debug_abbrev  0x0000000000000293      0x254 Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_serial.o
@@ -29561,11 +29565,11 @@ LOAD linker stubs
  .debug_abbrev  0x000000000000bcb1      0x251 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_soc.o
  .debug_abbrev  0x000000000000bf02      0x46e Output/Release/Obj/Init template - FreeRTOS/uart.o
  .debug_abbrev  0x000000000000c370      0x3a5 Output/Release/Obj/Init template - FreeRTOS/NrfLogger.o
- .debug_abbrev  0x000000000000c715      0x31a Output/Release/Obj/Init template - FreeRTOS/fifo.o
- .debug_abbrev  0x000000000000ca2f      0x3f5 Output/Release/Obj/Init template - FreeRTOS/system_task.o
- .debug_abbrev  0x000000000000ce24      0x3a6 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
+ .debug_abbrev  0x000000000000c715      0x305 Output/Release/Obj/Init template - FreeRTOS/fifo.o
+ .debug_abbrev  0x000000000000ca1a      0x3f5 Output/Release/Obj/Init template - FreeRTOS/system_task.o
+ .debug_abbrev  0x000000000000ce0f      0x3a6 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
 
-.debug_aranges  0x0000000000000000     0xbb28
+.debug_aranges  0x0000000000000000     0xbb30
  .debug_aranges
                 0x0000000000000000       0x98 Output/Release/Obj/Init template - FreeRTOS/thumb_crt0.o
  .debug_aranges
@@ -29707,13 +29711,13 @@ LOAD linker stubs
  .debug_aranges
                 0x000000000000b418      0x1b8 Output/Release/Obj/Init template - FreeRTOS/NrfLogger.o
  .debug_aranges
-                0x000000000000b5d0      0x1e0 Output/Release/Obj/Init template - FreeRTOS/fifo.o
+                0x000000000000b5d0      0x1e8 Output/Release/Obj/Init template - FreeRTOS/fifo.o
  .debug_aranges
-                0x000000000000b7b0      0x1c0 Output/Release/Obj/Init template - FreeRTOS/system_task.o
+                0x000000000000b7b8      0x1c0 Output/Release/Obj/Init template - FreeRTOS/system_task.o
  .debug_aranges
-                0x000000000000b970      0x1b8 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
+                0x000000000000b978      0x1b8 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
 
-.debug_str      0x0000000000000000    0xc0f90
+.debug_str      0x0000000000000000    0xc0ffd
  .debug_str     0x0000000000000000       0xc1 Output/Release/Obj/Init template - FreeRTOS/thumb_crt0.o
  .debug_str     0x00000000000000c1    0x9309e Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_rtt.o
                                       0x95892 (size before relaxing)
@@ -29805,62 +29809,62 @@ LOAD linker stubs
                                       0x9440d (size before relaxing)
  .debug_str     0x00000000000ad143     0x8344 Output/Release/Obj/Init template - FreeRTOS/bsp_btn_ble.o
                                       0x9be6d (size before relaxing)
- .debug_str     0x00000000000b5487     0x5469 Output/Release/Obj/Init template - FreeRTOS/main.o
-                                      0xa9994 (size before relaxing)
- .debug_str     0x00000000000ba8f0      0x5f2 Output/Release/Obj/Init template - FreeRTOS/SEGGER_RTT.o
+ .debug_str     0x00000000000b5487     0x549b Output/Release/Obj/Init template - FreeRTOS/main.o
+                                      0xa99d7 (size before relaxing)
+ .debug_str     0x00000000000ba922      0x5f2 Output/Release/Obj/Init template - FreeRTOS/SEGGER_RTT.o
                                       0x83026 (size before relaxing)
- .debug_str     0x00000000000baee2      0x516 Output/Release/Obj/Init template - FreeRTOS/ble_conn_params.o
+ .debug_str     0x00000000000baf14      0x516 Output/Release/Obj/Init template - FreeRTOS/ble_conn_params.o
                                       0x956b4 (size before relaxing)
- .debug_str     0x00000000000bb3f8      0x86d Output/Release/Obj/Init template - FreeRTOS/ble_conn_state.o
+ .debug_str     0x00000000000bb42a      0x86d Output/Release/Obj/Init template - FreeRTOS/ble_conn_state.o
                                       0x93d28 (size before relaxing)
- .debug_str     0x00000000000bbc65      0x312 Output/Release/Obj/Init template - FreeRTOS/ble_srv_common.o
+ .debug_str     0x00000000000bbc97      0x312 Output/Release/Obj/Init template - FreeRTOS/ble_srv_common.o
                                       0x886b2 (size before relaxing)
- .debug_str     0x00000000000bbf77     0x10bd Output/Release/Obj/Init template - FreeRTOS/gatt_cache_manager.o
+ .debug_str     0x00000000000bbfa9     0x10bd Output/Release/Obj/Init template - FreeRTOS/gatt_cache_manager.o
                                       0x97fc9 (size before relaxing)
- .debug_str     0x00000000000bd034      0x326 Output/Release/Obj/Init template - FreeRTOS/gatts_cache_manager.o
+ .debug_str     0x00000000000bd066      0x326 Output/Release/Obj/Init template - FreeRTOS/gatts_cache_manager.o
                                       0x96b57 (size before relaxing)
- .debug_str     0x00000000000bd35a      0x4b8 Output/Release/Obj/Init template - FreeRTOS/id_manager.o
+ .debug_str     0x00000000000bd38c      0x4b8 Output/Release/Obj/Init template - FreeRTOS/id_manager.o
                                       0x97c71 (size before relaxing)
- .debug_str     0x00000000000bd812      0x407 Output/Release/Obj/Init template - FreeRTOS/nrf_ble_gatt.o
+ .debug_str     0x00000000000bd844      0x407 Output/Release/Obj/Init template - FreeRTOS/nrf_ble_gatt.o
                                       0x93c2c (size before relaxing)
- .debug_str     0x00000000000bdc19      0x498 Output/Release/Obj/Init template - FreeRTOS/peer_data_storage.o
+ .debug_str     0x00000000000bdc4b      0x498 Output/Release/Obj/Init template - FreeRTOS/peer_data_storage.o
                                       0x96ec7 (size before relaxing)
- .debug_str     0x00000000000be0b1      0x5cd Output/Release/Obj/Init template - FreeRTOS/peer_database.o
+ .debug_str     0x00000000000be0e3      0x5cd Output/Release/Obj/Init template - FreeRTOS/peer_database.o
                                       0x96fbb (size before relaxing)
- .debug_str     0x00000000000be67e      0x12b Output/Release/Obj/Init template - FreeRTOS/peer_id.o
+ .debug_str     0x00000000000be6b0      0x12b Output/Release/Obj/Init template - FreeRTOS/peer_id.o
                                       0x9217d (size before relaxing)
- .debug_str     0x00000000000be7a9      0x74e Output/Release/Obj/Init template - FreeRTOS/peer_manager.o
+ .debug_str     0x00000000000be7db      0x74e Output/Release/Obj/Init template - FreeRTOS/peer_manager.o
                                       0x98317 (size before relaxing)
- .debug_str     0x00000000000beef7      0x34e Output/Release/Obj/Init template - FreeRTOS/peer_manager_handler.o
+ .debug_str     0x00000000000bef29      0x34e Output/Release/Obj/Init template - FreeRTOS/peer_manager_handler.o
                                       0x97a2a (size before relaxing)
- .debug_str     0x00000000000bf245      0x185 Output/Release/Obj/Init template - FreeRTOS/pm_buffer.o
+ .debug_str     0x00000000000bf277      0x185 Output/Release/Obj/Init template - FreeRTOS/pm_buffer.o
                                       0x88adb (size before relaxing)
- .debug_str     0x00000000000bf3ca      0x3b8 Output/Release/Obj/Init template - FreeRTOS/security_dispatcher.o
+ .debug_str     0x00000000000bf3fc      0x3b8 Output/Release/Obj/Init template - FreeRTOS/security_dispatcher.o
                                       0x97ec2 (size before relaxing)
- .debug_str     0x00000000000bf782      0x412 Output/Release/Obj/Init template - FreeRTOS/security_manager.o
+ .debug_str     0x00000000000bf7b4      0x412 Output/Release/Obj/Init template - FreeRTOS/security_manager.o
                                       0x97be9 (size before relaxing)
- .debug_str     0x00000000000bfb94      0x2f9 Output/Release/Obj/Init template - FreeRTOS/ble_bas.o
+ .debug_str     0x00000000000bfbc6      0x2f9 Output/Release/Obj/Init template - FreeRTOS/ble_bas.o
                                       0x950ef (size before relaxing)
- .debug_str     0x00000000000bfe8d      0x3c4 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh.o
+ .debug_str     0x00000000000bfebf      0x3c4 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh.o
                                       0x8e6b2 (size before relaxing)
- .debug_str     0x00000000000c0251      0x347 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_ble.o
+ .debug_str     0x00000000000c0283      0x347 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_ble.o
                                       0x9456c (size before relaxing)
- .debug_str     0x00000000000c0598      0x155 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_freertos.o
+ .debug_str     0x00000000000c05ca      0x155 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_freertos.o
                                       0x91e02 (size before relaxing)
- .debug_str     0x00000000000c06ed      0x16e Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_soc.o
+ .debug_str     0x00000000000c071f      0x16e Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_soc.o
                                       0x8d223 (size before relaxing)
- .debug_str     0x00000000000c085b      0x32d Output/Release/Obj/Init template - FreeRTOS/uart.o
-                                      0x9c5dc (size before relaxing)
- .debug_str     0x00000000000c0b88      0x180 Output/Release/Obj/Init template - FreeRTOS/NrfLogger.o
+ .debug_str     0x00000000000c088d      0x32d Output/Release/Obj/Init template - FreeRTOS/uart.o
+                                      0x9c618 (size before relaxing)
+ .debug_str     0x00000000000c0bba      0x180 Output/Release/Obj/Init template - FreeRTOS/NrfLogger.o
                                       0x9af2d (size before relaxing)
- .debug_str     0x00000000000c0d08       0x99 Output/Release/Obj/Init template - FreeRTOS/fifo.o
-                                      0x8eb12 (size before relaxing)
- .debug_str     0x00000000000c0da1       0xbd Output/Release/Obj/Init template - FreeRTOS/system_task.o
-                                      0x9bd23 (size before relaxing)
- .debug_str     0x00000000000c0e5e      0x132 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
-                                      0x9bd7a (size before relaxing)
+ .debug_str     0x00000000000c0d3a       0xd4 Output/Release/Obj/Init template - FreeRTOS/fifo.o
+                                      0x8ea21 (size before relaxing)
+ .debug_str     0x00000000000c0e0e       0xbd Output/Release/Obj/Init template - FreeRTOS/system_task.o
+                                      0x9bd5f (size before relaxing)
+ .debug_str     0x00000000000c0ecb      0x132 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
+                                      0x9bdbd (size before relaxing)
 
-.debug_ranges   0x0000000000000000     0xb818
+.debug_ranges   0x0000000000000000     0xb820
  .debug_ranges  0x0000000000000000       0x90 Output/Release/Obj/Init template - FreeRTOS/thumb_crt0.o
  .debug_ranges  0x0000000000000090      0x1e0 Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_rtt.o
  .debug_ranges  0x0000000000000270      0x198 Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_serial.o
@@ -29929,11 +29933,11 @@ LOAD linker stubs
  .debug_ranges  0x000000000000ad58      0x1b8 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_soc.o
  .debug_ranges  0x000000000000af10      0x238 Output/Release/Obj/Init template - FreeRTOS/uart.o
  .debug_ranges  0x000000000000b148      0x1a8 Output/Release/Obj/Init template - FreeRTOS/NrfLogger.o
- .debug_ranges  0x000000000000b2f0      0x1d0 Output/Release/Obj/Init template - FreeRTOS/fifo.o
- .debug_ranges  0x000000000000b4c0      0x1b0 Output/Release/Obj/Init template - FreeRTOS/system_task.o
- .debug_ranges  0x000000000000b670      0x1a8 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
+ .debug_ranges  0x000000000000b2f0      0x1d8 Output/Release/Obj/Init template - FreeRTOS/fifo.o
+ .debug_ranges  0x000000000000b4c8      0x1b0 Output/Release/Obj/Init template - FreeRTOS/system_task.o
+ .debug_ranges  0x000000000000b678      0x1a8 Output/Release/Obj/Init template - FreeRTOS/uart_app.o
 
-.debug_frame    0x0000000000000000    0x1d410
+.debug_frame    0x0000000000000000    0x1d43c
  .debug_frame   0x0000000000000000      0x41c Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_rtt.o
  .debug_frame   0x000000000000041c      0x348 Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_serial.o
  .debug_frame   0x0000000000000764      0x368 Output/Release/Obj/Init template - FreeRTOS/nrf_log_default_backends.o
@@ -30001,12 +30005,12 @@ LOAD linker stubs
  .debug_frame   0x000000000001bba8      0x368 Output/Release/Obj/Init template - FreeRTOS/nrf_sdh_soc.o
  .debug_frame   0x000000000001bf10      0x604 Output/Release/Obj/Init template - FreeRTOS/uart.o
  .debug_frame   0x000000000001c514      0x390 Output/Release/Obj/Init template - FreeRTOS/NrfLogger.o
- .debug_frame   0x000000000001c8a4      0x428 Output/Release/Obj/Init template - FreeRTOS/fifo.o
- .debug_frame   0x000000000001cccc      0x3b8 Output/Release/Obj/Init template - FreeRTOS/system_task.o
- .debug_frame   0x000000000001d084      0x38c Output/Release/Obj/Init template - FreeRTOS/uart_app.o
+ .debug_frame   0x000000000001c8a4      0x454 Output/Release/Obj/Init template - FreeRTOS/fifo.o
+ .debug_frame   0x000000000001ccf8      0x3b8 Output/Release/Obj/Init template - FreeRTOS/system_task.o
+ .debug_frame   0x000000000001d0b0      0x38c Output/Release/Obj/Init template - FreeRTOS/uart_app.o
 
 .debug_pubnames
-                0x0000000000000000    0x4f491
+                0x0000000000000000    0x4f4ab
  .debug_pubnames
                 0x0000000000000000      0xb8d Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_rtt.o
  .debug_pubnames
@@ -30142,14 +30146,14 @@ LOAD linker stubs
  .debug_pubnames
                 0x000000000004c7ad      0xb4c Output/Release/Obj/Init template - FreeRTOS/NrfLogger.o
  .debug_pubnames
-                0x000000000004d2f9      0xb55 Output/Release/Obj/Init template - FreeRTOS/fifo.o
+                0x000000000004d2f9      0xb6f Output/Release/Obj/Init template - FreeRTOS/fifo.o
  .debug_pubnames
-                0x000000000004de4e      0xb29 Output/Release/Obj/Init template - FreeRTOS/system_task.o
+                0x000000000004de68      0xb29 Output/Release/Obj/Init template - FreeRTOS/system_task.o
  .debug_pubnames
-                0x000000000004e977      0xb1a Output/Release/Obj/Init template - FreeRTOS/uart_app.o
+                0x000000000004e991      0xb1a Output/Release/Obj/Init template - FreeRTOS/uart_app.o
 
 .debug_pubtypes
-                0x0000000000000000    0x211cc
+                0x0000000000000000    0x2119b
  .debug_pubtypes
                 0x0000000000000000      0x3a2 Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_rtt.o
  .debug_pubtypes
@@ -30285,11 +30289,11 @@ LOAD linker stubs
  .debug_pubtypes
                 0x000000000002028f      0x3e8 Output/Release/Obj/Init template - FreeRTOS/NrfLogger.o
  .debug_pubtypes
-                0x0000000000020677      0x361 Output/Release/Obj/Init template - FreeRTOS/fifo.o
+                0x0000000000020677      0x330 Output/Release/Obj/Init template - FreeRTOS/fifo.o
  .debug_pubtypes
-                0x00000000000209d8      0x3fa Output/Release/Obj/Init template - FreeRTOS/system_task.o
+                0x00000000000209a7      0x3fa Output/Release/Obj/Init template - FreeRTOS/system_task.o
  .debug_pubtypes
-                0x0000000000020dd2      0x3fa Output/Release/Obj/Init template - FreeRTOS/uart_app.o
+                0x0000000000020da1      0x3fa Output/Release/Obj/Init template - FreeRTOS/uart_app.o
 
 .debug_macro    0x0000000000000000    0x2f4eb
  .debug_macro   0x0000000000000000      0x4d5 Output/Release/Obj/Init template - FreeRTOS/nrf_log_backend_rtt.o

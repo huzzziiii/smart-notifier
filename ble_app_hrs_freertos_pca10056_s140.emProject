@@ -225,4 +225,5 @@
   <import file_name="../../../../../peripheral/uart/pca10056/blank/ses/uart_pca10056.emProject" />
   <import file_name="../../../../../ble_peripheral/ble_app_uart/pca10056/s140/ses/ble_app_uart_pca10056_s140.emProject" />
   <import file_name="../../../../../peripheral/usbd_ble_uart_freertos/pca10056/s140/ses/usbd_ble_uart_freertos_pca10056_s140.emProject" />
+  <import file_name="../../../../../ble_peripheral/ble_app_hrs_freertos/pca10056/s140/ses/ble_app_hrs_freertos_pca10056_s140.emProject" />
 </solution>

@@ -10,21 +10,28 @@
 
 constexpr uint8_t fifoSize = 8;
 
-typedef enum 
-{
-    QueueEmpty = 0,
-    QueueFull = 1
- } FifoStatus;
+//typedef enum 
+//{
+//    QueueEmpty = 0,
+//    QueueFull = 1
+// } FifoStatus;
+
+ typedef enum 
+ {
+    indexOutOfBounds = 0,
+    fifoIsEmpty,
+    success
+} FifoReturnValues;
 
 class Fifo 
 {
     //uint8_t *buffer;
     uint8_t mask;
     uint8_t bufferSize;
-    volatile uint8_t readIdx;	      // TODO - volatile?
-    volatile uint8_t writeIdx;
-    volatile uint8_t startIdx;      // start index for the user input
-    uint8_t buffer[fifoSize];
+    volatile uint8_t _readIdx;	      // volatile - cause the values would be modified inside an ISR
+    volatile uint8_t _writeIdx;
+    volatile uint8_t _startIdx;	     // start index for the user input
+    volatile uint8_t _buffer[fifoSize];
     
     public:
     Fifo();
@@ -35,5 +42,6 @@ class Fifo
     void resetStartIdx();
     uint8_t const *getFifo();
     uint8_t const getStartIdx() const;
+    uint8_t getChunksOfData(uint8_t startIdx, uint8_t bytesToCopy, uint8_t *buffer);
 };
 #endif
