@@ -4,6 +4,7 @@
 #include "sensors.hpp"
 #include "nrf_drv_twi.h"
 #include "NrfLogger.hpp"
+#include "Subject.hpp"
 
 #define MCP9808_ADDR	      0x18
 #define TWI_INSTANCE_ID	      0
@@ -25,41 +26,32 @@ enum MCP9808_REG
     manufucterurId = 0x6
 };
 
-static bool m_xfer_done;  // todo
-
-//class MCP9808 : public Sensors 
-class MCP9808 
+/*
+@MCP9808 class - inherits from the Subject class
+@brief: invokes driver functions for reading the raw temperature value.
+Every time the value is read, it invokes notify() for its observers
+*/
+//class MCP9808 : public Sensors		  // TODO - add inheritance...
+class MCP9808 : public Subject
 {
-    //static const nrf_drv_twi_t m_twi;
-    uint8_t buffer[10] = {0};		// todo - size!
-    uint16_t temp;
-
-    //union xferState
-    //{
-       
-        //bool m_xfer_
-    //}
+    uint8_t _buffer[10] = {0};		// TODO - size!
+    uint16_t _tempInC;			// stores temperature value in Celcius
 
     public:
-    //MCP9808(uint32_t sclPin, uint32_t sdaPin, nrf_drv_twi_frequency_t i2cFreq, uint8_t irqPriority);
     MCP9808(nrf_drv_twi_config_t *config);
     MCP9808();
     void begin();
     void write(uint8_t address, uint8_t *buffer, uint8_t size);
-    //float ReadTempInC();
-    void ReadTempInC();
+    void readTempInC();
     float readTempInF();	      // TODO
     uint16_t read();
     
     void xferData(uint8_t *p_buffer, uint8_t size);
-    //void initXfer(uint8_t *buffer, uint8_t size);
-
+   
     const uint8_t *getBuffer() const 
     {
-        return buffer;
+        return _buffer;
     }
-    //void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context); // todo
-    
 
 };
 #endif

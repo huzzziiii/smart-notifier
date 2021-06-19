@@ -27,7 +27,7 @@ void Uart::irqHandler()
     {
         if (newInput)
         {
-	  fifoRx.resetStartIdx();
+	  fifoRx.resetStartIdx();				// set the starting index to parse the incoming data
 	  newInput = false;
         }
 

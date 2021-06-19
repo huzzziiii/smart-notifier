@@ -110,4 +110,6 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/system_task.o: \
  ../../../../../../modules/nrfx/hal/nrf_twim.h \
  ../../../../../../modules/nrfx/drivers/include/nrfx_twi.h \
  ../../../../../../modules/nrfx/hal/nrf_twi.h \
- ../../../../../../external/freertos/source/include/stream_buffer.h
+ ../../../../../../external/freertos/source/include/stream_buffer.h \
+ ObserverPattern/Observer.hpp ObserverPattern/Subject.hpp \
+ ObserverPattern/Observer.hpp ObserverPattern/Subject.hpp

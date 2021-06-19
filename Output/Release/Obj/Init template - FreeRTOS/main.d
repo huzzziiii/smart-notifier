@@ -166,7 +166,9 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/main.o: \
  ../../../../../../modules/nrfx/hal/nrf_twi.h NrfLogger/Inc/NrfLogger.hpp \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdarg.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdarg.h \
- custom_drivers/Inc/uart.hpp Fifo/Inc/fifo.hpp \
+ ObserverPattern/Subject.hpp ObserverPattern/Observer.hpp \
+ ObserverPattern/Subject.hpp custom_drivers/Inc/uart.hpp \
+ Fifo/Inc/fifo.hpp \
  ../../../../../../external/freertos/source/include/queue.h \
  UartApp/uart_app.hpp SystemTask/system_task.hpp \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/cstring \
@@ -177,4 +179,41 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/main.o: \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/using/cstring \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/cstdio \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_cstdio.h \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/cstdio
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/cstdio \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/algorithm \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_algo.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_algobase.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_cstddef.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/cstddef \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/climits \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/climits \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/limits.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/limits.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_cstdlib.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/cstdlib \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_cmath.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/cmath \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/math.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/math.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_pair.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/type_traits.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/type_manips.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_move_construct_fwk.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_iterator_base.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_ptrs_specialize.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_algobase.c \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_function_base.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_iterator.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_heap.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_heap.c \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_algo.c \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_tempbuf.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_uninitialized.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_construct.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_new.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/new \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/cstdlib \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/exception \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/exception \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_tempbuf.c \
+ NotificationManager/NotificationManager.hpp ObserverPattern/Observer.hpp

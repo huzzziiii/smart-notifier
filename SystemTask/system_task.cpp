@@ -1,13 +1,12 @@
 #include "system_task.hpp"
-
+#include "Observer.hpp"
+#include "Subject.hpp"
 //static uint8_t ringBuffer[8] = {QueueEmpty};		// todo
 
 /* todo -
  - what to do in enque() once queue == full?
+    - override the data or wait till some vacancy?
 */
-//static constexpr uint8_t queueSize = 10;
-//static constexpr uint8_t itemSize  = 1;
-
 SystemTask::SystemTask(Uart &pUart, QueueHandle_t &systemQueue) : uart(pUart), systemTaskQueue(systemQueue)
 {   
     // create a task
@@ -23,11 +22,16 @@ void SystemTask::process(void *instance)
     pInstance->mainThread();
 }
 
+/**
+@brief: main state machine that handles requests from the user 
+@description: current supported requests: enableNotifications(<typeOfNotif>), disableNotifications(<typeOfNotif>), 
+	    where <typeOfNotif> corresponds to any supported sensor
+*/
 void SystemTask::mainThread()
 {   
     Messages curMsg;
 
-    // init peripherals?
+    // TODO - init peripherals?
     
     while(true)
     {
@@ -37,8 +41,9 @@ void SystemTask::mainThread()
 
 	  switch(curMsg)
 	  {
-	      case Messages::readTemperature:
-		
+	      case Messages::enableTempNotification:
+		// sensor.attach(notificationMgr);
+	
 
 		break;
 

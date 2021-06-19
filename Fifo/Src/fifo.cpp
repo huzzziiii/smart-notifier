@@ -39,9 +39,10 @@ uint8_t Fifo::deque()
     }
 
     //NRF_LOG_DEBUG("Reading %u at index %u\n", _buffer[_readIdx], _readIdx);
-    _buffer[_readIdx] = 0;
+    
     uint8_t value = _buffer[_readIdx++];
     _readIdx &= mask;
+
     return value;
 }
 
@@ -84,10 +85,18 @@ uint8_t Fifo::getChunksOfData(uint8_t startIdx, uint8_t bytesToCopy, uint8_t *bu
     {
         return fifoIsEmpty;
     }
-    
-    while (startIdx < bytesOffset)
+    else if (bytesToCopy >= fifoSize)
     {
-        buffer[idx++] = deque();
+        return invalidRequestForBytes;
+    }
+    
+    while (idx < bytesToCopy)
+    {
+        uint8_t val = deque();
+        if (val != '\r')
+        {
+	  buffer[idx++] = val;
+        }
     }
     //memcpy(buffer, _buffer + startIdx, bytesToCopy);
     return success;

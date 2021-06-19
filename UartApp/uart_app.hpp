@@ -8,6 +8,7 @@
 #include "fifo.hpp"
 #include "system_task.hpp"
 #include <stdbool.h>
+#include "string.h"
 #include <stdarg.h>
 
 

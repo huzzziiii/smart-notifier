@@ -22,7 +22,8 @@ class SystemTask
     public:
     enum class Messages
     {
-        readTemperature,
+        enableTempNotification,
+        disableTempNotification,
         invalidInput
     };
     static Messages messages;

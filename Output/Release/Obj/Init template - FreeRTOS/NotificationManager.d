@@ -1,6 +1,6 @@
-Output/Release/Obj/Init\ template\ -\ FreeRTOS/mcp9808.o: \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/custom_drivers/Src/mcp9808.cpp \
- custom_drivers/Inc/mcp9808.hpp custom_drivers/Inc/sensors.hpp \
+Output/Release/Obj/Init\ template\ -\ FreeRTOS/NotificationManager.o: \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/NotificationManager/NotificationManager.cpp \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/NotificationManager/NotificationManager.hpp \
  ../../../../../../components/libraries/log/nrf_log.h \
  ../../../../../../components/libraries/util/sdk_common.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdint.h \
@@ -71,6 +71,12 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/mcp9808.o: \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdio.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdio.h \
  ../../../../../../components/libraries/util/app_error_weak.h \
+ ../../../../../../components/libraries/log/nrf_log_default_backends.h \
+ ObserverPattern/Observer.hpp ObserverPattern/Subject.hpp \
+ ObserverPattern/Observer.hpp \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdarg.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdarg.h \
+ custom_drivers/Inc/mcp9808.hpp custom_drivers/Inc/sensors.hpp \
  ../../../../../../integration/nrfx/legacy/nrf_drv_twi.h \
  ../../../../../../modules/nrfx/nrfx.h \
  ../../../../../../integration/nrfx/nrfx_config.h \
@@ -93,7 +99,6 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/mcp9808.o: \
  ../../../../../../modules/nrfx/hal/nrf_twim.h \
  ../../../../../../modules/nrfx/drivers/include/nrfx_twi.h \
  ../../../../../../modules/nrfx/hal/nrf_twi.h NrfLogger/Inc/NrfLogger.hpp \
- ../../../../../../components/libraries/log/nrf_log_default_backends.h \
  ../../../../../../external/freertos/source/include/FreeRTOS.h \
  ../../../../../../external/freertos/config/FreeRTOSConfig.h \
  ../../../../../../external/freertos/source/include/projdefs.h \
@@ -105,7 +110,4 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/mcp9808.o: \
  ../../../../../../external/freertos/source/include/task.h \
  ../../../../../../external/freertos/source/include/list.h \
  ../../../../../../external/freertos/source/include/stream_buffer.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdarg.h \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdarg.h \
- ObserverPattern/Subject.hpp ObserverPattern/Observer.hpp \
  ObserverPattern/Subject.hpp

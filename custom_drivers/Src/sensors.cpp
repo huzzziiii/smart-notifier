@@ -1,4 +1,4 @@
-//#include "sensors.hpp"
+#include "sensors.hpp"
 
 //Sensors::init(Sensor *sensor)
 //{

@@ -94,33 +94,8 @@
 #include <stdarg.h>
 #include <cstring>
 #include <cstdio>
-
-//#include "queue.h"
-
-//extern "C" size_t xStreamBufferReceive( StreamBufferHandle_t xStreamBuffer,
-//                             void *pvRxData,
-//                             size_t xBufferLengthBytes,
-//                             TickType_t xTicksToWait );
-
-#if NRF_LOG_ENABLED
-static TaskHandle_t m_logger_thread;                                /**< Definition of Logger thread. */
-#endif
-
-static TaskHandle_t m_huzzi_thread;
-StreamBufferHandle_t streamBuffer;
-
-//QueueHandle_t q;
-
-/**@brief A function which is hooked to idle task.
- * @note Idle hook must be enabled in FreeRTOS configuration (configUSE_IDLE_HOOK).
- */
-//void vApplicationIdleHook( void )
-//{
-//#if NRF_LOG_ENABLED
-//     vTaskResume(m_logger_thread);
-//#endif
-//}
-
+#include <algorithm>
+#include "NotificationManager.hpp"
 
 static void clock_init(void)
 {
@@ -128,84 +103,6 @@ static void clock_init(void)
     APP_ERROR_CHECK(err_code);
 }
 
-#if NRF_LOG_ENABLED
-/**@brief Thread for handling the logger.
- *
- * @details This thread is responsible for processing log entries if logs are deferred.
- *          Thread flushes all log entries and suspends. It is resumed by idle task hook.
- *
- * @param[in]   arg   Pointer used for passing some arbitrary information (context) from the
- *                    osThreadCreate() call to the thread.
- */
- volatile char rxBuff[45] = {0};
-static void logger_thread(void * arg)
-{ 
-    NRF_LOG_INFO("start logger_thread()\n");
-    NRF_LOG_FLUSH();  
-
-    UNUSED_PARAMETER(arg);
-
-    while (1)
-    {
-        size_t bytesRead = xStreamBufferReceive(streamBuffer, (void*) rxBuff, 40, portMAX_DELAY);
-        NRF_LOG_INFO("Read bytes: %d -- ", bytesRead);
-
-        //NRF_LOG_INFO("Received bytes...\n");
-        NRF_LOG_INFO("RCVD: %s\n", rxBuff);
-        NRF_LOG_FLUSH();  
-
-       // vTaskDelay(1000);
-
-       // vTaskSuspend(NULL); // Suspend myself
-    }
-}
-#endif //NRF_LOG_ENABLED
-
-/**@brief Function for initializing the nrf log module.
- */
-static void log_init(void)
-{
-    ret_code_t err_code = NRF_LOG_INIT(NULL);
-    APP_ERROR_CHECK(err_code);
-
-    NRF_LOG_DEFAULT_BACKENDS_INIT();
-}
-
-char loggerData[10] = "HAAHA";  // todo remove
-
-void sendLog(const char *x, ...)
-{
-    char tmp[40] = {0};
-    va_list args;
-    va_start(args, x);
-    vsprintf(tmp, x, args);
-
-    //strncpy(tmp, log, strlen(log));
-    size_t bytesSent = xStreamBufferSend(streamBuffer, (void*)tmp, sizeof(tmp), portMAX_DELAY);
-    
-}
-
-void huzz(void *arg) 
-{
-    NRF_LOG_INFO("huzzi_thread()\n");
-    NRF_LOG_FLUSH();
-    
-    //vTaskResume(m_logger_thread);
-
-    char temp[] = "PASSING\n";
-    strncpy(loggerData, temp, strlen(temp));
-    temp[strlen(temp)] = '\0';
-   
-    while(1) 
-    {
-        vTaskDelay(5000);
-        sendLog("YESS -- val: %d", 54);
-        //size_t bytesSent = xStreamBufferSend(streamBuffer, (void*)loggerData, sizeof(loggerData), portMAX_DELAY);
-        //NRF_LOG_INFO("Bytes sent: %d\n", bytesSent);
-        //NRF_LOG_FLUSH();
-        //vTaskDelay(2000);
-    }
-}
 /* Instantiations */
 static constexpr uint8_t queueSize = 10;
 static constexpr uint8_t itemSize  = 1;
@@ -223,21 +120,27 @@ UartCommParams_t commParams =
         .baudRate = NRF_UART_BAUDRATE_115200
 };
 
+// uart instance
 Uart uart(&commParams, NRF_UART0, APP_IRQ_PRIORITY_LOWEST, uartCallback, systemQueue);
 
-
-
-//if (systemTaskQueue == NULL)
-//{
-//    APP_ERROR_HANDLER(NRF_ERROR_RESOURCES);
-//}
-
+// system task
 SystemTask systemTask(uart, systemQueue);
+
+
+static constexpr uint32_t idleTime = 3000;
+int m = 0;
+void IdleTimerCallback(TimerHandle_t xTimer)
+{
+    NRF_LOG_INFO("......Idle timeout -> Going to sleepXxX !!!! ");
+    m++;
+    //NRF_LOG_FLUSH();
+}
 
 /**@brief Function for application main entry.
  */
-int main(void)
-{   
+int main()
+{  
+   //ulTaskNotifyTake()
     NrfLogger logger;
 
     //NrfLogger::writeToLogger<char>("Writing to register address %x", 10);
@@ -248,77 +151,24 @@ int main(void)
     NRF_LOG_DEFAULT_BACKENDS_INIT();
 
     clock_init();
-     
-    // uint8_t tmp[40];
-    // MCP9808 tmpSensor;
-    //tmpSensor.xferData(tmp, 1);
     
-    //while(true) 
-    //{
-    //    tmpSensor.read();
-    //    nrf_delay_ms(3000);
-    //}
-
-    vTaskStartScheduler();		// Start FreeRTOS scheduler
-
-    //while(1);
-
-    /*
-    char buff[6];
-    sprintf(buff, "ZUZ%s\n", "i");
-
-    //char ugh[] = "NRF_LOG_INFO";
-    NRF_LOG_INFO("%s\r\n", buff);
-    //NRF_LOG_INFO("hua");
-    NRF_LOG_FLUSH();
+    //TimerHandle_t idleTimer = xTimerCreate ("idleTimer", pdMS_TO_TICKS(idleTime), pdFALSE, 0, IdleTimerCallback);
+    //xTimerStart(idleTimer, 0);
     
-   
-    uint8_t tmp[1] = {0};
-    MCP9808 tmpSensor;
+
+    //vTaskStartScheduler();		// Start FreeRTOS scheduler
+
+     uint8_t tmp[40];
+     MCP9808 tmpSensor;
+     NotificationManager ntf(tmpSensor);
     tmpSensor.xferData(tmp, 1);
     
     while(true) 
     {
-        tmpSensor.read();
-        nrf_delay_ms(3000);
+        uint16_t data = tmpSensor.read();
+        ntf.unsubscribe();
+        //nrf_delay_ms(6000);
     }
-    
-    // Start FreeRTOS scheduler.
-    vTaskStartScheduler();*/
-
-/*
-    streamBuffer = xStreamBufferCreate(45, 5);
-
-    if (streamBuffer == NULL)
-    {
-        NRF_LOG_INFO("Couldn't alloc stream buffer\n");
-    }
-    else 
-    {
-        NRF_LOG_INFO("STREAM buff == alloc'd\n");
-    }
-
-    
-
-    #if NRF_LOG_ENABLED
-    // Start execution.
-    if (pdPASS != xTaskCreate(logger_thread, "LOGGER", 256, NULL, 5, &m_logger_thread))
-    {
-        //APP_ERROR_HANDLER(NRF_ERROR_NO_MEM);
-    }
-    #endif
-    
-    if (pdPASS != xTaskCreate(huzz, "LOGGER", 256, NULL, 1, &m_huzzi_thread))
-    {
-        //APP_ERROR_HANDLER(NRF_ERROR_NO_MEM);
-    }
-        
-
-    // MCP9808
-    initMcp9808();
-
-    // Start FreeRTOS scheduler.
-    //vTaskStartScheduler();*/
 }
 
 
