@@ -7,7 +7,11 @@ void convertParsedInputToMsg(void)
 {
     if (!strcmp(parsedInput, "tempEnable"))
     {
-        dataToQueue = SystemTask::Messages::enableTempNotification;
+        dataToQueue = SystemTask::Messages::subscribeTempNotifications;
+    }
+    else if (!strcmp(parsedInput, "tempDisable"))
+    {
+        dataToQueue = SystemTask::Messages::unsubscribeTempNotifications;
     }
 
 }
@@ -42,7 +46,7 @@ void parseUserInput(Fifo &pFifo)
 
 void uartCallback(Fifo &pFifo, QueueHandle_t &systemQueue)
 {
-    int a = 0;
+    int a = 0;  // TODO - remove
     a++;
     parseUserInput(pFifo);
     

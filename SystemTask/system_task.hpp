@@ -7,6 +7,8 @@
 #include <task.h>
 #include <queue.h>
 #include <uart.hpp>
+#include <mcp9808.hpp>
+#include <NotificationManager.hpp>
 
 class SystemTask 
 {   
@@ -17,17 +19,21 @@ class SystemTask
     void mainThread();
     
     
-    // peripheral
+    // peripherals
     Uart& uart;
+    MCP9808 &_tmpSensor;
+
+    NotificationManager &_notificationManager;
+
     public:
     enum class Messages
     {
-        enableTempNotification,
-        disableTempNotification,
+        subscribeTempNotifications,
+        unsubscribeTempNotifications,
         invalidInput
     };
     static Messages messages;
-    SystemTask(Uart &uart, QueueHandle_t &systemTask);
+    SystemTask(Uart &uart, MCP9808 &tmpSensor, NotificationManager &notificationManager, QueueHandle_t &systemTask);
     void pushMessage(SystemTask::Messages msg);
 
 };

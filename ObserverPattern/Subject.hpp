@@ -19,15 +19,17 @@ class Subject
     uint8_t tailIdx = 0;	
 
     //Subject *nextSubscription = nullptr;
-    //Observer *firstSubscriber = nullptr;
+    //Observer *firstSubscription = nullptr;
+    Observer *notificationSubscriber = nullptr;
 
     public:
     virtual ~Subject() = default;
          
     Observer *observerList[observerMaxSize];  // TODO - really need an array just to store a ref to Notification class?
     void attach(Observer *obs);
-    void detach(Observer *obs);
+    void detach();
     void notify(Subject*);
+    void setSubscriptionHead(Subject *head);
 };
 
 #endif

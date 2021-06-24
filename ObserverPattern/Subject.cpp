@@ -8,28 +8,20 @@ void Subject::attach(Observer *obs)
         // TODO - add a print!
         return;
     }
-    observerList[headIdx++] = obs;	// TODO - rmv
-
-    //if (firstSubscription == nullptr)	    // first subscriber - store the head
-    //{
-    //    firstSubscriber = obs;
-    //}
+    notificationSubscriber = obs;
 }
 
-void Subject::detach(Observer *obs)
+void Subject::detach()
 {
-    if (headIdx == 0)
-    {
-        // TODO - add a print!
-        return;	
-    }
-    headIdx--;
+    notificationSubscriber = nullptr;
 }
 
 void Subject::notify(Subject *subject) // TODO - remove params
 {
-    for (uint8_t idx = tailIdx; idx < headIdx; idx++)
-    {
-        observerList[idx]->update(subject);
+    if (notificationSubscriber == nullptr)
+    {   
+        // TODO - add a relevant comment on how there's no subcriber
+        return;
     }
+    notificationSubscriber->update(subject);
 }

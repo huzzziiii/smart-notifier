@@ -1,36 +1,47 @@
 #include "NotificationManager.hpp"
 
-NotificationManager::NotificationManager(MCP9808 &tmpSensor) : _subject(tmpSensor) 
+void NotificationManager::unsubscribe(Subject *subscription)
 {
-    _subject.attach(this);	      // subscribing an observer by default
-
-    // TODO - subscribe to dynamic subjects...
+    for (uint8_t idx = 0; idx < maxSubscriptions; idx++)
+    {
+        if (subscriptions[idx] == subscription)
+        {
+	  subscriptions[idx]->detach();
+	  return;
+        }
+    }
 }
 
-void NotificationManager::push(Notification &notification)
+void NotificationManager::subscribe(Subject *subscription)
 {
-
+    subscription->attach(this);
 }
 
-void NotificationManager::unsubscribe()
+void NotificationManager::push()
 {
-    _subject.detach(this);
+    //_notifications.enque(notification);
+    _notifications[_notification.idx++] = _notification;
 }
 
 /*
-@NotificationManager: receives notifications from all the subscribers
-TODO - must use protection guard for member variables
+@update: receives notifications from all the subscribers within IRQ (confirm that's true for all cases == has to be small!)
+[TODO] -- Since this function is invoked from all the subscriptions. Protection guard would be required to protect the data...
+
 */
 void NotificationManager::update(Subject *subject)
 {
     int a = 5; // TODO - remove
     int h;
-    if (subject == &_subject)
-    {
-        a++;
-        h = 5;
 
-        // display to the output
+    if (subject == subscriptions[0])	    // tmpSensor
+    {
+        MCP9808 *mcp9808 = dynamic_cast<MCP9808*>(subject);
+        uint16_t tmpValue = mcp9808->getCurrentTempInC();
+        _notification.category = Category::tempReading;
+        snprintf(_notification.msg, 40, "Current temperature value (C) = %d\n", tmpValue);
+        push(); 
+
+        // TODO - display to the output source
     }
-    h++;
+    h++;	      // TODO - remove
 }

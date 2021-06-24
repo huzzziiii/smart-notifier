@@ -110,4 +110,4 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/NotificationManager.o: \
  ../../../../../../external/freertos/source/include/task.h \
  ../../../../../../external/freertos/source/include/list.h \
  ../../../../../../external/freertos/source/include/stream_buffer.h \
- ObserverPattern/Subject.hpp
+ ObserverPattern/Subject.hpp Fifo/Inc/fifo.hpp

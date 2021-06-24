@@ -123,8 +123,16 @@ UartCommParams_t commParams =
 // uart instance
 Uart uart(&commParams, NRF_UART0, APP_IRQ_PRIORITY_LOWEST, uartCallback, systemQueue);
 
+// Temp sensor
+MCP9808 tmpSensor;
+
+// Notification Manager
+NotificationManager notificationManager(&tmpSensor);
+
 // system task
-SystemTask systemTask(uart, systemQueue);
+SystemTask systemTask(uart, tmpSensor, notificationManager, systemQueue);
+
+NrfLogger logger;
 
 
 static constexpr uint32_t idleTime = 3000;
@@ -141,7 +149,7 @@ void IdleTimerCallback(TimerHandle_t xTimer)
 int main()
 {  
    //ulTaskNotifyTake()
-    NrfLogger logger;
+    
 
     //NrfLogger::writeToLogger<char>("Writing to register address %x", 10);
 
@@ -156,19 +164,19 @@ int main()
     //xTimerStart(idleTimer, 0);
     
 
-    //vTaskStartScheduler();		// Start FreeRTOS scheduler
+    vTaskStartScheduler();		// Start FreeRTOS scheduler
 
-     uint8_t tmp[40];
-     MCP9808 tmpSensor;
-     NotificationManager ntf(tmpSensor);
-    tmpSensor.xferData(tmp, 1);
     
-    while(true) 
-    {
-        uint16_t data = tmpSensor.read();
-        ntf.unsubscribe();
-        //nrf_delay_ms(6000);
-    }
+    //uint8_t tmp[40];
+    
+    //tmpSensor.xferData(tmp, 1);
+
+    //while(true) 
+    //{
+    //    uint16_t data = tmpSensor.read();
+    //    notificationManager.unsubscribe(&tmpSensor);
+    //    //nrf_delay_ms(6000);
+    //}
 }
 
 

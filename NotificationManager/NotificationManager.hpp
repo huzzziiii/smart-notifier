@@ -7,8 +7,11 @@
 #include "stdint.h"
 #include "Observer.hpp"
 #include "mcp9808.hpp"
+#include "fifo.hpp"
 #include <stdbool.h>
 #include <stdarg.h>
+
+uint8_t constexpr maxSubscriptions = 5;
 
 enum class Category
 {
@@ -17,25 +20,36 @@ enum class Category
 
 struct Notification
 {
-    uint8_t idx;
-    char msg[20];
+    uint8_t idx = 0;
+    char msg[40];
     Category category;
 };
 
 class NotificationManager : public Observer
 {
-    MCP9808 &_subject;		
-    //Subject *subscriptionHead;
+    Subject *subscriptions[maxSubscriptions] = {nullptr};
+    uint8_t subscriptionIdx = 0;
 
+    Notification _notifications[40];			// TODO - think about using Fifo instead...
+    //Fifo _notifications;
     public:
-    NotificationManager(MCP9808 &tmpSensor);
-    Notification notification;
+    //NotificationManager(MCP9808 &tmpSensor);
 
-    void push(Notification &notification);
+    template<typename ...Args>
+    NotificationManager(Args ...args)
+    {
+        ((subscriptions[subscriptionIdx] = args), ...);
+        subscriptions[subscriptionIdx++]->attach(this);
+    }
+  
+    void push();
     void update(Subject *subject);
     Notification const &getPrev(Notification &notification);
-    void unsubscribe();
 
+    void subscribe(Subject *subscription);
+    void unsubscribe(Subject *subscription);
+
+    Notification _notification;
 };
 
 #endif

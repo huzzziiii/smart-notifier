@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include <stdarg.h>
 
-constexpr uint8_t fifoSize = 8;
+constexpr uint8_t fifoSize = 16;
 
 //typedef enum 
 //{

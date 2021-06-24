@@ -1,14 +1,14 @@
 #include "mcp9808.hpp"
 
 static const nrf_drv_twi_t m_twi = NRF_DRV_TWI_INSTANCE(TWI_INSTANCE_ID);
-static bool m_xfer_done; 
+static bool volatile m_xfer_done; 
 
 
 void MCP9808::readTempInC()			  // TODO - get value in float!
 {
     uint8_t upperByte = _buffer[0] & 0x1f;	  // mask out Alert pins
     uint8_t signedData = _buffer[0] & 0x10;	  // check the signedness of the value
-    uint16_t _tempInC; 
+    //uint16_t _tempInC; 
 
     if (signedData)
     {
@@ -18,8 +18,7 @@ void MCP9808::readTempInC()			  // TODO - get value in float!
     else
     {
         _tempInC = upperByte << 4 | _buffer[1] >> 4;
-    }
-    notify(this);
+    } 
 }
 
  /**
@@ -56,7 +55,7 @@ void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)
     ret_code_t err_code = nrf_drv_twi_init(&m_twi, &config, twi_handler, this);
     APP_ERROR_CHECK(err_code);
 
-    nrf_drv_twi_enable(&m_twi);
+    nrf_drv_twi_enable(&m_twi);	// enable the interrupt
 }
 
 
@@ -78,13 +77,26 @@ void MCP9808::write(uint8_t reg, uint8_t *buffer, uint8_t size)
     while (m_xfer_done == false);
 }
 
+uint16_t MCP9808::getCurrentTempInC() const
+{
+    return _tempInC;
+}
+
+
 uint16_t MCP9808::read()
 {
      m_xfer_done = false;
     ret_code_t err_code = nrf_drv_twi_rx(&m_twi, MCP9808_ADDR, _buffer, 2);
+    
     APP_ERROR_CHECK(err_code);
+    //NRF_LOG_WARNING("Function: %s, error code: %s.",
+    //                 __func__,
+    //                 NRF_LOG_ERROR_STRING_GET(err_code));
+    //NRF_LOG_FLUSH();
     
     while(!m_xfer_done);
+
+    notify(this);	        // update the subscriber of the current value 
     return _tempInC;	         
 }
 

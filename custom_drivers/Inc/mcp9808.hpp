@@ -45,6 +45,7 @@ class MCP9808 : public Subject
     void readTempInC();
     float readTempInF();	      // TODO
     uint16_t read();
+    uint16_t getCurrentTempInC() const;
     
     void xferData(uint8_t *p_buffer, uint8_t size);
    

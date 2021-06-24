@@ -112,4 +112,8 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/uart_app.o: \
  ../../../../../../modules/nrfx/hal/nrf_twim.h \
  ../../../../../../modules/nrfx/drivers/include/nrfx_twi.h \
  ../../../../../../modules/nrfx/hal/nrf_twi.h \
- ../../../../../../external/freertos/source/include/stream_buffer.h
+ ../../../../../../external/freertos/source/include/stream_buffer.h \
+ custom_drivers/Inc/mcp9808.hpp custom_drivers/Inc/sensors.hpp \
+ ObserverPattern/Subject.hpp ObserverPattern/Observer.hpp \
+ ObserverPattern/Subject.hpp NotificationManager/NotificationManager.hpp \
+ ObserverPattern/Observer.hpp
