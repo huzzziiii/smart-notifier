@@ -27,10 +27,11 @@ struct Notification
 
 class NotificationManager : public Observer
 {
-    Subject *subscriptions[maxSubscriptions] = {nullptr};
+    Subject *subscriptions[maxSubscriptions] = {nullptr};	// store references to Subject
     uint8_t subscriptionIdx = 0;
 
     Notification _notifications[40];			// TODO - think about using Fifo instead...
+    //template<typename T>?
     //Fifo _notifications;
     public:
     //NotificationManager(MCP9808 &tmpSensor);

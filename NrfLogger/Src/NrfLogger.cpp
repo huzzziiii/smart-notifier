@@ -10,15 +10,19 @@ NrfLogger::NrfLogger()
     auto res = NRF_LOG_INIT(NULL);
     APP_ERROR_CHECK(res);
     NRF_LOG_DEFAULT_BACKENDS_INIT();
-        
+    
+    size_t heapSize1 = xPortGetFreeHeapSize();
     // creating a stream buffer (instead of a queue) because its ability to take variable-sized data
     logStreamBuffer = xStreamBufferCreate(50, 5);
 
     // creating a task
-    if (pdPASS != xTaskCreate(NrfLogger::Process, "PROCESS_LOG", 256, this, 5, &NrfLogger::loggerThread))
+    if (pdPASS != xTaskCreate(NrfLogger::Process, "PROCESS_LOG", 100, this, 5, &NrfLogger::loggerThread))
     {
         APP_ERROR_HANDLER(NRF_ERROR_NO_MEM);
     }
+
+    size_t heapSize2 = xPortGetFreeHeapSize();
+    size_t heapTaken = heapSize1 - heapSize2;
 }
 
 void NrfLogger::Process(void *arg)

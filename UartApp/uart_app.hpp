@@ -6,7 +6,7 @@
 #include "nrf_log_default_backends.h"
 #include "stdint.h"
 #include "fifo.hpp"
-#include "system_task.hpp"
+#include "SystemTask.hpp"
 #include <stdbool.h>
 #include "string.h"
 #include <stdarg.h>

@@ -1,7 +1,7 @@
 #include "mcp9808.hpp"
 
 static const nrf_drv_twi_t m_twi = NRF_DRV_TWI_INSTANCE(TWI_INSTANCE_ID);
-static bool volatile m_xfer_done; 
+static bool volatile m_xfer_done = true;
 
 
 void MCP9808::readTempInC()			  // TODO - get value in float!
@@ -33,8 +33,13 @@ void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)
         case NRF_DRV_TWI_EVT_DONE:
             if (p_event->xfer_desc.type == NRF_DRV_TWI_XFER_RX)
             {
-	      obj->readTempInC();				  // parsing the data now that the transfer has been completed
+	      //vTaskNotifyGiveFromISR(obj->taskHandle, pdFALSE);
+	      obj->readTempInC();	 // TODO - do the parsing in the task! (parsing the data now that the transfer has been completed
             }
+	  else if (p_event->xfer_desc.type == NRF_DRV_TWI_XFER_TX)
+	  {
+	      NRF_LOG_INFO("TX transfer done...\n");
+	  }
             m_xfer_done = true; 
             break;
         default:
@@ -42,9 +47,11 @@ void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)
     }
 }
 
+uint8_t tmpBuffer[10]; // TODO - remv
+
  MCP9808::MCP9808() 
 {
-    const nrf_drv_twi_config_t config = {
+    i2cConfig = {
        .scl                = TWI_SCLK,
        .sda                = TWI_SDA,
        .frequency          = static_cast<nrf_drv_twi_frequency_t> (TWI_FREQ),	  
@@ -52,12 +59,53 @@ void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)
        .clear_bus_init     = false
     };
     
-    ret_code_t err_code = nrf_drv_twi_init(&m_twi, &config, twi_handler, this);
+    ret_code_t err_code = nrf_drv_twi_init(&m_twi, &i2cConfig, twi_handler, this);
     APP_ERROR_CHECK(err_code);
 
     nrf_drv_twi_enable(&m_twi);	// enable the interrupt
+    
+    size_t heapSize1 = xPortGetFreeHeapSize();
+    
+    //taskHandle = xTaskGetCurrentTaskHandle();
+
+    // create a task
+    if (xTaskCreate(MCP9808::process, "process", 100, this, 0, &taskHandle) != pdPASS)	  // TODO - think about stack size!
+    {
+        APP_ERROR_HANDLER(NRF_ERROR_NO_MEM);
+    } 
+
+    size_t heapSize2 = xPortGetFreeHeapSize(); 
+    size_t heapTaken = heapSize1 - heapSize2;
 }
 
+void MCP9808::process(void *instance)
+{
+    auto pInstance = static_cast<MCP9808*>(instance);
+    pInstance->mainThread();
+}
+
+static volatile uint8_t m = 0;
+
+void MCP9808::mainThread()
+{
+    xferData(tmpBuffer, 1);  
+
+    while(true)
+    {   
+        uint16_t xaf = read();
+        
+        vTaskDelay(pdMS_TO_TICKS(2000));
+   //     uint32_t taskNotify = ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+   //     if (taskNotify != 0)
+   //     {
+	  //m++;
+   //     }
+   //     readTempInC();
+        m++;
+        notify(this);
+        vTaskDelay(pdMS_TO_TICKS(500));
+    }
+}
 
 void MCP9808::xferData(uint8_t *p_buffer, uint8_t size)
 {
@@ -82,21 +130,20 @@ uint16_t MCP9808::getCurrentTempInC() const
     return _tempInC;
 }
 
-
 uint16_t MCP9808::read()
 {
-     m_xfer_done = false;
+    m_xfer_done = false;
     ret_code_t err_code = nrf_drv_twi_rx(&m_twi, MCP9808_ADDR, _buffer, 2);
     
-    APP_ERROR_CHECK(err_code);
+    //APP_ERROR_CHECK(err_code);
     //NRF_LOG_WARNING("Function: %s, error code: %s.",
     //                 __func__,
     //                 NRF_LOG_ERROR_STRING_GET(err_code));
     //NRF_LOG_FLUSH();
     
-    while(!m_xfer_done);
+    //while(!m_xfer_done);
 
-    notify(this);	        // update the subscriber of the current value 
+    //notify(this);	        // update the subscriber of the current value 
     return _tempInC;	         
 }
 

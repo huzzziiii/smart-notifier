@@ -4,6 +4,7 @@
 
 /* TODO -
  - what to do in enque() once queue == full?
+ - multiple tasks write to the FIFO? protection...
 */
 
 Fifo::Fifo() : 

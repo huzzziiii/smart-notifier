@@ -90,12 +90,14 @@
 #include "NrfLogger.hpp"
 #include "uart.hpp"
 #include "uart_app.hpp"
-#include "system_task.hpp"
+#include "SystemTask.hpp"
+#include "NotificationManager.hpp"
 #include <stdarg.h>
 #include <cstring>
 #include <cstdio>
 #include <algorithm>
-#include "NotificationManager.hpp"
+
+//#include "SEGGER_SYSVIEW.h"
 
 static void clock_init(void)
 {
@@ -132,7 +134,7 @@ NotificationManager notificationManager(&tmpSensor);
 // system task
 SystemTask systemTask(uart, tmpSensor, notificationManager, systemQueue);
 
-NrfLogger logger;
+//NrfLogger logger; // TODO - uncomment!
 
 
 static constexpr uint32_t idleTime = 3000;
@@ -144,10 +146,21 @@ void IdleTimerCallback(TimerHandle_t xTimer)
     //NRF_LOG_FLUSH();
 }
 
+int failure = 0;
+extern "C" {
+    void vApplicationMallocFailedHook(void)
+    {
+        failure++;
+        NRF_LOG_INFO("Heap allocation failed...\n");
+        NRF_LOG_FLUSH();
+    }
+}
+
 /**@brief Function for application main entry.
  */
 int main()
-{  
+{
+      //SEGGER_SYSVIEW_Conf();
    //ulTaskNotifyTake()
     
 
@@ -168,14 +181,13 @@ int main()
 
     
     //uint8_t tmp[40];
-    
     //tmpSensor.xferData(tmp, 1);
 
     //while(true) 
     //{
     //    uint16_t data = tmpSensor.read();
     //    notificationManager.unsubscribe(&tmpSensor);
-    //    //nrf_delay_ms(6000);
+    //    nrf_delay_ms(3000);
     //}
 }
 

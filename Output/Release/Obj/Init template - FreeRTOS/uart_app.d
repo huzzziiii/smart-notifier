@@ -75,7 +75,7 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/uart_app.o: \
  Fifo/Inc/fifo.hpp \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdarg.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdarg.h \
- SystemTask/system_task.hpp \
+ SystemTask/SystemTask.hpp \
  ../../../../../../external/freertos/source/include/FreeRTOS.h \
  ../../../../../../external/freertos/config/FreeRTOSConfig.h \
  ../../../../../../components/libraries/util/nrf_assert.h \

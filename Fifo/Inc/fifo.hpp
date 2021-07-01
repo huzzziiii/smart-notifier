@@ -24,6 +24,7 @@ constexpr uint8_t fifoSize = 16;
     success
 } FifoReturnValues;
 
+
 class Fifo 
 {
     //uint8_t *buffer;
@@ -32,7 +33,10 @@ class Fifo
     volatile uint8_t _readIdx;	      // volatile - cause the values would be modified inside an ISR
     volatile uint8_t _writeIdx;
     volatile uint8_t _startIdx;	     // start index for the user input
+    
+    //T _buffexr[fifoSize];	// TODO - volatile?!
     uint8_t _buffer[fifoSize];	// TODO - volatile?!
+    
     
     public:
     Fifo();

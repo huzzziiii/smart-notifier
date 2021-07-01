@@ -24,9 +24,8 @@ void NotificationManager::push()
 }
 
 /*
-@update: receives notifications from all the subscribers within IRQ (confirm that's true for all cases == has to be small!)
+@update: receives notifications from all the subscribers (currently only one so no need for a loop!)
 [TODO] -- Since this function is invoked from all the subscriptions. Protection guard would be required to protect the data...
-
 */
 void NotificationManager::update(Subject *subject)
 {

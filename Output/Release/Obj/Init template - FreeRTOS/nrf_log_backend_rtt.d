@@ -90,6 +90,6 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/nrf_log_backend_rtt.o: \
  ../../../../../../components/softdevice/s140/headers/nrf_sd_def.h \
  ../../../../../../components/softdevice/s140/headers/nrf_soc.h \
  ../../../../../../modules/nrfx/drivers/nrfx_errors.h \
- ../../../../../../external/segger_rtt/SEGGER_RTT_Conf.h \
+ SeggerFiles/Config/SEGGER_RTT_Conf.h \
  ../../../../../../external/segger_rtt/SEGGER_RTT.h \
  ../../../../../../external/segger_rtt/SEGGER_RTT_Conf.h
