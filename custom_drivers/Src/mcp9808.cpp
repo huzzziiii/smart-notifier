@@ -3,6 +3,12 @@
 static const nrf_drv_twi_t m_twi = NRF_DRV_TWI_INSTANCE(TWI_INSTANCE_ID);
 static bool volatile m_xfer_done = true;
 
+// TODO
+/*
+- change timer period based on the temperature value
+- do a floating point example
+- 
+*/
 
 void MCP9808::readTempInC()			  // TODO - get value in float!
 {
@@ -35,12 +41,14 @@ void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)
             {
 	      //vTaskNotifyGiveFromISR(obj->taskHandle, pdFALSE);
 	      obj->readTempInC();	 // TODO - do the parsing in the task! (parsing the data now that the transfer has been completed
+	       m_xfer_done = true; 
             }
 	  else if (p_event->xfer_desc.type == NRF_DRV_TWI_XFER_TX)
 	  {
 	      NRF_LOG_INFO("TX transfer done...\n");
+	       m_xfer_done = true; 
 	  }
-            m_xfer_done = true; 
+            //m_xfer_done = true; 
             break;
         default:
             break;
@@ -89,13 +97,18 @@ static volatile uint8_t m = 0;
 void MCP9808::mainThread()
 {
     xferData(tmpBuffer, 1);  
+    vTaskDelay(pdMS_TO_TICKS(2000));
 
     while(true)
     {   
-        uint16_t xaf = read();
         
+        uint32_t xaf = read();
+        
+        //NRF_LOG_INFO("READ ret: %d\n", xaf);
+        //NRF_LOG_FLUSH();
+
         vTaskDelay(pdMS_TO_TICKS(2000));
-   //     uint32_t taskNotify = ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+        //uint32_t taskNotify = ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
    //     if (taskNotify != 0)
    //     {
 	  //m++;
@@ -130,21 +143,21 @@ uint16_t MCP9808::getCurrentTempInC() const
     return _tempInC;
 }
 
-uint16_t MCP9808::read()
+uint32_t MCP9808::read()
 {
     m_xfer_done = false;
     ret_code_t err_code = nrf_drv_twi_rx(&m_twi, MCP9808_ADDR, _buffer, 2);
     
-    //APP_ERROR_CHECK(err_code);
+    APP_ERROR_CHECK(err_code);
     //NRF_LOG_WARNING("Function: %s, error code: %s.",
     //                 __func__,
     //                 NRF_LOG_ERROR_STRING_GET(err_code));
     //NRF_LOG_FLUSH();
     
-    //while(!m_xfer_done);
+    while(!m_xfer_done);
 
     //notify(this);	        // update the subscriber of the current value 
-    return _tempInC;	         
+    return err_code;	         
 }
 
 

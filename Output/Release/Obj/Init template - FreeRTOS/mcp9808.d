@@ -108,5 +108,9 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/mcp9808.o: \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdarg.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdarg.h \
  ObserverPattern/Subject.hpp ObserverPattern/Observer.hpp \
- ObserverPattern/Subject.hpp \
+ ObserverPattern/Subject.hpp TimerApp/TimerApp.hpp \
+ ../../../../../../external/freertos/source/include/timers.h \
+ ../../../../../../external/freertos/source/include/task.h \
+ ../../../../../../external/freertos/source/include/semphr.h \
+ ../../../../../../external/freertos/source/include/queue.h \
  ../../../../../../external/freertos/source/include/queue.h

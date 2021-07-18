@@ -5,6 +5,8 @@
 #include "nrf_drv_twi.h"
 #include "NrfLogger.hpp"
 #include "Subject.hpp"
+#include "TimerApp.hpp"
+#include "semphr.h"
 #include <queue.h>
 
 #define MCP9808_ADDR	      0x18
@@ -27,6 +29,21 @@ enum MCP9808_REG
     manufucterurId = 0x6
 };
 
+// Timeouts for the timer in mS
+enum ledTimeouts
+{
+    below22 = 500,	    
+    above21 = 3000
+};
+
+struct timerHandler
+{
+    bool isActive;
+    void (*appTimerHandler)(uint16_t currentTemp, uint16_t prevTemp);
+};
+
+uint32_t constexpr ledIndex = 3;     // LED index to blink based on the temperature value
+
 /*
 @MCP9808 class - inherits from the Subject class
 @brief: invokes driver functions for reading the raw temperature value.
@@ -37,12 +54,14 @@ class MCP9808 : public Subject
 {
     uint8_t _buffer[10] = {0};		// TODO - size!
     uint16_t _tempInC;			// stores temperature value in Celcius
-    
+    bool changeInTemp = false;
+    uint16_t _prevTemp; 
     
     QueueHandle_t *queueHandle;
     static void process(void *instance);
     void mainThread(void);
     nrf_drv_twi_config_t i2cConfig;
+    Timer _ledTimer;
 
     public:
     MCP9808(nrf_drv_twi_config_t *config);
@@ -51,9 +70,13 @@ class MCP9808 : public Subject
     void write(uint8_t address, uint8_t *buffer, uint8_t size);
     void readTempInC();
     float readTempInF();	      // TODO
-    uint16_t read();
+    uint32_t read();
     uint16_t getCurrentTempInC() const;
+
+
     TaskHandle_t taskHandle = NULL;
+    SemaphoreHandle_t signal;
+
     
     void xferData(uint8_t *p_buffer, uint8_t size);
    

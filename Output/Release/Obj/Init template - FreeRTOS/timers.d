@@ -61,5 +61,5 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/timers.o: \
  ../../../../../../external/freertos/source/include/task.h \
  ../../../../../../external/freertos/source/include/list.h \
  ../../../../../../external/freertos/source/include/queue.h \
- ../../../../../../external/freertos/source/include/timers.h \
- ../../../../../../external/freertos/source/include/task.h
+ ../../../../../../external/freertos/source/include/task.h \
+ ../../../../../../external/freertos/source/include/timers.h

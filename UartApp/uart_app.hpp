@@ -8,12 +8,12 @@
 #include "fifo.hpp"
 #include "SystemTask.hpp"
 #include <stdbool.h>
-#include "string.h"
+#include <string.h>
 #include <stdarg.h>
+#include "BleUartService.hpp"
 
-
-
-void uartCallback(Fifo &pFifo, QueueHandle_t &systemTaskQueue);
+void uartCallback(Fifo<uint8_t> &pFifo, QueueHandle_t &systemTaskQueue);
+void bleUartHandler(BleUartEvent_t *pEventType);
 
 
 #endif

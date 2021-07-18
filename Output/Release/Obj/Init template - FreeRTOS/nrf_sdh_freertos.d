@@ -66,6 +66,7 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/nrf_sdh_freertos.o: \
  ../../../../../../external/freertos/source/include/task.h \
  ../../../../../../external/freertos/source/include/list.h \
  ../../../../../../external/freertos/source/include/queue.h \
+ ../../../../../../external/freertos/source/include/task.h \
  ../../../../../../external/freertos/source/include/semphr.h \
  ../../../../../../external/freertos/source/include/queue.h \
  ../../../../../../components/libraries/log/nrf_log.h \

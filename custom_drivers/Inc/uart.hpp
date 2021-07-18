@@ -181,10 +181,10 @@ class Uart
     UartCommParams_t    *pUartCommParams;
     NRF_UART_Type	    *pUARTx;
     UartConfig_t	    uartConfig;
-    void		    (*uartCallback)(Fifo &pFifo, QueueHandle_t &systemTaskQueue);
+    void		    (*uartCallback)(Fifo <uint8_t> &pFifo, QueueHandle_t &systemTaskQueue);
 
-    Fifo fifoRx;
-    Fifo fifoTx;
+    Fifo <uint8_t> fifoRx;
+    Fifo <uint8_t> fifoTx;
 
     //std::function<void()> callback;
 
@@ -205,7 +205,7 @@ class Uart
     bool newInput = true;
 
     public:
-    Uart(const UartCommParams_t *commParams, NRF_UART_Type *pUARTx, const uint8_t irqPriority, void (*callback)(Fifo &pFifo, QueueHandle_t &systemTaskQueue), QueueHandle_t &queue);
+    Uart(const UartCommParams_t *commParams, NRF_UART_Type *pUARTx, const uint8_t irqPriority, void (*callback)(Fifo <uint8_t> &pFifo, QueueHandle_t &systemTaskQueue), QueueHandle_t &queue);
     void uartInit();
     bool getIrqRegStatus(uint32_t mask);
     bool getNrfEventStatus(nrf_uart_event_t reg) const;

@@ -66,9 +66,9 @@ bool Uart::getIrqRegStatus(uint32_t mask)
     return (bool) (pUARTx->INTENSET & mask);
 }
 
-Uart::Uart(const UartCommParams_t *commParams, NRF_UART_Type *uartInstance, const uint8_t irqPriority, void (*callback)(Fifo &pFifo, QueueHandle_t &systemTaskQueue),
+Uart::Uart(const UartCommParams_t *commParams, NRF_UART_Type *uartInstance, const uint8_t irqPriority, void (*callback)(Fifo<uint8_t> &pFifo, QueueHandle_t &systemTaskQueue),
 	 QueueHandle_t &queue) 
-	  : systemTaskQueue(queue)
+	 : systemTaskQueue(queue)
 {
     // init comm params
     uartConfig.interruptPriority = irqPriority;

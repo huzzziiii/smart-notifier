@@ -62,4 +62,5 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/queue.o: \
  ../../../../../../external/freertos/source/include/mpu_wrappers.h \
  ../../../../../../external/freertos/source/include/task.h \
  ../../../../../../external/freertos/source/include/list.h \
- ../../../../../../external/freertos/source/include/queue.h
+ ../../../../../../external/freertos/source/include/queue.h \
+ ../../../../../../external/freertos/source/include/task.h

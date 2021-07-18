@@ -12,7 +12,7 @@
 class NrfLogger 
 {
     static TaskHandle_t loggerThread;
-    static StreamBufferHandle_t logStreamBuffer;
+    static StreamBufferHandle_t logStreamBufferx;
     static uint8_t buffer[50]; // todo  -- know SIZE in compile time for storing chars?!
 
     public:
@@ -27,7 +27,7 @@ class NrfLogger
         va_list args;
         va_start(args, data);
         vsprintf (tmp, data, args);
-        xStreamBufferSend(logStreamBuffer, (void*)&tmp, 40, pdFALSE);
+        xStreamBufferSend(logStreamBufferx, (void*)&tmp, 40, pdFALSE);
     }
 };
 #endif
