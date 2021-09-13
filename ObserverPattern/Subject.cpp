@@ -20,6 +20,7 @@ void Subject::notify(Subject *subject) // TODO - remove params
 {
     if (notificationSubscriber == nullptr)
     {   
+        NRF_LOG_WARNING("No subscribers to notify...\n");
         // TODO - add a relevant comment on how there's no subcriber
         return;
     }

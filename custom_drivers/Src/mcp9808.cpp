@@ -6,25 +6,30 @@ static bool volatile m_xfer_done = true;
 // TODO
 /*
 - change timer period based on the temperature value
-- do a floating point example
-- 
+- write a function to get a floating point temp value
+- think about when notifications are unsubscribed, whether it'd be worth still reading the temp value
 */
 
 void MCP9808::readTempInC()			  // TODO - get value in float!
 {
     uint8_t upperByte = _buffer[0] & 0x1f;	  // mask out Alert pins
+    uint8_t lowerByte = _buffer[1];
+
     uint8_t signedData = _buffer[0] & 0x10;	  // check the signedness of the value
     //uint16_t _tempInC; 
 
     if (signedData)
     {
         upperByte &= 0x0f;			  // clear SIGN bit
-        _tempInC = 256 - (upperByte << 4 | upperByte >> 4);
+        _tempInC = 256 - (upperByte << 4 | lowerByte >> 4);
     }
     else
     {
-        _tempInC = upperByte << 4 | _buffer[1] >> 4;
+        _tempInC = upperByte << 4 | lowerByte >> 4;
     } 
+    NRF_LOG_INFO("_tempInC: %u\n", _tempInC);
+    //NRF_LOG_FLUSH();
+    int m = 0; // TODO remove
 }
 
  /**
@@ -33,14 +38,15 @@ void MCP9808::readTempInC()			  // TODO - get value in float!
 void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)	   
 {
     MCP9808 *obj = static_cast<MCP9808*>(p_context);
-    
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+
     switch (p_event->type)
     {
         case NRF_DRV_TWI_EVT_DONE:
             if (p_event->xfer_desc.type == NRF_DRV_TWI_XFER_RX)
             {
-	      //vTaskNotifyGiveFromISR(obj->taskHandle, pdFALSE);
-	      obj->readTempInC();	 // TODO - do the parsing in the task! (parsing the data now that the transfer has been completed
+	      vTaskNotifyGiveFromISR(obj->taskHandle, &xHigherPriorityTaskWoken); // unlocks the receiver thread by giving a semaphore (ncrementing ulNotifiedValue by 1)
+	      //obj->readTempInC();	 // TODO - do the parsing in the task! (parsing the data now that the transfer has been completed
 	       m_xfer_done = true; 
             }
 	  else if (p_event->xfer_desc.type == NRF_DRV_TWI_XFER_TX)
@@ -101,22 +107,30 @@ void MCP9808::mainThread()
 
     while(true)
     {   
-        
         uint32_t xaf = read();
         
         //NRF_LOG_INFO("READ ret: %d\n", xaf);
         //NRF_LOG_FLUSH();
 
-        vTaskDelay(pdMS_TO_TICKS(2000));
-        //uint32_t taskNotify = ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-   //     if (taskNotify != 0)
-   //     {
-	  //m++;
-   //     }
-   //     readTempInC();
-        m++;
+        //vTaskDelay(pdMS_TO_TICKS(2000));
+        uint32_t taskNotify = ulTaskNotifyTake(pdTRUE, portMAX_DELAY);  // blocks the current thread by decrementing ulNotifiedValue to 0 (taking a semaphore)
+        if (taskNotify != 0)
+        {
+	  NRF_LOG_WARNING("Transmission ended as expected...\n");
+	  //NRF_LOG_FLUSH();
+	  m++;
+        }
+        else
+        {
+	  NRF_LOG_WARNING("The call to ulTaskNotifyTake timedout!!\n");
+        }
+
+        readTempInC();
+        //m++;
         notify(this);
-        vTaskDelay(pdMS_TO_TICKS(500));
+  
+        vTaskDelay(pdMS_TO_TICKS(3000));
+        
     }
 }
 
@@ -135,12 +149,7 @@ void MCP9808::write(uint8_t reg, uint8_t *buffer, uint8_t size)
 
     err_code = nrf_drv_twi_tx(&m_twi, MCP9808_ADDR, &reg, size, false);
     APP_ERROR_CHECK(err_code);
-    while (m_xfer_done == false);
-}
-
-uint16_t MCP9808::getCurrentTempInC() const
-{
-    return _tempInC;
+    while (!m_xfer_done);
 }
 
 uint32_t MCP9808::read()
@@ -149,15 +158,17 @@ uint32_t MCP9808::read()
     ret_code_t err_code = nrf_drv_twi_rx(&m_twi, MCP9808_ADDR, _buffer, 2);
     
     APP_ERROR_CHECK(err_code);
-    //NRF_LOG_WARNING("Function: %s, error code: %s.",
-    //                 __func__,
-    //                 NRF_LOG_ERROR_STRING_GET(err_code));
+    //NRF_LOG_WARNING("Function: %s, error code: %s.", __func__,NRF_LOG_ERROR_STRING_GET(err_code));
     //NRF_LOG_FLUSH();
     
-    while(!m_xfer_done);
+    //while(!m_xfer_done);
 
-    //notify(this);	        // update the subscriber of the current value 
-    return err_code;	         
+    //notify(this);	            // update the subscriber of the current value 
+    return err_code;	 // TODO - change to pascalCase         
 }
 
 
+uint16_t MCP9808::getCurrentTempInC() const
+{
+    return _tempInC;
+}

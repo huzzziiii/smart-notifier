@@ -7,7 +7,7 @@
 #include "stdint.h"
 #include <stdbool.h>
 #include <stdarg.h>
-
+#include <typeinfo>
 // TODO
 /*
     - include protection guard for the buffer in case BLE service also accesses it
@@ -33,7 +33,7 @@ class Fifo
     volatile uint8_t _startIdx;	     // start index for the user input
     bool _isFull = false;
     
-    T _buffer[fifoSize];	// TODO - volatile?!
+    T _buffer[fifoSize] = {0};	// TODO - volatile?!
     //uint8_t _buffer[fifoSize];	// TODO - remove -- volatile?!
     
     
@@ -66,6 +66,35 @@ class Fifo
 
 
     //void enque(const T byte);
+
+    void printFifo() const
+    {
+        //NRF_LOG_FLUSH();
+        //NRF_LOG_INFO("Template Type: %s\n", __PRETTY_FUNCTION__);
+        //NRF_LOG_FLUSH();
+
+   //     for (uint8_t idx = 0; idx < fifoSize; idx++)
+   //     {
+	  //NRF_LOG_INFO("%
+   //     }
+    }
+
+    bool isEmpty() const
+    {
+        return _writeIdx == _readIdx;
+    }
+
+    bool isFull() const
+    {
+        return _isFull;
+    }
+
+    uint8_t const getReadIdx() const;
+    void resetStartIdx()
+    {
+        _startIdx = _writeIdx;
+    }
+    
     T deque()
     {
    // TODO --     if (isEmpty())
@@ -89,29 +118,15 @@ class Fifo
         return value;
     }
 
-    bool isEmpty() const
+    void enque(T item)    
     {
-        return _writeIdx == _readIdx;
-    }
+         NRF_LOG_INFO("[ENQUE] Writing at index %u\n", _writeIdx);
+        //NRF_LOG_FLUSH();
 
-    bool isFull() const
-    {
-        return _isFull;
-    }
-
-    uint8_t const getReadIdx() const;
-    void resetStartIdx()
-    {
-        _startIdx = _writeIdx;
-    }
-    
-    void enque(T item)      // TODO - change uint8_t -> 32 bits?
-    {
-        //NRF_LOG_DEBUG("Writing %u at index %u\n", byte, _writeIdx);
         _buffer[_writeIdx++] = item;
         _writeIdx &= mask;
 
-        _isFull = (_writeIdx - _readIdx == fifoSize - 2);  // 0 1 5 6
+        _isFull = (_writeIdx - _readIdx == fifoSize - 2);  
 	  
     }
 
@@ -166,6 +181,19 @@ class Fifo
     uint8_t *getNullTermAddr()
     {
         return &_buffer[fifoSize - 1];
+    }
+
+    T GetFiFoAt(uint8_t idx) const 
+    {
+        return _buffer[idx];
+    }
+
+    uint8_t GetFifoSize() const
+    {
+        //NRF_LOG_INFO("Fifo Write size: %d\n", _writeIdx);
+        //NRF_LOG_FLUSH();
+
+        return _writeIdx;
     }
 };
 #endif

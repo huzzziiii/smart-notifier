@@ -1,7 +1,8 @@
 #include "SystemTask.hpp"
 #include "Observer.hpp"
 #include "Subject.hpp" // TODO ---
-
+//#include "bleApp.hpp"
+//#include "BleUartService.hpp"
 //static uint8_t ringBuffer[8] = {QueueEmpty};		// todo
 
 /* todo -
@@ -32,8 +33,8 @@ SystemTask::SystemTask(Uart &pUart, MCP9808 &tmpSensor, NotificationManager &not
     //advertising_init();
     //conn_params_init();
 
-    //// Start execution.
-    ////printf("\r\nUART started.\r\n");
+    // Start execution.
+    //printf("\r\nUART started.\r\n");
     //NRF_LOG_INFO("Debug logging for UART over RTT started.");
     //advertising_start();
 }
@@ -80,9 +81,11 @@ void SystemTask::mainThread()
         //vTaskDelay(pdMS_TO_TICKS(1000));
     while(true)
     {
-        if (xQueueReceive(systemTaskQueue, &msg, 0) == pdPASS)      // wait for the user input over UART (for now!)
+        if (xQueueReceive(systemTaskQueue, &msg, portMAX_DELAY) == pdPASS)      // wait for the user input over UART (for now!)
         {
-	  curMsg = static_cast<Messages>(msg);		        // TODO - might as well make msg type --> Message
+	  curMsg = static_cast<Messages>(msg);		         // TODO - might as well make msg type --> Message
+	  NRF_LOG_INFO("[SystemTask] -- message received: %d\n", curMsg);
+	  	       
 	  switch(curMsg)
 	  {
 	      case Messages::subscribeTempNotifications:
@@ -102,6 +105,8 @@ void SystemTask::mainThread()
 
 void SystemTask::pushMessage(SystemTask::Messages dataToQueue)
 {
+    NRF_LOG_WARNING("SystemTask::pushMessage()...\n");
+    NRF_LOG_FLUSH();
     BaseType_t xHigherPriorityTaskWoken; // TODO - need?
     xQueueSendFromISR(systemTaskQueue, &dataToQueue, 0);
 

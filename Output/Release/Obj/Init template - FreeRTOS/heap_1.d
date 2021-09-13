@@ -49,6 +49,15 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/heap_1.o: \
  ../../../../../../components/libraries/util/nordic_common.h \
  ../../../../../../components/libraries/util/app_error_weak.h \
  ../../../../../../components/libraries/util/nrf_assert.h \
+ ../../../../../../external/freertos/config/SEGGER_SYSVIEW_FreeRTOS.h \
+ ../../../segger_files/SEGGER/SEGGER_SYSVIEW.h \
+ ../../../segger_files/SEGGER/SEGGER.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdarg.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdarg.h \
+ ../../../segger_files/Config/Global.h \
+ ../../../segger_files/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h \
+ ../../../segger_files/Config/SEGGER_SYSVIEW_Conf.h \
+ ../../../segger_files/Config/SEGGER_RTT_Conf.h \
  ../../../../../../external/freertos/source/include/projdefs.h \
  ../../../../../../external/freertos/source/include/portable.h \
  ../../../../../../external/freertos/source/include/deprecated_definitions.h \

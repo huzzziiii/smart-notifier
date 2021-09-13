@@ -74,6 +74,13 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/uart.o: \
  ../../../../../../components/libraries/log/nrf_log_default_backends.h \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdarg.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdarg.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/typeinfo \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_prolog.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/debug/_debug.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_typeinfo.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/typeinfo \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/exception \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/exception \
  ../../../../../../modules/nrfx/hal/nrf_gpio.h \
  ../../../../../../modules/nrfx/nrfx.h \
  ../../../../../../integration/nrfx/nrfx_config.h \
@@ -100,6 +107,13 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/uart.o: \
  ../../../../../../modules/nrfx/hal/nrf_twi.h \
  ../../../../../../external/freertos/source/include/FreeRTOS.h \
  ../../../../../../external/freertos/config/FreeRTOSConfig.h \
+ ../../../../../../external/freertos/config/SEGGER_SYSVIEW_FreeRTOS.h \
+ ../../../segger_files/SEGGER/SEGGER_SYSVIEW.h \
+ ../../../segger_files/SEGGER/SEGGER.h \
+ ../../../segger_files/Config/Global.h \
+ ../../../segger_files/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h \
+ ../../../segger_files/Config/SEGGER_SYSVIEW_Conf.h \
+ ../../../segger_files/Config/SEGGER_RTT_Conf.h \
  ../../../../../../external/freertos/source/include/projdefs.h \
  ../../../../../../external/freertos/source/include/portable.h \
  ../../../../../../external/freertos/source/include/deprecated_definitions.h \

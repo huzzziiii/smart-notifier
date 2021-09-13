@@ -52,7 +52,7 @@ typedef uint32_t returnCode;
 
 #define APP_BLE_CONN_CFG_TAG            1  
 #define APP_BLE_OBSERVER_PRIO           3    
-#define DEVICE_NAME			"HUZZI_UART"
+#define DEVICE_NAME			"nRF_BLE_SERVICE"
 #define MIN_CONN_INTERVAL               MSEC_TO_UNITS(20, UNIT_1_25_MS)             /**< Minimum acceptable connection interval (20 ms), Connection interval uses 1.25 ms units. */
 #define MAX_CONN_INTERVAL               MSEC_TO_UNITS(75, UNIT_1_25_MS)             /**< Maximum acceptable connection interval (75 ms), Connection interval uses 1.25 ms units. */
 #define SLAVE_LATENCY                   0                                           /**< Slave latency. */
@@ -65,7 +65,7 @@ typedef uint32_t returnCode;
 
 #define UART_TX_BUF_SIZE                256                                         /**< UART TX buffer size. */
 #define UART_RX_BUF_SIZE                256                                         /**< UART RX buffer size. */
-#define BLE_UUID_NUS_SERVICE 0x0001
+#define BLE_UUID_NUS_SERVICE		0x0001
 #define NUS_SERVICE_UUID_TYPE           BLE_UUID_TYPE_VENDOR_BEGIN                  /**< UUID type for the Nordic UART Service (vendor specific). */
 
 #define APP_ADV_INTERVAL                64                                          /**< The advertising interval (in units of 0.625 ms. This value corresponds to 40 ms). */
@@ -175,5 +175,13 @@ class BleUartService
     uint32_t initService(BleUartSrv_t *pService);
     
 };
+
+void ble_stack_init();
+void    gap_params_init();
+void    gatt_init();
+void    services_init();
+void    advertising_init();
+void    conn_params_init();
+void    advertising_start();
 
 #endif

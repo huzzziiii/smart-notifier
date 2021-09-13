@@ -42,29 +42,4 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/ble_dis.o: \
  ../../../../../../components/softdevice/s140/headers/nrf52/nrf_mbr.h \
  ../../../../../../components/softdevice/s140/headers/nrf_svc.h \
  ../../../../../../components/libraries/util/sdk_macros.h \
- ../../../../../../components/libraries/util/nrf_assert.h \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/components/ble/ble_services/ble_dis/ble_dis.h \
- ../../../../../../components/ble/common/ble_srv_common.h \
- ../../../../../../components/softdevice/s140/headers/ble_types.h \
- ../../../../../../components/libraries/util/app_util.h \
- ../../../../../../components/softdevice/s140/headers/ble.h \
- ../../../../../../components/softdevice/s140/headers/nrf_svc.h \
- ../../../../../../components/softdevice/s140/headers/nrf_error.h \
- ../../../../../../components/softdevice/s140/headers/ble_err.h \
- ../../../../../../components/softdevice/s140/headers/ble_gap.h \
- ../../../../../../components/softdevice/s140/headers/ble_hci.h \
- ../../../../../../components/softdevice/s140/headers/ble_ranges.h \
- ../../../../../../components/softdevice/s140/headers/ble_types.h \
- ../../../../../../components/softdevice/s140/headers/ble_l2cap.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
- ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatts.h \
- ../../../../../../components/softdevice/s140/headers/ble_gap.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdlib.h \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdlib.h \
- ../../../../../../components/libraries/util/app_error.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdio.h \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdio.h \
- ../../../../../../components/libraries/util/app_error_weak.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatts.h
+ ../../../../../../components/libraries/util/nrf_assert.h

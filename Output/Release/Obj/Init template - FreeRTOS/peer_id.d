@@ -42,33 +42,4 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/peer_id.o: \
  ../../../../../../components/softdevice/s140/headers/nrf52/nrf_mbr.h \
  ../../../../../../components/softdevice/s140/headers/nrf_svc.h \
  ../../../../../../components/libraries/util/sdk_macros.h \
- ../../../../../../components/libraries/util/nrf_assert.h \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/components/ble/peer_manager/peer_id.h \
- ../../../../../../components/libraries/util/sdk_errors.h \
- ../../../../../../components/softdevice/s140/headers/ble_gap.h \
- ../../../../../../components/softdevice/s140/headers/nrf_svc.h \
- ../../../../../../components/softdevice/s140/headers/nrf_error.h \
- ../../../../../../components/softdevice/s140/headers/ble_hci.h \
- ../../../../../../components/softdevice/s140/headers/ble_ranges.h \
- ../../../../../../components/softdevice/s140/headers/ble_types.h \
- ../../../../../../components/softdevice/s140/headers/ble_err.h \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/components/ble/peer_manager/peer_manager_types.h \
- ../../../../../../components/softdevice/s140/headers/ble_hci.h \
- ../../../../../../components/ble/common/ble_gatt_db.h \
- ../../../../../../components/softdevice/s140/headers/ble.h \
- ../../../../../../components/softdevice/s140/headers/ble_gap.h \
- ../../../../../../components/softdevice/s140/headers/ble_l2cap.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
- ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatts.h \
- ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
- ../../../../../../components/libraries/util/app_util.h \
- ../../../../../../components/libraries/util/app_util_platform.h \
- ../../../../../../components/softdevice/s140/headers/nrf_soc.h \
- ../../../../../../components/softdevice/s140/headers/nrf_error_soc.h \
- ../../../../../../components/softdevice/s140/headers/nrf_nvic.h \
- ../../../../../../components/libraries/util/app_error.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdio.h \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdio.h \
- ../../../../../../components/libraries/util/app_error_weak.h \
- ../../../../../../components/libraries/atomic_flags/nrf_atflags.h
+ ../../../../../../components/libraries/util/nrf_assert.h

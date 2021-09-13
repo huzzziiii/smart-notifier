@@ -95,4 +95,45 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/bleApp.o: \
  ../../../../../../components/softdevice/s140/headers/nrf_soc.h \
  ../../../../../../modules/nrfx/drivers/nrfx_errors.h \
  ../../../../../../components/boards/pca10056.h \
- ../../../../../../components/libraries/button/app_button.h
+ ../../../../../../components/libraries/button/app_button.h \
+ BLE/bleApp.hpp ../../../../../../components/libraries/log/nrf_log.h \
+ ../../../../../../components/libraries/experimental_section_vars/nrf_section.h \
+ ../../../../../../components/libraries/strerror/nrf_strerror.h \
+ ../../../../../../components/libraries/log/src/nrf_log_internal.h \
+ ../../../../../../components/libraries/log/nrf_log_instance.h \
+ ../../../../../../components/libraries/log/nrf_log_types.h \
+ ../../../../../../components/libraries/log/nrf_log_types.h \
+ ../../../../../../components/libraries/log/nrf_log_ctrl.h \
+ ../../../../../../components/libraries/log/src/nrf_log_ctrl_internal.h \
+ ../../../../../../components/libraries/log/nrf_log_backend_interface.h \
+ ../../../../../../components/libraries/memobj/nrf_memobj.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdlib.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdlib.h \
+ ../../../../../../components/libraries/balloc/nrf_balloc.h \
+ ../../../../../../components/libraries/log/nrf_log_default_backends.h \
+ ../../../../../../components/ble/common/ble_conn_params.h \
+ ../../../../../../components/ble/common/ble_srv_common.h \
+ TimerApp/TimerApp.hpp \
+ ../../../../../../external/freertos/source/include/FreeRTOS.h \
+ ../../../../../../external/freertos/config/FreeRTOSConfig.h \
+ ../../../../../../external/freertos/source/include/projdefs.h \
+ ../../../../../../external/freertos/source/include/portable.h \
+ ../../../../../../external/freertos/source/include/deprecated_definitions.h \
+ ../../../../../../external/freertos/portable/GCC/nrf52/portmacro.h \
+ ../../../../../../external/freertos/portable/CMSIS/nrf52/portmacro_cmsis.h \
+ ../../../../../../external/freertos/source/include/mpu_wrappers.h \
+ ../../../../../../external/freertos/source/include/timers.h \
+ ../../../../../../external/freertos/source/include/task.h \
+ ../../../../../../external/freertos/source/include/list.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdarg.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdarg.h \
+ ../../../../../../components/softdevice/common/nrf_sdh.h \
+ ../../../../../../components/libraries/experimental_section_vars/nrf_section_iter.h \
+ ../../../../../../components/libraries/experimental_section_vars/nrf_section.h \
+ ../../../../../../components/softdevice/common/nrf_sdh_ble.h \
+ ../../../../../../components/ble/nrf_ble_gatt/nrf_ble_gatt.h \
+ ../../../../../../components/ble/ble_services/ble_nus/ble_nus.h \
+ ../../../../../../components/ble/ble_link_ctx_manager/ble_link_ctx_manager.h \
+ ../../../../../../components/ble/common/ble_conn_state.h \
+ ../../../../../../components/libraries/atomic/nrf_atomic.h \
+ ../../../../../../components/ble/nrf_ble_qwr/nrf_ble_qwr.h

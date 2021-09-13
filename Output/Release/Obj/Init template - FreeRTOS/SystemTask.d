@@ -50,6 +50,13 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/SystemTask.o: \
  ../../../../../../components/libraries/util/nordic_common.h \
  ../../../../../../components/libraries/util/app_error_weak.h \
  ../../../../../../components/libraries/util/nrf_assert.h \
+ ../../../../../../external/freertos/config/SEGGER_SYSVIEW_FreeRTOS.h \
+ ../../../segger_files/SEGGER/SEGGER_SYSVIEW.h \
+ ../../../segger_files/SEGGER/SEGGER.h \
+ ../../../segger_files/Config/Global.h \
+ ../../../segger_files/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h \
+ ../../../segger_files/Config/SEGGER_SYSVIEW_Conf.h \
+ ../../../segger_files/Config/SEGGER_RTT_Conf.h \
  ../../../../../../external/freertos/source/include/projdefs.h \
  ../../../../../../external/freertos/source/include/portable.h \
  ../../../../../../external/freertos/source/include/deprecated_definitions.h \
@@ -88,6 +95,13 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/SystemTask.o: \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdlib.h \
  ../../../../../../components/libraries/balloc/nrf_balloc.h \
  ../../../../../../components/libraries/log/nrf_log_default_backends.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/typeinfo \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_prolog.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/debug/_debug.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_typeinfo.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/typeinfo \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/exception \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/exception \
  ../../../../../../modules/nrfx/hal/nrf_gpio.h \
  ../../../../../../modules/nrfx/nrfx.h \
  ../../../../../../integration/nrfx/nrfx_config.h \
@@ -118,39 +132,4 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/SystemTask.o: \
  ../../../../../../external/freertos/source/include/timers.h \
  ../../../../../../external/freertos/source/include/semphr.h \
  ../../../../../../external/freertos/source/include/queue.h \
- CustomBleServices/BleUartService.hpp \
- ../../../../../../components/ble/ble_services/ble_nus/ble_nus.h \
- ../../../../../../components/softdevice/s140/headers/ble.h \
- ../../../../../../components/softdevice/s140/headers/ble_err.h \
- ../../../../../../components/softdevice/s140/headers/ble_gap.h \
- ../../../../../../components/softdevice/s140/headers/ble_hci.h \
- ../../../../../../components/softdevice/s140/headers/ble_ranges.h \
- ../../../../../../components/softdevice/s140/headers/ble_types.h \
- ../../../../../../components/softdevice/s140/headers/ble_l2cap.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
- ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatts.h \
- ../../../../../../components/ble/common/ble_srv_common.h \
- ../../../../../../components/softdevice/s140/headers/ble_types.h \
- ../../../../../../components/softdevice/s140/headers/ble_gap.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
- ../../../../../../components/softdevice/common/nrf_sdh_ble.h \
- ../../../../../../components/libraries/experimental_section_vars/nrf_section_iter.h \
- ../../../../../../components/libraries/experimental_section_vars/nrf_section.h \
- ../../../../../../components/ble/ble_link_ctx_manager/ble_link_ctx_manager.h \
- ../../../../../../components/ble/common/ble_conn_state.h \
- ../../../../../../components/libraries/atomic/nrf_atomic.h \
- ../../../../../../components/libraries/bsp/bsp.h \
- ../../../../../../components/boards/boards.h \
- ../../../../../../components/boards/pca10056.h \
- ../../../../../../components/libraries/button/app_button.h \
- ../../../../../../components/libraries/util/app_error.h \
- ../../../../../../components/softdevice/common/nrf_sdh.h \
- ../../../../../../components/ble/nrf_ble_gatt/nrf_ble_gatt.h \
- ../../../../../../components/ble/common/ble_advdata.h \
- ../../../../../../components/ble/ble_advertising/ble_advertising.h \
- ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
- ../../../../../../components/ble/common/ble_conn_params.h \
- ../../../../../../components/ble/common/ble_srv_common.h \
- ../../../../../../components/ble/nrf_ble_qwr/nrf_ble_qwr.h \
  NotificationManager/NotificationManager.hpp ObserverPattern/Observer.hpp

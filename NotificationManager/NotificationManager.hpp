@@ -21,7 +21,7 @@ enum class Category
 struct Notification
 {
     uint8_t idx = 0;
-    char msg[40];
+    char msg[50];
     Category category;
 };
 
@@ -36,15 +36,17 @@ class NotificationManager : public Observer
 
     public:
     //NotificationManager(MCP9808 &tmpSensor);
-
+    
+    // constructor
     template<typename ...Args>
     NotificationManager(Args ...args)
     {
         ((subscriptions[subscriptionIdx] = args), ...);
         subscriptions[subscriptionIdx++]->attach(this);
     }
-  
-    void push();
+    
+    void printNotificationList();
+    void pushNotification();
     void update(Subject *subject);
     Notification const &getPrev(Notification &notification);
 

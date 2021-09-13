@@ -75,10 +75,24 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/uart_app.o: \
  Fifo/Inc/fifo.hpp \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdarg.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdarg.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/typeinfo \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_prolog.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/debug/_debug.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_typeinfo.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/typeinfo \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/exception \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/exception \
  SystemTask/SystemTask.hpp \
  ../../../../../../external/freertos/source/include/FreeRTOS.h \
  ../../../../../../external/freertos/config/FreeRTOSConfig.h \
  ../../../../../../components/libraries/util/nrf_assert.h \
+ ../../../../../../external/freertos/config/SEGGER_SYSVIEW_FreeRTOS.h \
+ ../../../segger_files/SEGGER/SEGGER_SYSVIEW.h \
+ ../../../segger_files/SEGGER/SEGGER.h \
+ ../../../segger_files/Config/Global.h \
+ ../../../segger_files/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h \
+ ../../../segger_files/Config/SEGGER_SYSVIEW_Conf.h \
+ ../../../segger_files/Config/SEGGER_RTT_Conf.h \
  ../../../../../../external/freertos/source/include/projdefs.h \
  ../../../../../../external/freertos/source/include/portable.h \
  ../../../../../../external/freertos/source/include/deprecated_definitions.h \
@@ -120,6 +134,7 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/uart_app.o: \
  ../../../../../../external/freertos/source/include/timers.h \
  ../../../../../../external/freertos/source/include/semphr.h \
  ../../../../../../external/freertos/source/include/queue.h \
+ NotificationManager/NotificationManager.hpp ObserverPattern/Observer.hpp \
  CustomBleServices/BleUartService.hpp \
  ../../../../../../components/ble/ble_services/ble_nus/ble_nus.h \
  ../../../../../../components/softdevice/s140/headers/ble.h \
@@ -154,5 +169,4 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/uart_app.o: \
  ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
  ../../../../../../components/ble/common/ble_conn_params.h \
  ../../../../../../components/ble/common/ble_srv_common.h \
- ../../../../../../components/ble/nrf_ble_qwr/nrf_ble_qwr.h \
- NotificationManager/NotificationManager.hpp ObserverPattern/Observer.hpp
+ ../../../../../../components/ble/nrf_ble_qwr/nrf_ble_qwr.h

@@ -7,6 +7,7 @@
 #include "Subject.hpp"
 #include "TimerApp.hpp"
 #include "semphr.h"
+#include "nrf_log.h"
 #include <queue.h>
 
 #define MCP9808_ADDR	      0x18

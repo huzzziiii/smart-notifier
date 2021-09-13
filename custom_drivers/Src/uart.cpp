@@ -22,6 +22,8 @@ void Uart::irqHandler()
     bool isEventMaskErrorSet	   = getNrfEventStatus(NRF_UART_EVENT_ERROR);
 
     // TODO - fill TX...
+    NRF_LOG_WARNING("............----IRQ()----.............\n");
+    NRF_LOG_FLUSH();
 
     if (isRxdRdyIrqSet && isRxdRdyEvntSet)
     {
@@ -38,7 +40,7 @@ void Uart::irqHandler()
         if (data == '\r')					// if end of data...
         {
 	  newInput = true;
-	  uartCallback(fifoRx, systemTaskQueue);	          // invoke callback
+	  uartCallback(fifoRx, systemTaskQueue);	          // invoke a callback to unblock the system task for processing the data
         }
     }
     else if (isIrqMaskErrorSet && isEventMaskErrorSet)

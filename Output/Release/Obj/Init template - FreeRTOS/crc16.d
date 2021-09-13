@@ -42,7 +42,4 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/crc16.o: \
  ../../../../../../components/softdevice/s140/headers/nrf52/nrf_mbr.h \
  ../../../../../../components/softdevice/s140/headers/nrf_svc.h \
  ../../../../../../components/libraries/util/sdk_macros.h \
- ../../../../../../components/libraries/util/nrf_assert.h \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/components/libraries/crc16/crc16.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdlib.h \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdlib.h
+ ../../../../../../components/libraries/util/nrf_assert.h

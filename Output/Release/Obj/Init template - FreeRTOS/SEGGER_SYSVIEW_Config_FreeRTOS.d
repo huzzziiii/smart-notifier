@@ -1,5 +1,5 @@
 Output/Release/Obj/Init\ template\ -\ FreeRTOS/SEGGER_SYSVIEW_Config_FreeRTOS.o: \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/SystemView/SEGGER_SYSVIEW_Config_FreeRTOS.c \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/segger_files/SEGGER_SYSVIEW_Config_FreeRTOS.c \
  ../../../../../../external/freertos/source/include/FreeRTOS.h \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stddef.h \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_cprolog.h \
@@ -47,14 +47,15 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/SEGGER_SYSVIEW_Config_FreeRTOS.o:
  ../../../../../../components/libraries/util/nordic_common.h \
  ../../../../../../components/libraries/util/app_error_weak.h \
  ../../../../../../components/libraries/util/nrf_assert.h \
- SeggerFiles/Sample/FreeRTOSV10/SEGGER_SYSVIEW_FreeRTOS.h \
- SeggerFiles/SEGGER/SEGGER_SYSVIEW.h SeggerFiles/SEGGER/SEGGER.h \
+ ../../../../../../external/freertos/config/SEGGER_SYSVIEW_FreeRTOS.h \
+ ../../../segger_files/SEGGER/SEGGER_SYSVIEW.h \
+ ../../../segger_files/SEGGER/SEGGER.h \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdarg.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdarg.h \
- SeggerFiles/Config/Global.h \
- SeggerFiles/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h \
- SeggerFiles/Config/SEGGER_SYSVIEW_Conf.h \
- SeggerFiles/Config/SEGGER_RTT_Conf.h \
+ ../../../segger_files/Config/Global.h \
+ ../../../segger_files/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h \
+ ../../../segger_files/Config/SEGGER_SYSVIEW_Conf.h \
+ ../../../segger_files/Config/SEGGER_RTT_Conf.h \
  ../../../../../../external/freertos/source/include/projdefs.h \
  ../../../../../../external/freertos/source/include/portable.h \
  ../../../../../../external/freertos/source/include/deprecated_definitions.h \
@@ -63,5 +64,4 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/SEGGER_SYSVIEW_Config_FreeRTOS.o:
  ../../../../../../components/libraries/util/app_util.h \
  ../../../../../../components/softdevice/s140/headers/nrf52/nrf_mbr.h \
  ../../../../../../components/softdevice/s140/headers/nrf_svc.h \
- ../../../../../../external/freertos/source/include/mpu_wrappers.h \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/SystemView/SEGGER_SYSVIEW.h
+ ../../../../../../external/freertos/source/include/mpu_wrappers.h

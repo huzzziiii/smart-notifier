@@ -42,7 +42,4 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/pm_buffer.o: \
  ../../../../../../components/softdevice/s140/headers/nrf52/nrf_mbr.h \
  ../../../../../../components/softdevice/s140/headers/nrf_svc.h \
  ../../../../../../components/libraries/util/sdk_macros.h \
- ../../../../../../components/libraries/util/nrf_assert.h \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/components/ble/peer_manager/pm_buffer.h \
- ../../../../../../components/libraries/util/sdk_errors.h \
- ../../../../../../components/libraries/atomic_flags/nrf_atflags.h
+ ../../../../../../components/libraries/util/nrf_assert.h

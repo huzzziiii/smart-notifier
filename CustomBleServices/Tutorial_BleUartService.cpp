@@ -28,7 +28,7 @@ uint32_t ble_cus_init(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
 
     // Add the Custom Service
     err_code = sd_ble_gatts_service_add(BLE_GATTS_SRVC_TYPE_PRIMARY, &ble_uuid, &p_cus->service_handle);
-    
+    VERIFY_SUCCESS(err_code);
     return err_code;
  }
 

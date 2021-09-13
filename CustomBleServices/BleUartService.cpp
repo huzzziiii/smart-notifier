@@ -15,6 +15,15 @@
 
 static constexpr uint8_t bleUuidUartService = 0x0001;
 
+/**@defgroup BLE_GAP_PHYS GAP PHYs
+ * @{ */
+#define BLE_GAP_PHY_AUTO                         0x00    /**< Automatic PHY selection. Refer @ref sd_ble_gap_phy_update for more information.*/
+#define BLE_GAP_PHY_1MBPS                        0x01    /**< 1 Mbps PHY. */
+#define BLE_GAP_PHY_2MBPS                        0x02    /**< 2 Mbps PHY. */
+#define BLE_GAP_PHY_CODED                        0x04    /**< Coded PHY. */
+#define BLE_GAP_PHY_NOT_SET                      0xFF    /**< PHY is not configured. */
+
+
 ///**@brief Function for handling the @ref BLE_GAP_EVT_CONNECTED event from the SoftDevice.
 // *
 // * @param[in] p_nus     Nordic UART Service structure.
@@ -200,12 +209,63 @@ static constexpr uint8_t bleUuidUartService = 0x0001;
 //    //}
 //}
 
+NRF_BLE_QWR_DEF(m_qwr); 
 static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 {
+    ret_code_t err_code = NRF_SUCCESS;
 
+    switch (p_ble_evt->header.evt_id)
+    {
+        case BLE_GAP_EVT_DISCONNECTED:
+            NRF_LOG_INFO("Disconnected.");
+            // LED indication will be changed when advertising starts.
+            break;
+
+        case BLE_GAP_EVT_CONNECTED:
+            NRF_LOG_INFO("Connected.");
+            err_code = bsp_indication_set(BSP_INDICATE_CONNECTED);
+            APP_ERROR_CHECK(err_code);
+            m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
+            err_code = nrf_ble_qwr_conn_handle_assign(&m_qwr, m_conn_handle);
+            APP_ERROR_CHECK(err_code);
+            break;
+
+        case BLE_GAP_EVT_PHY_UPDATE_REQUEST:
+        {
+            NRF_LOG_DEBUG("PHY update request.");
+            ble_gap_phys_t phys =
+            {
+                .tx_phys = BLE_GAP_PHY_AUTO,
+	      .rx_phys = BLE_GAP_PHY_AUTO
+                
+            };
+            err_code = sd_ble_gap_phy_update(p_ble_evt->evt.gap_evt.conn_handle, &phys);
+            APP_ERROR_CHECK(err_code);
+        } break;
+
+        case BLE_GATTC_EVT_TIMEOUT:
+            // Disconnect on GATT Client timeout event.
+            NRF_LOG_DEBUG("GATT Client Timeout.");
+            err_code = sd_ble_gap_disconnect(p_ble_evt->evt.gattc_evt.conn_handle,
+                                             BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
+            APP_ERROR_CHECK(err_code);
+            break;
+
+        case BLE_GATTS_EVT_TIMEOUT:
+            // Disconnect on GATT Server timeout event.
+            NRF_LOG_DEBUG("GATT Server Timeout.");
+            err_code = sd_ble_gap_disconnect(p_ble_evt->evt.gatts_evt.conn_handle,
+                                             BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
+            APP_ERROR_CHECK(err_code);
+            break;
+
+        default:
+            // No implementation needed.
+            break;
+    }
 }
 
-void ble_stack_init(void)
+void ble_stack_init()
 {
     ret_code_t err_code;
 
@@ -221,9 +281,8 @@ void ble_stack_init(void)
     // Enable BLE stack.
     err_code = nrf_sdh_ble_enable(&ram_start);
     APP_ERROR_CHECK(err_code);
-
-    // Register a handler for BLE events.
-    NRF_SDH_BLE_OBSERVER(m_ble_observer, APP_BLE_OBSERVER_PRIO, ble_evt_handler, NULL);
+    
+    NRF_SDH_BLE_OBSERVER(m_ble_observer, APP_BLE_OBSERVER_PRIO, ble_evt_handler, NULL);  // Register a handler for BLE events.
 }
 
 void gap_params_init(void)
@@ -308,7 +367,7 @@ void advertising_init(void)
     init.advdata.name_type          = BLE_ADVDATA_FULL_NAME;
     //init.advdata.name_type          = BLE_ADVDATA_SHORT_NAME;
     //init.advdata.short_name_len     = 6;
-    init.advdata.include_appearance = false;
+    init.advdata.include_appearance = true;
     init.advdata.flags              = BLE_GAP_ADV_FLAGS_LE_ONLY_LIMITED_DISC_MODE;
 
     init.srdata.uuids_complete.uuid_cnt = sizeof(m_adv_uuids) / sizeof(m_adv_uuids[0]);
@@ -409,7 +468,7 @@ void advertising_start(void)
     APP_ERROR_CHECK(err_code);
 }
 
-NRF_BLE_QWR_DEF(m_qwr); 
+//NRF_BLE_QWR_DEF(m_qwr); 
 BLE_NUS_DEF(m_nus, NRF_SDH_BLE_TOTAL_LINK_COUNT);  
 void services_init(void)
 {
@@ -432,7 +491,7 @@ void services_init(void)
 
 
 
-// TODO -------
+// TODO --------------------------------------------------------------------------
 
 BleUartService::BleUartService(BleUartSrv_t *pService) 				      
 {
