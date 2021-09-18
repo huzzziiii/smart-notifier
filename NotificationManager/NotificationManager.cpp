@@ -49,7 +49,7 @@ void NotificationManager::update(Subject *subject)
     int h;
 
     NRF_LOG_WARNING("[NotificationManager::update] -- %d\n", subject == subscriptions[0]);  // TODO remove
-    NRF_LOG_FLUSH();
+    //NRF_LOG_FLUSH();
 
     if (subject == subscriptions[0])	    // tmpSensor
     {

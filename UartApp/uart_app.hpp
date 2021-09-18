@@ -13,7 +13,7 @@
 #include "BleUartService.hpp"
 
 void uartCallback(Fifo<uint8_t> &pFifo, QueueHandle_t &systemTaskQueue);
-void bleUartHandler(BleUartEvent_t *pEventType);
+//void bleUartHandler(BleUartEvent_t *pEventType);
 
 
 #endif

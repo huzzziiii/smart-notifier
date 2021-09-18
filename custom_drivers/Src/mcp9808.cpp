@@ -104,7 +104,9 @@ void MCP9808::mainThread()
 {
     xferData(tmpBuffer, 1);  
     vTaskDelay(pdMS_TO_TICKS(2000));
-
+    
+    //vTaskDelay(pdMS_TO_TICKS(2000000));
+    //while(1);
     while(true)
     {   
         uint32_t xaf = read();

@@ -135,38 +135,4 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/uart_app.o: \
  ../../../../../../external/freertos/source/include/semphr.h \
  ../../../../../../external/freertos/source/include/queue.h \
  NotificationManager/NotificationManager.hpp ObserverPattern/Observer.hpp \
- CustomBleServices/BleUartService.hpp \
- ../../../../../../components/ble/ble_services/ble_nus/ble_nus.h \
- ../../../../../../components/softdevice/s140/headers/ble.h \
- ../../../../../../components/softdevice/s140/headers/ble_err.h \
- ../../../../../../components/softdevice/s140/headers/ble_gap.h \
- ../../../../../../components/softdevice/s140/headers/ble_hci.h \
- ../../../../../../components/softdevice/s140/headers/ble_ranges.h \
- ../../../../../../components/softdevice/s140/headers/ble_types.h \
- ../../../../../../components/softdevice/s140/headers/ble_l2cap.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
- ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatts.h \
- ../../../../../../components/ble/common/ble_srv_common.h \
- ../../../../../../components/softdevice/s140/headers/ble_types.h \
- ../../../../../../components/softdevice/s140/headers/ble_gap.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
- ../../../../../../components/softdevice/common/nrf_sdh_ble.h \
- ../../../../../../components/libraries/experimental_section_vars/nrf_section_iter.h \
- ../../../../../../components/libraries/experimental_section_vars/nrf_section.h \
- ../../../../../../components/ble/ble_link_ctx_manager/ble_link_ctx_manager.h \
- ../../../../../../components/ble/common/ble_conn_state.h \
- ../../../../../../components/libraries/atomic/nrf_atomic.h \
- ../../../../../../components/libraries/bsp/bsp.h \
- ../../../../../../components/boards/boards.h \
- ../../../../../../components/boards/pca10056.h \
- ../../../../../../components/libraries/button/app_button.h \
- ../../../../../../components/libraries/util/app_error.h \
- ../../../../../../components/softdevice/common/nrf_sdh.h \
- ../../../../../../components/ble/nrf_ble_gatt/nrf_ble_gatt.h \
- ../../../../../../components/ble/common/ble_advdata.h \
- ../../../../../../components/ble/ble_advertising/ble_advertising.h \
- ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
- ../../../../../../components/ble/common/ble_conn_params.h \
- ../../../../../../components/ble/common/ble_srv_common.h \
- ../../../../../../components/ble/nrf_ble_qwr/nrf_ble_qwr.h
+ CustomBleServices/BleUartService.hpp

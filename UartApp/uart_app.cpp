@@ -67,14 +67,14 @@ void uartCallback(Fifo<uint8_t> &pFifo, QueueHandle_t &systemQueue)
 }
 
 // TODO ....
-void bleUartHandler(BleUartEvent_t *pEventType)
-{
-    for (uint32_t i = 0; i < pEventType->params.rxData.length; i++)
-    {
-        int m = 0;
-        m++;
-        // send to UART buffer
+//void bleUartHandler(BleUartEvent_t *pEventType)
+//{
+//    for (uint32_t i = 0; i < pEventType->params.rxData.length; i++)
+//    {
+//        int m = 0;
+//        m++;
+//        // send to UART buffer
 
 
-    }
-}
+//    }
+//}
