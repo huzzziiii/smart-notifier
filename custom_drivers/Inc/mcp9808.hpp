@@ -14,6 +14,8 @@
 #define TWI_INSTANCE_ID	      0
 #define BYTES_PER_TRANSACTION	      2
 
+#define DELAY_PER_READ	      3000 // milliseconds
+
 typedef enum 
 {
     TWI_SCLK		    =          27,
@@ -73,7 +75,8 @@ class MCP9808 : public Subject
     float readTempInF();	      // TODO
     uint32_t read();
     uint16_t getCurrentTempInC() const;
-
+    
+    void onSubscriberChange(bool resumeThread) override;
 
     TaskHandle_t taskHandle = NULL;
     SemaphoreHandle_t signal;

@@ -20,16 +20,22 @@ class Subject
 
     //Subject *nextSubscription = nullptr;
     //Observer *firstSubscription = nullptr;
-    Observer *notificationSubscriber = nullptr;
+    Observer *_notificationSubscriber = nullptr;
+    
+    virtual void onSubscriberChange(bool resumeThread) {}
 
     public:
     virtual ~Subject() = default;
          
-    Observer *observerList[observerMaxSize];  // TODO - really need an array just to store a ref to Notification class?
+    Observer *observerList[observerMaxSize];  // TODO - really need an array just to store a ref to Notification class????!!
     void attach(Observer *obs);
-    void detach();
+    void detach(Observer *observerToDetach);
     void notify(Subject*);
+
     void setSubscriptionHead(Subject *head);
+    bool ObserverSubscribed() const;
+
+    //int GetObserverIdx(Observer *obs) const;
 };
 
 #endif

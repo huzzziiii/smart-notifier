@@ -22,7 +22,7 @@ void NotificationManager::unsubscribe(Subject *subscription)
     {
         if (subscriptions[idx] == subscription)
         {
-	  subscriptions[idx]->detach();
+	  subscriptions[idx]->detach(this);
 	  return;
         }
     }
@@ -50,7 +50,8 @@ void NotificationManager::update(Subject *subject)
 
     NRF_LOG_WARNING("[NotificationManager::update] -- %d\n", subject == subscriptions[0]);  // TODO remove
     //NRF_LOG_FLUSH();
-
+    
+   
     if (subject == subscriptions[0])	    // tmpSensor
     {
         MCP9808 *mcp9808 = dynamic_cast<MCP9808*>(subject);

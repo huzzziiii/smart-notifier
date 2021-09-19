@@ -9,14 +9,13 @@
 #include <stdbool.h>
 #include <stdarg.h>
 
-Subject subject;
+Subject subject; // TODO needed??
+    
 
 class Observer 
 {
     virtual ~Observer() = default;
     virtual void update(Subject&) = 0;
-
-    
 
 };
 

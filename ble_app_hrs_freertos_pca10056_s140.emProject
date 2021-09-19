@@ -306,6 +306,8 @@
     <folder Name="CustomBLE">
       <file file_name="CustomBLE/ble_common.c" />
       <file file_name="CustomBLE/ble_common.h" />
+      <file file_name="ble_cust_service.cpp" />
+      <file file_name="ble_cust_service.h" />
     </folder>
   </project>
 </solution>

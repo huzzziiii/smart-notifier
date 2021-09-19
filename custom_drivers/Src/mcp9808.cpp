@@ -27,6 +27,7 @@ void MCP9808::readTempInC()			  // TODO - get value in float!
     {
         _tempInC = upperByte << 4 | lowerByte >> 4;
     } 
+
     NRF_LOG_INFO("_tempInC: %u\n", _tempInC);
     //NRF_LOG_FLUSH();
     int m = 0; // TODO remove
@@ -47,7 +48,7 @@ void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)
             {
 	      vTaskNotifyGiveFromISR(obj->taskHandle, &xHigherPriorityTaskWoken); // unlocks the receiver thread by giving a semaphore (ncrementing ulNotifiedValue by 1)
 	      //obj->readTempInC();	 // TODO - do the parsing in the task! (parsing the data now that the transfer has been completed
-	       m_xfer_done = true; 
+	       m_xfer_done = true; // TODO -- comment out! 
             }
 	  else if (p_event->xfer_desc.type == NRF_DRV_TWI_XFER_TX)
 	  {
@@ -63,7 +64,7 @@ void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)
 
 uint8_t tmpBuffer[10]; // TODO - remv
 
- MCP9808::MCP9808() 
+ MCP9808::MCP9808() : _tempInC(-1)
 {
     i2cConfig = {
        .scl                = TWI_SCLK,
@@ -105,8 +106,6 @@ void MCP9808::mainThread()
     xferData(tmpBuffer, 1);  
     vTaskDelay(pdMS_TO_TICKS(2000));
     
-    //vTaskDelay(pdMS_TO_TICKS(2000000));
-    //while(1);
     while(true)
     {   
         uint32_t xaf = read();
@@ -131,7 +130,7 @@ void MCP9808::mainThread()
         //m++;
         notify(this);
   
-        vTaskDelay(pdMS_TO_TICKS(3000));
+        vTaskDelay(pdMS_TO_TICKS(DELAY_PER_READ));
         
     }
 }
@@ -164,8 +163,6 @@ uint32_t MCP9808::read()
     //NRF_LOG_FLUSH();
     
     //while(!m_xfer_done);
-
-    //notify(this);	            // update the subscriber of the current value 
     return err_code;	 // TODO - change to pascalCase         
 }
 
@@ -173,4 +170,19 @@ uint32_t MCP9808::read()
 uint16_t MCP9808::getCurrentTempInC() const
 {
     return _tempInC;
+}
+
+void MCP9808::onSubscriberChange(bool resumeThread)
+{
+    if (resumeThread)
+    {
+        if (_tempInC != -1)
+        {
+	  vTaskResume(taskHandle);
+        }
+    }
+    else
+    {
+        vTaskSuspend(taskHandle);
+    }
 }

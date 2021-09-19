@@ -23,7 +23,7 @@ void Uart::irqHandler()
 
     // TODO - fill TX...
     NRF_LOG_WARNING("............----IRQ()----.............\n");
-    NRF_LOG_FLUSH();
+    //NRF_LOG_FLUSH();
 
     if (isRxdRdyIrqSet && isRxdRdyEvntSet)
     {
