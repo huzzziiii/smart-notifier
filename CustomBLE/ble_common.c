@@ -2,7 +2,7 @@
 
 #define APP_BLE_CONN_CFG_TAG            1                                           /**< A tag identifying the SoftDevice BLE configuration. */
 
-#define DEVICE_NAME                     "Luz-Nordic_UART"                               /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                     "Xypher-Nordic_UART"                               /**< Name of device. Will be included in the advertising data. */
 #define NUS_SERVICE_UUID_TYPE           BLE_UUID_TYPE_VENDOR_BEGIN                  /**< UUID type for the Nordic UART Service (vendor specific). */
 
 #define APP_BLE_OBSERVER_PRIO           3                                           /**< Application's BLE observer priority. You shouldn't need to modify this value. */
@@ -42,108 +42,155 @@ static ble_uuid_t m_adv_uuids[]          =                                      
     {BLE_UUID_NUS_SERVICE, NUS_SERVICE_UUID_TYPE}
 };
 
-
-int32_t add_custom_chars(ble_cus_t *p_cus, const ble_cus_init_t *p_cus_init)
+static ble_uuid_t m_adv_uuids_cust[]          =                                          /**< Universally unique service identifier. */
 {
-    ble_gatts_char_md_t char_md;
-    ble_gatts_attr_t    attr_char_value;
-    ble_gatts_attr_md_t attr_md;
-    ble_uuid_t          ble_uuid;
+    {CUSTOM_SERVICE_UUID, BLE_UUID_TYPE_VENDOR_BEGIN}
+};
 
-    memset(&char_md, 0, sizeof(char_md));
-   
-    char_md.char_props.read = 1;
-    char_md.char_props.write  = 1;
-    char_md.char_props.notify = 0; 
-    char_md.p_char_user_desc  = NULL;
-    char_md.p_char_pf         = NULL;
-    char_md.p_user_desc_md    = NULL;
-    char_md.p_cccd_md         = NULL; 
-    char_md.p_sccd_md         = NULL;
-        
-    //set_security_req(p_char_props->read_access, &attr_md.read_perm);
-    //set_security_req(p_char_props->write_access, & attr_md.write_perm);
 
-    attr_md.read_perm = p_cus_init->custom_value_char_attr_md.read_perm;
-    attr_md.write_perm = p_cus_init->custom_value_char_attr_md.write_perm;
-
-    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&attr_md.read_perm);
-    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&attr_md.write_perm);
-
-    attr_md.vloc       = BLE_GATTS_VLOC_STACK;
-    attr_md.rd_auth    = 0;
-    attr_md.wr_auth    = 0;
-    attr_md.vlen       = 0;
-   
-    memset(&attr_char_value, 0, sizeof(attr_char_value));
-    
-    ble_uuid.type = p_cus->uuid_type;
-    ble_uuid.uuid = CUSTOM_VALUE_CHAR_UUID;
-
-    attr_char_value.p_uuid = &ble_uuid;
-    attr_char_value.p_attr_md = &attr_md;
-    attr_char_value.init_len  = sizeof(uint8_t);
-    attr_char_value.init_offs = 0;
-    attr_char_value.max_len   = sizeof(uint8_t);
-
-    uint32_t err_code = sd_ble_gatts_characteristic_add(p_cus->service_handle, &char_md, &attr_char_value, &p_cus->custom_value_handles);
-    APP_ERROR_CHECK(err_code);
-
-    return err_code;
+static void nrf_qwr_error_handler(uint32_t nrf_error)
+{
+    APP_ERROR_HANDLER(nrf_error);
 }
 
-//uint32_t ble_cus_init(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
-//{
-//    //if (p_cus == NULL || p_cus_init == NULL)
-//    //{
-//    //    return NRF_ERROR_NULL;
-//    //}
+BLE_CUS_DEF(m_cust);    // invokes ble_cus_on_ble_evt
+#define BLE_CUS_DEF(_name)                                                                          \
+static ble_cus_t _name;                                                                             \
+NRF_SDH_BLE_OBSERVER(_name ## _obs,                                                                 \
+                     BLE_HRS_BLE_OBSERVER_PRIO,                                                     \
+                     ble_cus_on_ble_evt, &_name)
 
-//    uint32_t   err_code;
-//    ble_uuid_t ble_uuid;
 
-//    p_cus->conn_handle               = BLE_CONN_HANDLE_INVALID;
 
-//    // Add Custom Service UUID
-//    //ble_uuid128_t base_uuid = {CUSTOM_SERVICE_UUID_BASE};
-//    //err_code =  sd_ble_uuid_vs_add(&base_uuid, &p_cus->uuid_type);
-//    //VERIFY_SUCCESS(err_code);
+/**@brief Function for handling the Connect event.
+ *
+ * @param[in]   p_cus       Custom Service structure.
+ * @param[in]   p_ble_evt   Event received from the BLE stack.
+ */
+static void on_connect(BleCust *p_cus, ble_evt_t const * p_ble_evt)
+{
+    ret_code_t err_code = nrf_ble_qwr_conn_handle_assign(&m_qwr, m_conn_handle);
+    APP_ERROR_CHECK(err_code);
+    p_cus->connectionHandle = p_ble_evt->evt.gap_evt.conn_handle;
+}
 
-//    //ble_uuid.type = p_cus->uuid_type;
-//    //ble_uuid.uuid = CUSTOM_SERVICE_UUID;
+/**@brief Function for handling the Disconnect event.
+ *
+ * @param[in]   p_cus       Custom Service structure.
+ * @param[in]   p_ble_evt   Event received from the BLE stack.
+ */
+static void on_disconnect(BleCust *p_cus, ble_evt_t const * p_ble_evt)
+{
+    UNUSED_PARAMETER(p_ble_evt);
+    p_cus->connectionHandle = BLE_CONN_HANDLE_INVALID;
+}
 
-//    //// Add the Custom Service to BLE stack
-//    //err_code = sd_ble_gatts_service_add(BLE_GATTS_SRVC_TYPE_PRIMARY, &ble_uuid, &p_cus->service_handle);
+void CustomDataHndlr(BleCustEvent *bleCustEvent)
+{   
+    uint8_t rxdBytes[100] = {0};
+
+    for (uint8_t idx = 0; idx < bleCustEvent->rxData.receivedBytes; idx++)
+    {
+        rxdBytes[idx] = bleCustEvent->rxData.rxBuffer[idx];
+    }
+        
+    uint8_t const *rxData = bleCustEvent->rxData.rxBuffer;
+    char const val = (char ) *rxData;
+    int a;
+    a++;
+
+}
+
+/**@brief Function for handling the Write event.
+ *
+ * @param[in]   pCust       Custom Service structure.
+ * @param[in]   p_ble_evt   Event received from the BLE stack.
+ */
+static void on_write(BleCust *pCust, ble_evt_t const * p_ble_evt)
+{
+    BleCustEvent bleCustEvent = {0};
+    bleCustEvent.pCust = pCust;
+
+    ble_gatts_evt_write_t const *p_evt_write = &p_ble_evt->evt.gatts_evt.params.write;
     
-//    VERIFY_SUCCESS(err_code);
+    //int len = p_ble_evt->params.rx_data.length;  // p_evt->params.rx_data.length
+ 
+    // Check if the handle passed with the event matches the Custom Value Characteristic handle.
+    if (p_evt_write->handle == pCust->customValueHandle.value_handle)
+    {
+        bleCustEvent.eventType = bleCusEvtRxData;
+        bleCustEvent.rxData.rxBuffer = p_evt_write->data;
+        bleCustEvent.rxData.receivedBytes = p_evt_write->len;
+        
+        nrf_gpio_pin_toggle(LED_4);  // TODO - do useful stuff!
 
-//    // -----------
-//    // ble_add_char_params_t add_char_params;
+        if (pCust->DataHandler)
+        {
+	  pCust->DataHandler(&bleCustEvent);
+        }
+    }
+}
 
-//    //// Add the RX Characteristic.
-//    //memset(&add_char_params, 0, sizeof(add_char_params));
-//    //add_char_params.uuid                     = BLE_UUID_NUS_RX_CHARACTERISTIC;
-//    //add_char_params.uuid_type                = p_nus->uuid_type;
-//    //add_char_params.max_len                  = BLE_NUS_MAX_RX_CHAR_LEN;
-//    //add_char_params.init_len                 = sizeof(uint8_t);
-//    //add_char_params.is_var_len               = true;
-//    //add_char_params.char_props.write         = 1;
-//    //add_char_params.char_props.write_wo_resp = 1;
 
-//    //add_char_params.read_access  = SEC_OPEN;
-//    //add_char_params.write_access = SEC_OPEN;
+/**@brief Function for handling the Application's BLE Stack events.
+ *
+ * @details Handles all events from the BLE stack of interest to the Battery Service.
+ *
+ * @note 
+ *
+ * @param[in]   p_ble_evt  Event received from the BLE stack.
+ * @param[in]   p_context  Custom Service structure.
+ */
+void ble_cus_on_ble_evt( ble_evt_t const * p_ble_evt, void * p_context)
+{
+    BleCust * p_cus = (BleCust *) p_context;
+    
+    if (p_cus == NULL || p_ble_evt == NULL)
+    {
+        return;
+    }
 
-//    //err_code = characteristic_add(p_nus->service_handle, &add_char_params, &p_nus->rx_handles);
+    switch (p_ble_evt->header.evt_id)
+    {
+        case BLE_GAP_EVT_CONNECTED:
+	  on_connect(p_cus, p_ble_evt);
+            break;
 
-//    // -------------
-//    err_code = add_custom_chars(p_cus, p_cus_init);
-//    VERIFY_SUCCESS(err_code);
-//    //if (err_code != NRF_SUCCESS)
-//    //{
-//    //    NRF_LOG_INFO("Adding custom char failed!\n");
-//    //}
-//    return err_code;
-// }
+        case BLE_GAP_EVT_DISCONNECTED:
+	  on_disconnect(p_cus, p_ble_evt);
+            break;
+        
+        case BLE_GATTS_EVT_WRITE:
+	  on_write(p_cus, p_ble_evt);
+	  break;
+
+        default:
+            // No implementation needed.
+            break;
+    }
+}
+
+void cust_services_init()
+{
+    ret_code_t         err_code;
+    nrf_ble_qwr_init_t qwr_init = {0};
+    BleCustInit_t     cus_init;
+
+    // Initialize Queued Write Module.
+    qwr_init.error_handler = nrf_qwr_error_handler;
+
+    err_code = nrf_ble_qwr_init(&m_qwr, &qwr_init);
+    APP_ERROR_CHECK(err_code);
+
+    // Initialize custom init service init structure to zero.
+    memset(&cus_init, 0, sizeof(cus_init));
+
+    // initialize the Data Handler
+    cus_init.DataHandler = CustomDataHndlr;
+
+    err_code = BleCustInit(&m_cust, &cus_init);
+    APP_ERROR_CHECK(err_code);	
+}
 
 /**@brief Function for handling Queued Write Module errors.
  *
@@ -151,49 +198,15 @@ int32_t add_custom_chars(ble_cus_t *p_cus, const ble_cus_init_t *p_cus_init)
  *          application about an error.
  *
  * @param[in]   nrf_error   Error code containing information about what went wrong.
- */
-static void nrf_qwr_error_handler(uint32_t nrf_error)
-{
-    APP_ERROR_HANDLER(nrf_error);
-}
+// */
+//static void nrf_qwr_error_handler(uint32_t nrf_error)
+//{
+//    APP_ERROR_HANDLER(nrf_error);
+//}
 
-/**@brief Function for handling the data from the Nordic UART Service.
- *
- * @details This function will process the data received from the Nordic UART BLE Service and send
- *          it to the UART module.
- *
- * @param[in] p_evt       Nordic UART Service event.
- */
-/**@snippet [Handling the data received over BLE] */
+
 static void nus_data_handler(ble_nus_evt_t * p_evt)
-{
-
-    if (p_evt->type == BLE_NUS_EVT_RX_DATA)
-    {
-        uint32_t err_code;
-
-        NRF_LOG_DEBUG("Received data from BLE NUS. Writing data on UART.");
-        NRF_LOG_HEXDUMP_DEBUG(p_evt->params.rx_data.p_data, p_evt->params.rx_data.length);
-
-        for (uint32_t i = 0; i < p_evt->params.rx_data.length; i++)
-        {
-            //do
-            //{
-            //    err_code = app_uart_put(p_evt->params.rx_data.p_data[i]);
-            //    if ((err_code != NRF_SUCCESS) && (err_code != NRF_ERROR_BUSY))
-            //    {
-            //        NRF_LOG_ERROR("Failed receiving NUS message. Error 0x%x. ", err_code);
-            //        APP_ERROR_CHECK(err_code);
-            //    }
-            //} while (err_code == NRF_ERROR_BUSY);
-        }
-        //if (p_evt->params.rx_data.p_data[p_evt->params.rx_data.length - 1] == '\r')
-        //{
-        //    while (app_uart_put('\n') == NRF_ERROR_BUSY);
-        //}
-    }
-
-}
+{}
 
 /**@brief Function for initializing services that will be used by the application.
  */
@@ -277,8 +290,6 @@ void conn_params_init(void)
     APP_ERROR_CHECK(err_code);
 }
 
-
-
 /**@brief Function for handling advertising events.
  *
  * @details This function will be called for advertising events which are passed to the application.
@@ -303,6 +314,56 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
     }
 }
 
+static uint32_t custom_value_char_add(BleCust * p_cus, const BleCustInit_t * p_cus_init)
+{
+    uint32_t            err_code;
+    ble_gatts_char_md_t char_md;
+    ble_gatts_attr_md_t cccd_md;
+    ble_gatts_attr_t    attr_char_value;
+    ble_uuid_t          ble_uuid;
+    ble_gatts_attr_md_t attr_md;
+
+    memset(&char_md, 0, sizeof(char_md));
+
+    char_md.char_props.read   = 1;
+    char_md.char_props.write  = 1;
+    char_md.char_props.notify = 0; 
+    char_md.p_char_user_desc  = NULL;
+    char_md.p_char_pf         = NULL;
+    char_md.p_user_desc_md    = NULL;
+    char_md.p_cccd_md         = NULL; 
+    char_md.p_sccd_md         = NULL;
+		
+    memset(&attr_md, 0, sizeof(attr_md));
+
+    attr_md.read_perm  = p_cus_init->customCharAttr.read_perm;
+    attr_md.write_perm = p_cus_init->customCharAttr.write_perm;
+    attr_md.vloc       = BLE_GATTS_VLOC_STACK;
+    attr_md.rd_auth    = 0;
+    attr_md.wr_auth    = 0;
+    attr_md.vlen       = 0;
+
+    ble_uuid.type = p_cus->uuidType;
+    ble_uuid.uuid = CUSTOM_VALUE_CHAR_UUID;
+
+    memset(&attr_char_value, 0, sizeof(attr_char_value));
+
+    attr_char_value.p_uuid    = &ble_uuid;
+    attr_char_value.p_attr_md = &attr_md;
+    attr_char_value.init_len  = sizeof(uint8_t);
+    attr_char_value.init_offs = 0;
+    attr_char_value.max_len   = sizeof(uint8_t) * 5;	// TODO - modify the max length
+
+    err_code = sd_ble_gatts_characteristic_add(p_cus->serviceHandle, &char_md,
+                                               &attr_char_value,
+                                               &p_cus->customValueHandle);
+    if (err_code != NRF_SUCCESS)
+    {
+        return err_code;
+    }
+
+    return NRF_SUCCESS;
+}
 
 /**@brief Function for handling BLE events.
  *
@@ -317,8 +378,12 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
     {
         case BLE_GAP_EVT_CONNECTED:
             NRF_LOG_INFO("Connected");
-            err_code = bsp_indication_set(BSP_INDICATE_CONNECTED);
-            APP_ERROR_CHECK(err_code);
+
+
+	  //APP_ERROR_CHECK(NRF_ERROR_INVALID_STATE);
+
+            //err_code = bsp_indication_set(BSP_INDICATE_CONNECTED);
+            //APP_ERROR_CHECK(err_code);
             m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
             err_code = nrf_ble_qwr_conn_handle_assign(&m_qwr, m_conn_handle);
             APP_ERROR_CHECK(err_code);
@@ -374,6 +439,50 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
     }
 }
 
+/**@brief Function for initializing the Custom Service.
+ *
+ * @param[out]  p_cus       Custom Service structure. This structure will have to be supplied by
+ *                          the application. It will be initialized by this function, and will later
+ *                          be used to identify this particular service instance.
+ * @param[in]   p_cus_init  Information needed to initialize the service.
+ *
+ * @return      NRF_SUCCESS on successful initialization of service, otherwise an error code.
+ */
+uint32_t BleCustInit(BleCust *pCustom, BleCustInit_t * pCustInit)
+{
+    if (pCustom == NULL || pCustInit == NULL)
+    {
+        return NRF_ERROR_NULL;
+    }
+    uint32_t   errorCode;
+    ble_uuid_t bleUuid;
+
+    // Initialize service structure
+    pCustom->connectionHandle = BLE_CONN_HANDLE_INVALID;
+
+    // Initialize the data handler
+    pCustom->DataHandler = pCustInit->DataHandler;
+
+    // Add Custom Service UUID
+    ble_uuid128_t baseUuid = {CUSTOM_SERVICE_UUID_BASE};
+    errorCode =  sd_ble_uuid_vs_add(&baseUuid, &pCustom->uuidType);
+    VERIFY_SUCCESS(errorCode);
+    
+    bleUuid.type = pCustom->uuidType;
+    bleUuid.uuid = CUSTOM_SERVICE_UUID;
+
+    //// Add the Custom Service
+    errorCode = sd_ble_gatts_service_add(BLE_GATTS_SRVC_TYPE_PRIMARY, &bleUuid, &pCustom->serviceHandle);
+    
+    // Add read/write permissions for the characteristics
+    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&pCustInit->customCharAttr.read_perm);
+    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&pCustInit->customCharAttr.write_perm); //(&cus_init.custom_value_char_attr_md.write_perm);
+
+    // Add Custom Value characteristic
+    return custom_value_char_add(pCustom, pCustInit);
+
+    //return errorCode;
+}
 
 /**@brief Function for the SoftDevice initialization.
  *
@@ -467,70 +576,6 @@ void bsp_event_handler(bsp_event_t event)
 }
 
 
-/**@brief   Function for handling app_uart events.
- *
- * @details This function will receive a single character from the app_uart module and append it to
- *          a string. The string will be be sent over BLE when the last character received was a
- *          'new line' '\n' (hex 0x0A) or if the string has reached the maximum data length.
- */
-/**@snippet [Handling the data received over UART] */
-void uart_event_handle(app_uart_evt_t * p_event)
-{
-    static uint8_t data_array[BLE_NUS_MAX_DATA_LEN];
-    static uint8_t index = 0;
-    uint32_t       err_code;
-    
-    switch (p_event->evt_type)
-    {   
-        case APP_UART_DATA_READY:
-	  //NRF_LOG_INFO("APP_UART_DATA_READY\n");
-
-   //         UNUSED_VARIABLE(app_uart_get(&data_array[index]));
-   //         //NRF_LOG_INFO("M_CONNECTION_HANDLE: %x -- data array: %c\n", m_conn_handle, data_array[index]);
-	  //index++;
-
-   //         if ((data_array[index - 1] == '\n') ||
-   //             (data_array[index - 1] == '\r') ||
-   //             (index >= m_ble_nus_max_data_len))
-   //         {
-   //             if (index > 1)
-   //             {
-   //                 //NRF_LOG_DEBUG("Ready to send data over BLE NUS");
-   //                 //NRF_LOG_HEXDUMP_DEBUG(data_array, index);
-
-   //                 do
-   //                 {
-   //                     uint16_t length = (uint16_t)index;
-   //                     err_code = ble_nus_data_send(&m_nus, data_array, &length, m_conn_handle);
-   //                     if ((err_code != NRF_ERROR_INVALID_STATE) &&
-   //                         (err_code != NRF_ERROR_RESOURCES) &&
-   //                         (err_code != NRF_ERROR_NOT_FOUND))
-   //                     {
-   //                         APP_ERROR_CHECK(err_code);
-   //                     }
-   //                 } while (err_code == NRF_ERROR_RESOURCES);
-   //             }
-
-   //             index = 0;
-   //         }
-   //         break;
-
-        case APP_UART_COMMUNICATION_ERROR:
-            APP_ERROR_HANDLER(p_event->data.error_communication);
-            break;
-
-        case APP_UART_FIFO_ERROR:
-            APP_ERROR_HANDLER(p_event->data.error_code);
-            break;
-
-        default:
-            break;
-    }
-}
-
-/**@snippet [UART Initialization] */
-
-
 /**@brief Function for initializing the Advertising functionality.
  */
  void advertising_init(void)
@@ -549,8 +594,8 @@ void uart_event_handle(app_uart_evt_t * p_event)
     init.advdata.include_appearance = false;
     init.advdata.flags              = BLE_GAP_ADV_FLAGS_LE_ONLY_LIMITED_DISC_MODE;
 
-    init.srdata.uuids_complete.uuid_cnt = sizeof(m_adv_uuids) / sizeof(m_adv_uuids[0]);
-    init.srdata.uuids_complete.p_uuids  = m_adv_uuids;
+    init.srdata.uuids_complete.uuid_cnt = sizeof(m_adv_uuids_cust) / sizeof(m_adv_uuids_cust[0]);
+    init.srdata.uuids_complete.p_uuids  = m_adv_uuids_cust;
 
     init.config.ble_adv_fast_enabled  = true;
     init.config.ble_adv_fast_interval = APP_ADV_INTERVAL;

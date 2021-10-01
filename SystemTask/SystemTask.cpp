@@ -16,6 +16,7 @@ SystemTask::SystemTask(Uart &pUart, MCP9808 &tmpSensor, NotificationManager &not
 		   uart(pUart), _tmpSensor(tmpSensor), _notificationManager(notificationManager), systemTaskQueue(systemQueue)
 {   
     size_t heapSize1 = xPortGetFreeHeapSize();
+
     // create a task
     if (xTaskCreate(SystemTask::process, "PROCESS", 100, this, 0, &taskHandle) != pdPASS)	  // TODO - think about stack size!
     {

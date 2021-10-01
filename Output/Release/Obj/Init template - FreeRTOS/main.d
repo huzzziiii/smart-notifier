@@ -95,6 +95,7 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/main.o: \
  ../../../../../../modules/nrfx/drivers/include/nrfx_clock.h \
  ../../../../../../modules/nrfx/hal/nrf_clock.h \
  ../../../../../../modules/nrfx/drivers/include/nrfx_power_clock.h \
+ ../../../../../../components/libraries/delay/nrf_delay.h \
  ../../../../../../components/libraries/log/nrf_log.h \
  ../../../../../../components/libraries/util/sdk_common.h \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/string.h \
@@ -217,4 +218,4 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/main.o: \
  ../../../../../../components/libraries/button/app_button.h \
  ../../../../../../components/libraries/pwr_mgmt/nrf_pwr_mgmt.h \
  UartApp/uart_app.hpp CustomBleServices/BleUartService.hpp \
- CustomBLE/ble_common.h
+ CustomBLE/ble_common.h CustomBLE/ble_cust_service.h

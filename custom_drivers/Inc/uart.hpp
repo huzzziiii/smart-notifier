@@ -211,6 +211,11 @@ class Uart
     bool getNrfEventStatus(nrf_uart_event_t reg) const;
     void clearNrfEvent(uint8_t reg);
     void irqHandler();
+
+    void TxByte(uint8_t byte);
+    void TxBlocking(uint8_t *buffer, size_t bytesToSend);
+    void StartTx(uint8_t *buffer, size_t bytesToSend, bool blockingTx);
+
     NRF_UART_Type* const getUartInstance() const	  // TODO - might not need it!
     {
         return pUARTx;
@@ -222,7 +227,8 @@ class Uart
         *((volatile uint32_t *)((uint8_t *)pUARTx + (uint32_t)reg)) = value;
 
         #if __CORTEX_M == 0x04
-        volatile uint32_t dummy = *((volatile uint32_t *)((uint8_t *)reg + (uint32_t)reg));
+        //volatile uint32_t dummy = *((volatile uint32_t *)((uint8_t *)reg + (uint32_t)reg));
+        volatile uint32_t dummy = *( (volatile uint32_t *) ((uint8_t *)pUARTx + (uint32_t)reg) );
         (void)dummy;
         #endif
     }

@@ -124,4 +124,5 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/uart.o: \
  ../../../../../../external/freertos/source/include/list.h \
  ../../../../../../external/freertos/source/include/stream_buffer.h \
  ../../../../../../external/freertos/source/include/queue.h \
- ../../../../../../external/freertos/source/include/task.h
+ ../../../../../../external/freertos/source/include/task.h \
+ ../../../../../../components/libraries/delay/nrf_delay.h

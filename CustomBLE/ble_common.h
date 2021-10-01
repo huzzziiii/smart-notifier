@@ -26,6 +26,7 @@ extern "C" {
 #include "nrf_pwr_mgmt.h"
 #include "sdk_config.h"
 #include "nrf_log.h"
+#include "ble_cust_service.h"
 #include <stdint.h>
 
 /**@brief Custom Service structure. This contains various status information for the service. */
@@ -95,7 +96,69 @@ void gap_params_init(void);
 void advertising_init(void);
 void conn_params_init(void);
 void advertising_start(void);
+void cust_services_init();
 void foo();
+
+// --------- cust -----------
+
+typedef struct BleCust_s BleCust;
+
+/**@brief  Custom Service event types. */
+typedef enum
+{
+    bleCusEvtRxData,	      /**< Data received. */
+    bleCusEvtTxRdy,		      /**< Service is ready to accept new data to be transmitted. */
+    bleCusEvtCommStarted,	      /**< Notification has been enabled. */
+    bleCusEvtCommStopped	      /**< Notification has been disabled. */
+} BleCusEvtType;
+
+typedef struct
+{
+    uint8_t const *rxBuffer;
+    uint16_t receivedBytes;
+} BleCusRxData;
+
+typedef struct
+{
+    BleCust	*pCust; 
+    BleCusEvtType	eventType;
+    uint16_t	connectionHandle;
+    BleCusRxData	rxData;
+} BleCustEvent;
+
+typedef void (*BleCustDataHndlr)(BleCustEvent *p_evt);
+
+/**@brief Custom Service init structure. This contains all options and data needed for
+ *        initialization of the service.*/
+typedef struct
+{
+    uint8_t                       initCustomValue;	        /**< Initial custom value */
+    ble_srv_cccd_security_mode_t  customCharAttr;     /**< Initial security level for Custom characteristics attribute */
+    BleCustDataHndlr	    DataHandler;
+    
+} BleCustInit_t;
+
+
+/**@brief Custom Service structure. This contains various status information for the service. */
+struct BleCust_s
+{
+    uint16_t                      serviceHandle;			  /**< Handle of Custom Service (as provided by the BLE stack). */
+    ble_gatts_char_handles_t      customValueHandle;		  /**< Handles related to the Custom Value characteristic. */
+    uint16_t                      connectionHandle;                    /**< Handle of the current connection (as provided by the BLE stack, is BLE_CONN_HANDLE_INVALID if not in a connection). */
+    uint8_t                       uuidType; 
+    BleCustDataHndlr	    DataHandler;
+};
+
+
+
+
+
+
+
+
+
+/* function prototypes */
+uint32_t BleCustInit(BleCust *pCustom, BleCustInit_t *pCustInit);
 
 #ifdef __cplusplus
 }

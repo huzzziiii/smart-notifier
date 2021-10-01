@@ -25,13 +25,28 @@ Output/Debug/Obj/Init\ template\ -\ FreeRTOS/SEGGER_RTT_printf.o: \
  ../../../../../../components/softdevice/s140/headers/nrf_nvic.h \
  ../../../../../../components/libraries/util/nrf_assert.h \
  ../../../../../../components/libraries/util/app_error.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdio.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_cprolog.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/features.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_stlport_version.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/user_config.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/compat.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/host.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/_system.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/_crossworks.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/stl_confix.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/_native_headers.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdio.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/__crossworks.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_epilog.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_config_compat_post.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdbool.h \
  ../../../../../../components/libraries/util/sdk_errors.h \
  ../../../../../../components/softdevice/s140/headers/nrf_error.h \
  ../../../../../../components/libraries/util/nordic_common.h \
  ../../../../../../components/libraries/util/app_error_weak.h \
  ../config/sdk_config.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdlib.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdlib.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdarg.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdarg.h

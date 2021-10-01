@@ -93,9 +93,11 @@
       <file file_name="../../../../../../components/libraries/pwr_mgmt/nrf_pwr_mgmt.c" />
       <file file_name="../../../../../../components/libraries/uart/app_uart.c">
         <configuration Name="Release" build_exclude_from_build="Yes" />
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
       </file>
       <file file_name="../../../../../../components/libraries/uart/app_uart_fifo.c">
         <configuration Name="Release" build_exclude_from_build="Yes" />
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
       </file>
       <file file_name="../../../../../../components/libraries/uart/retarget.c" />
     </folder>
@@ -157,6 +159,7 @@
       <file file_name="../../../segger_files/SEGGER_SYSVIEW_Config_FreeRTOS.c" />
       <file file_name="main.c">
         <configuration Name="Release" build_exclude_from_build="Yes" />
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
       </file>
       <file file_name="../config/sdk_config.h" />
     </folder>
@@ -201,6 +204,7 @@
       <file file_name="../../../../../../components/softdevice/common/nrf_sdh_ble.c" />
       <file file_name="../../../../../../components/softdevice/common/nrf_sdh_freertos.c">
         <configuration Name="Release" build_exclude_from_build="Yes" />
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
       </file>
       <file file_name="../../../../../../components/softdevice/common/nrf_sdh_soc.c" />
     </folder>
@@ -220,7 +224,10 @@
         <file file_name="custom_drivers/Src/sensors.cpp" />
       </folder>
     </folder>
-    <configuration Name="Debug" gcc_cplusplus_language_standard="c++11" />
+    <configuration
+      Name="Debug"
+      gcc_cplusplus_language_standard="c++11"
+      gcc_optimization_level="Level 0" />
     <folder Name="NrfLogger">
       <folder Name="Inc">
         <file file_name="NrfLogger/Inc/NrfLogger.hpp" />
@@ -229,6 +236,7 @@
         <file file_name="NrfLogger/Src/NrfLogger.cpp" />
       </folder>
       <configuration Name="Release" build_exclude_from_build="Yes" />
+      <configuration Name="Debug" build_exclude_from_build="Yes" />
     </folder>
     <folder Name="Fifo">
       <file file_name="Fifo/Src/fifo.cpp" />
@@ -241,9 +249,10 @@
     <configuration
       Name="Release"
       STLport="Yes with IOStream support"
+      c_preprocessor_definitions="DEBUG&#x9;;DEBUG_NRF"
       cpp_enable_rtti="Yes"
       debug_type_file="$(StudioDir)/bin/STLport.xml"
-      gcc_optimization_level="Level 0" />
+      gcc_optimization_level="None" />
     <folder Name="UartApp">
       <file file_name="UartApp/uart_app.cpp" />
       <file file_name="UartApp/uart_app.hpp" />
@@ -279,11 +288,13 @@
         <configuration Name="Release" build_exclude_from_build="Yes" />
       </file>
       <configuration Name="Release" build_exclude_from_build="Yes" />
+      <configuration Name="Debug" build_exclude_from_build="Yes" />
     </folder>
     <folder Name="TimerApp">
       <file file_name="TimerApp/TimerApp.cpp" />
       <file file_name="TimerApp/TimerApp.hpp" />
       <configuration Name="Release" build_exclude_from_build="Yes" />
+      <configuration Name="Debug" build_exclude_from_build="Yes" />
     </folder>
     <folder Name="BLE">
       <file file_name="BLE/bleApp.hpp">
@@ -299,6 +310,7 @@
       <file file_name="BLE/ranBle.hpp">
         <configuration Name="Release" build_exclude_from_build="Yes" />
       </file>
+      <configuration Name="Debug" build_exclude_from_build="Yes" />
     </folder>
     <file file_name="SeggerFiles/SEGGER/SEGGER_SYSVIEW.c">
       <configuration Name="Release" build_exclude_from_build="No" />
@@ -307,7 +319,7 @@
       <file file_name="CustomBLE/ble_common.c" />
       <file file_name="CustomBLE/ble_common.h" />
       <file file_name="ble_cust_service.cpp" />
-      <file file_name="ble_cust_service.h" />
+      <file file_name="CustomBLE/ble_cust_service.h" />
     </folder>
   </project>
 </solution>

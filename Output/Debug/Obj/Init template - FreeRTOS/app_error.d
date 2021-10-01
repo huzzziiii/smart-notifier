@@ -13,8 +13,21 @@ Output/Debug/Obj/Init\ template\ -\ FreeRTOS/app_error.o: \
  ../../../../../../modules/nrfx/mdk/nrf51_to_nrf52840.h \
  ../../../../../../modules/nrfx/mdk/nrf52_to_nrf52840.h \
  ../../../../../../modules/nrfx/mdk/compiler_abstraction.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdio.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_cprolog.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/features.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_stlport_version.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/user_config.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/compat.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/host.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/_system.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/_crossworks.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/stl_confix.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/_native_headers.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdio.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/__crossworks.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_epilog.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_config_compat_post.h \
  /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_error.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdbool.h \
  /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/components/libraries/util/sdk_errors.h \

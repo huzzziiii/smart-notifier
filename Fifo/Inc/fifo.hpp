@@ -42,8 +42,7 @@ class Fifo
 		         _readIdx(0), 
 		         _writeIdx(0),
 		         _startIdx(0),
-		         mask(fifoSize - 2),	     
-		         _buffer{0}
+		         mask(fifoSize - 2)
     {}
 
 //    template<typename T>
@@ -79,6 +78,12 @@ class Fifo
    //     }
     }
 
+    uint8_t const getReadIdx() const;
+    void resetStartIdx()
+    {
+        _startIdx = _writeIdx;
+    }
+
     bool isEmpty() const
     {
         return _writeIdx == _readIdx;
@@ -87,12 +92,6 @@ class Fifo
     bool isFull() const
     {
         return _isFull;
-    }
-
-    uint8_t const getReadIdx() const;
-    void resetStartIdx()
-    {
-        _startIdx = _writeIdx;
     }
     
     T deque()
@@ -104,16 +103,24 @@ class Fifo
    //     }
 
         //NRF_LOG_DEBUG("Reading %u at index %u\n", _buffer[_readIdx], _readIdx);
-        
-        T value = _buffer[_readIdx];
-
-        if (value == '\r')
-        {	  
-	  ++_readIdx &= mask;
+        if (isEmpty())
+        {
+	  NRF_LOG_WARNING("Nothing to read from the queue - _readIdx: %d, _writeIdx: %d\n", _readIdx, _writeIdx);
+	  return fifoIsEmpty;
         }
 
-        value = _buffer[_readIdx++];
-        _readIdx &= mask;
+        T value = _buffer[_readIdx];
+        
+        ++_readIdx &= mask;
+
+
+   //     if (value == '\r')
+   //     {	  
+	  //++_readIdx &= mask;
+   //     }
+
+        //value = _buffer[_readIdx++];
+        //_readIdx &= mask;
 
         return value;
     }
@@ -126,8 +133,15 @@ class Fifo
         _buffer[_writeIdx++] = item;
         _writeIdx &= mask;
 
-        _isFull = (_writeIdx - _readIdx == fifoSize - 2);  
-	  
+        _isFull = (_writeIdx - _readIdx == fifoSize - 2);    
+    }
+    
+    void enqueElems(T *buffer, uint8_t size)
+    {
+        for (uint8_t idx = 0; idx < size; idx++)
+        {
+	  enque(buffer[idx]);  
+        }
     }
 
     uint8_t const *getFifo()

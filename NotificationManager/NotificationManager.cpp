@@ -12,13 +12,13 @@ void NotificationManager::printNotificationList()
     {
         Notification ntfx = _notifications.GetFiFoAt(idx);
         NRF_LOG_INFO("[%d] NtfIdx: %d, message: %s\n", idx, ntfx.idx, ntfx.msg);
-        NRF_LOG_FLUSH();
+        //NRF_LOG_FLUSH();
     }
 }
 
 void NotificationManager::unsubscribe(Subject *subscription)
 {
-    for (uint8_t idx = 0; idx < maxSubscriptions; idx++)
+    for (uint8_t idx = 0; idx < maxSubscriptions; idx++) // TODO - might wanna get rid of the loop since there's only ine subscription per Subject class
     {
         if (subscriptions[idx] == subscription)
         {
@@ -36,7 +36,10 @@ void NotificationManager::subscribe(Subject *subscription)
 void NotificationManager::pushNotification()
 {
     _notifications.enque(_notification);
-    //_notifications[_notification.idx++] = _notification;
+
+    /* TODO 
+    - send notification over to BLE and terminal
+    */
 }
 
 /*

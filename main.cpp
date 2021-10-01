@@ -1,4 +1,5 @@
 #include "port_cmsis_systick.c"
+#include "nrf_delay.h"
 /**
  * Copyright (c) 2014 - 2020, Nordic Semiconductor ASA
  *
@@ -130,7 +131,7 @@
 
 #include "uart.hpp"
 #include "uart_app.hpp"
-
+//#include "ble_cust_service.h"
 //extern "C" { 
     #include "ble_common.h" 
 //}
@@ -953,28 +954,6 @@ static void power_management_init(void)
 
 /**@snippet [Handling the data received over UART] */
 
-
-/**@brief  Function for initializing the UART module.
- */
-/**@snippet [UART Initialization] */
-static void uart_init(void)
-{
-    uint32_t                     err_code;
-    app_uart_comm_params_t const comm_params =
-    {
-        .rx_pin_no    = RX_PIN_NUMBER,
-        .tx_pin_no    = TX_PIN_NUMBER,
-        .rts_pin_no   = RTS_PIN_NUMBER,
-        .cts_pin_no   = CTS_PIN_NUMBER,
-        .flow_control = APP_UART_FLOW_CONTROL_DISABLED,
-        .use_parity   = false,
-#if defined (UART_PRESENT)
-        .baud_rate    = NRF_UART_BAUDRATE_115200
-#else
-        .baud_rate    = NRF_UARTE_BAUDRATE_115200
-#endif
-    };
-
     //APP_UART_FIFO_INIT(&comm_params,
     //                   UART_RX_BUF_SIZE,
     //                   UART_TX_BUF_SIZE,
@@ -982,7 +961,7 @@ static void uart_init(void)
     //                   APP_IRQ_PRIORITY_LOWEST,
     //                   err_code);
     //APP_ERROR_CHECK(err_code);
-}
+
 
 /**@brief Function for application main entry.
  */
@@ -997,14 +976,24 @@ int main()
     //SEGGER_SYSVIEW_Start();
 
     // BLE advertising and configuration
+    //while(1)
+    //{
+        char s[] = "HELLO";
+
+        uart.StartTx((uint8_t *) s, strlen(s), false);
+        //nrf_delay_ms(1000);
+    //}
+        //while(1);
 
     ble_stack_init();
     gap_params_init();
     gatt_init();
-    services_init();
+    //services_init();
+    cust_services_init();
     advertising_init();
     conn_params_init();
     advertising_start();
+   
 
     // Initialize modules  
     auto res = NRF_LOG_INIT(NULL);
@@ -1013,9 +1002,12 @@ int main()
 
     //clock_init();	    // TODO - change to camelCase
 
-    SEGGER_SYSVIEW_Conf();
+    //SEGGER_SYSVIEW_Conf();
     initLeds();
-    
+ 
+  while(1);
+
+
     //TimerHandle_t timerReturn = xTimerCreate("ledTimer", pdMS_TO_TICKS(200), pdTRUE, (void *) 0, cb);
 
     //if (timerReturn != NULL)

@@ -1,4 +1,5 @@
 #include "uart.hpp"
+#include "nrf_delay.h" // TODO remove
 
 static Uart *pInstance;
 
@@ -17,6 +18,9 @@ void Uart::irqHandler()
 
     bool isRxdRdyIrqSet	   = getIrqRegStatus(NRF_UART_INT_MASK_RXDRDY);
     bool isRxdRdyEvntSet	   = getNrfEventStatus(NRF_UART_EVENT_RXDRDY);
+    
+    bool isTxdRdyIrqSet	   = getIrqRegStatus(NRF_UART_INT_MASK_TXDRDY);
+    bool isTxdRdyEvntSet	   = getNrfEventStatus(NRF_UART_EVENT_TXDRDY);
 
     bool isIrqMaskErrorSet	   = getIrqRegStatus(NRF_UART_INT_MASK_ERROR);
     bool isEventMaskErrorSet	   = getNrfEventStatus(NRF_UART_EVENT_ERROR);
@@ -43,19 +47,71 @@ void Uart::irqHandler()
 	  uartCallback(fifoRx, systemTaskQueue);	          // invoke a callback to unblock the system task for processing the data
         }
     }
-    else if (isIrqMaskErrorSet && isEventMaskErrorSet)
+    
+    if (isIrqMaskErrorSet && isEventMaskErrorSet)
     {
         setNrfEvent(NRF_UART_EVENT_ERROR, StatusDisable);		// clear NRF_UART_EVENT_RXDRDY
         clearInterrupt(NRF_UART_INT_MASK_ERROR);
-        setNrfEvent(NRF_UART_TASK_STOPRX, StatusEnable);		// trigger STOPRX
+        setNrfEvent(NRF_UART_TASK_STOPRX | NRF_UART_TASK_STOPTX, StatusEnable);		// trigger STOPRX & STOPTX
     }
     
+    if (isTxdRdyIrqSet && isTxdRdyEvntSet)
+    {   
+        setNrfEvent(NRF_UART_EVENT_TXDRDY, StatusDisable);
+        if (!fifoTx.isEmpty())      
+        {
+	  uint8_t byte = fifoTx.deque();
+	  TxByte(byte);
+        }
+        else
+        {
+	  // transmission ended
+	  setNrfEvent(NRF_UART_TASK_STOPTX, StatusEnable);
+        }  
+    }
 
     /* 1. read from the RXD 
          - RXDRDY event is generated indicating byte is received
          - read from RXD
       2.  Clear RXDRDY event prior to reading off RXD
     */
+}
+
+void Uart::TxByte(uint8_t byte)
+{
+        setNrfEvent(NRF_UART_EVENT_TXDRDY, StatusDisable);
+        pUARTx->TXD = byte;
+}
+
+void Uart::TxBlocking(uint8_t *buffer, size_t bytesToSend)
+{
+    for (uint8_t idx = 0; idx < bytesToSend; idx++)
+    {   
+        setNrfEvent(NRF_UART_EVENT_TXDRDY, StatusDisable);
+        TxByte(buffer[idx]);
+        while (getNrfEventStatus(NRF_UART_EVENT_TXDRDY) == 0);   // wait till the byte has been successfully transmitted
+    }
+}
+
+void Uart::StartTx(uint8_t *buffer, size_t bytesToSend, bool blockingTx)
+{
+    //nrf_uart_event_clear(p_instance->p_reg, NRF_UART_EVENT_TXDRDY);
+    //nrf_uart_task_trigger(p_instance->p_reg, NRF_UART_TASK_STARTTX);
+
+    //setNrfEvent(NRF_UART_EVENT_TXDRDY, StatusDisable);
+    setNrfEvent(NRF_UART_TASK_STARTTX, StatusEnable);
+    
+    if (blockingTx)
+    {
+        TxBlocking(buffer, bytesToSend); 
+        setNrfEvent(NRF_UART_TASK_STOPTX, StatusEnable);  
+    }
+    else
+    {
+        fifoTx.enqueElems(buffer, bytesToSend);
+        uint8_t val = fifoTx.deque();
+        TxByte(val);
+    }
 }
 
 bool Uart::getNrfEventStatus(nrf_uart_event_t reg) const
@@ -80,7 +136,9 @@ Uart::Uart(const UartCommParams_t *commParams, NRF_UART_Type *uartInstance, cons
     uartConfig.pselRxd = commParams->rxPinNo;
     uartConfig.pselTxd = commParams->txPinNo;
     uartConfig.hwFlowCtl = commParams->hwFlowCntl;
-    uartConfig.interruptFlags = NRF_UART_INT_MASK_TXDRDY | NRF_UART_INT_MASK_RXDRDY | NRF_UART_INT_MASK_RXTO;
+    
+    uartConfig.interruptFlags = NRF_UART_INT_MASK_TXDRDY | NRF_UART_INT_MASK_RXDRDY; // | NRF_UART_INT_MASK_RXTO;
+    //uartConfig.interruptFlags = NRF_UART_INT_MASK_RXDRDY;
     pUARTx = uartInstance;
     pInstance = this;
     uartCallback = callback;

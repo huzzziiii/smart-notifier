@@ -6,8 +6,21 @@ Output/Debug/Obj/Init\ template\ -\ FreeRTOS/boards.o: \
  ../../../../../../integration/nrfx/nrfx_config.h ../config/sdk_config.h \
  ../../../../../../modules/nrfx/drivers/nrfx_common.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdint.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stddef.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_cprolog.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/features.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_stlport_version.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/user_config.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/compat.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/host.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/_system.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/_crossworks.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/stl_confix.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/config/_native_headers.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stddef.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/__crossworks.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_epilog.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_config_compat_post.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdbool.h \
  ../../../../../../modules/nrfx/mdk/nrf.h \
  ../../../../../../modules/nrfx/mdk/nrf52840.h \
@@ -42,6 +55,7 @@ Output/Debug/Obj/Init\ template\ -\ FreeRTOS/boards.o: \
  ../../../../../../components/softdevice/s140/headers/nrf_nvic.h \
  ../../../../../../components/libraries/util/nrf_assert.h \
  ../../../../../../components/libraries/util/app_error.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdio.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdio.h \
  ../../../../../../components/libraries/util/sdk_errors.h \
  ../../../../../../components/softdevice/s140/headers/nrf_error.h \
