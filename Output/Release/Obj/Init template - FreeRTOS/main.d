@@ -218,4 +218,4 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/main.o: \
  ../../../../../../components/libraries/button/app_button.h \
  ../../../../../../components/libraries/pwr_mgmt/nrf_pwr_mgmt.h \
  UartApp/uart_app.hpp CustomBleServices/BleUartService.hpp \
- CustomBLE/ble_common.h CustomBLE/ble_cust_service.h
+ BLE_Final/controller.h BLE_Final/custom_service.h BLE_Final/ble_common.h

@@ -1,6 +1,6 @@
-Output/Release/Obj/Init\ template\ -\ FreeRTOS/ble_common.o: \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/CustomBLE/ble_common.c \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/CustomBLE/ble_common.h \
+Output/Release/Obj/Init\ template\ -\ FreeRTOS/ble_custom_srv.o: \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/ble_custom_srv.cpp \
+ CustomBLE/ble_custom_srv_copy.hpp CustomBLE/ble_custom_common.h \
  ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdint.h \
  ../../../../../../components/softdevice/s140/headers/nrf_svc.h \
@@ -131,7 +131,5 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/ble_common.o: \
  ../../../../../../components/libraries/log/nrf_log_instance.h \
  ../../../../../../components/libraries/log/nrf_log_types.h \
  ../../../../../../components/libraries/log/nrf_log_types.h \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/CustomBLE/ble_cust_service.h \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/CustomBLE/ble_controller.h \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/CustomBLE/ble_custom_srv_copy.hpp \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/CustomBLE/ble_custom_common.h
+ CustomBLE/ble_cust_service.h CustomBLE/ble_controller.h \
+ CustomBLE/ble_custom_srv_copy.hpp

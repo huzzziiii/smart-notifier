@@ -12,14 +12,14 @@
 /*
     - include protection guard for the buffer in case BLE service also accesses it
 */
-constexpr uint8_t fifoSize = 17; // +1 to accomodate for a NULL terminator
+constexpr uint8_t fifoSize = 65; // 17; // (16) +1 to accomodate for a NULL terminator
 
  typedef enum 
  {
-    indexOutOfBounds = 0,
-    invalidRequestForBytes,
-    fifoIsEmpty,
-    success
+    indexOutOfBounds = -1,
+    invalidRequestForBytes = -2,
+    fifoIsEmpty = -3,
+    success = 1
 } FifoReturnValues;
 
 template<typename T>
@@ -105,7 +105,7 @@ class Fifo
         //NRF_LOG_DEBUG("Reading %u at index %u\n", _buffer[_readIdx], _readIdx);
         if (isEmpty())
         {
-	  NRF_LOG_WARNING("Nothing to read from the queue - _readIdx: %d, _writeIdx: %d\n", _readIdx, _writeIdx);
+	  // NRF_LOG_WARNING("Nothing to read from the queue - _readIdx: %d, _writeIdx: %d\n", _readIdx, _writeIdx);
 	  return fifoIsEmpty;
         }
 
@@ -127,7 +127,7 @@ class Fifo
 
     void enque(T item)    
     {
-         NRF_LOG_INFO("[ENQUE] Writing at index %u\n", _writeIdx);
+         //NRF_LOG_INFO("[ENQUE] Writing at index %u\n", _writeIdx);
         //NRF_LOG_FLUSH();
 
         _buffer[_writeIdx++] = item;
@@ -182,6 +182,7 @@ class Fifo
 	  
 	  if (val == delimiter)
 	  {
+	      _readIdx++;
 	      break;
 	  }
 	  
@@ -189,6 +190,7 @@ class Fifo
 	  count++;  
         }
         //memcpy(buffer, _buffer + startIdx, bytesToCopy);
+        _readIdx++;
         return success;
     }
 

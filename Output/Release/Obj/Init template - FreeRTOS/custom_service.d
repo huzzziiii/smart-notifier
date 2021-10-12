@@ -1,6 +1,6 @@
-Output/Release/Obj/Init\ template\ -\ FreeRTOS/ble_common.o: \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/CustomBLE/ble_common.c \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/CustomBLE/ble_common.h \
+Output/Release/Obj/Init\ template\ -\ FreeRTOS/custom_service.o: \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/Ble_Final/custom_service.cpp \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/Ble_Final/custom_service.h \
  ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdint.h \
  ../../../../../../components/softdevice/s140/headers/nrf_svc.h \
@@ -131,7 +131,47 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/ble_common.o: \
  ../../../../../../components/libraries/log/nrf_log_instance.h \
  ../../../../../../components/libraries/log/nrf_log_types.h \
  ../../../../../../components/libraries/log/nrf_log_types.h \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/CustomBLE/ble_cust_service.h \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/CustomBLE/ble_controller.h \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/CustomBLE/ble_custom_srv_copy.hpp \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/CustomBLE/ble_custom_common.h
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/Ble_Final/ble_common.h \
+ SystemTask/SystemTask.hpp \
+ ../../../../../../external/freertos/source/include/FreeRTOS.h \
+ ../../../../../../external/freertos/source/include/projdefs.h \
+ ../../../../../../external/freertos/source/include/portable.h \
+ ../../../../../../external/freertos/source/include/deprecated_definitions.h \
+ ../../../../../../external/freertos/portable/GCC/nrf52/portmacro.h \
+ ../../../../../../external/freertos/portable/CMSIS/nrf52/portmacro_cmsis.h \
+ ../../../../../../external/freertos/source/include/mpu_wrappers.h \
+ ../../../../../../external/freertos/source/include/task.h \
+ ../../../../../../external/freertos/source/include/list.h \
+ ../../../../../../external/freertos/source/include/queue.h \
+ ../../../../../../external/freertos/source/include/task.h \
+ custom_drivers/Inc/uart.hpp Fifo/Inc/fifo.hpp \
+ ../../../../../../components/libraries/log/nrf_log_ctrl.h \
+ ../../../../../../components/libraries/log/src/nrf_log_ctrl_internal.h \
+ ../../../../../../components/libraries/log/nrf_log_backend_interface.h \
+ ../../../../../../components/libraries/memobj/nrf_memobj.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stdlib.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdlib.h \
+ ../../../../../../components/libraries/balloc/nrf_balloc.h \
+ ../../../../../../components/libraries/log/nrf_log_default_backends.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/typeinfo \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_prolog.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/debug/_debug.h \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_typeinfo.h \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/typeinfo \
+ /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/exception \
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/exception \
+ NrfLogger/Inc/NrfLogger.hpp \
+ ../../../../../../integration/nrfx/legacy/nrf_drv_twi.h \
+ ../../../../../../modules/nrfx/drivers/include/nrfx_twim.h \
+ ../../../../../../modules/nrfx/drivers/include/nrfx_twi_twim.h \
+ ../../../../../../modules/nrfx/hal/nrf_twim.h \
+ ../../../../../../modules/nrfx/drivers/include/nrfx_twi.h \
+ ../../../../../../modules/nrfx/hal/nrf_twi.h \
+ ../../../../../../external/freertos/source/include/stream_buffer.h \
+ custom_drivers/Inc/mcp9808.hpp custom_drivers/Inc/sensors.hpp \
+ ObserverPattern/Subject.hpp ObserverPattern/Observer.hpp \
+ ObserverPattern/Subject.hpp TimerApp/TimerApp.hpp \
+ ../../../../../../external/freertos/source/include/timers.h \
+ ../../../../../../external/freertos/source/include/semphr.h \
+ ../../../../../../external/freertos/source/include/queue.h \
+ NotificationManager/NotificationManager.hpp ObserverPattern/Observer.hpp

@@ -11,7 +11,7 @@ void NotificationManager::printNotificationList()
     for (uint8_t idx = 0; idx < size; idx++)
     {
         Notification ntfx = _notifications.GetFiFoAt(idx);
-        NRF_LOG_INFO("[%d] NtfIdx: %d, message: %s\n", idx, ntfx.idx, ntfx.msg);
+        //NRF_LOG_INFO("[%d] NtfIdx: %d, message: %s\n", idx, ntfx.idx, ntfx.msg);
         //NRF_LOG_FLUSH();
     }
 }
@@ -51,7 +51,7 @@ void NotificationManager::update(Subject *subject)
     int a = 5; // TODO - remove
     int h;
 
-    NRF_LOG_WARNING("[NotificationManager::update] -- %d\n", subject == subscriptions[0]);  // TODO remove
+    //NRF_LOG_WARNING("[NotificationManager::update] -- %d\n", subject == subscriptions[0]);  // TODO remove
     //NRF_LOG_FLUSH();
     
    

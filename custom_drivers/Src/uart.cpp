@@ -1,5 +1,8 @@
 #include "uart.hpp"
 #include "nrf_delay.h" // TODO remove
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
 
 static Uart *pInstance;
 
@@ -8,6 +11,25 @@ extern "C" {
     {   
         pInstance->irqHandler();
     }
+}
+
+
+void Uart::PrintUart(const char *format, ...)
+{
+    //char completeStr[100] = {0};
+    //sprintf (completeStr, "%s\n\r", format);
+    //StartTx((uint8_t*) completeStr, strlen(completeStr));
+    //return; 
+    char buffer[100] = {0};
+    va_list args;
+
+    va_start (args, format);
+    vsnprintf (buffer, sizeof(buffer), format, args);
+    strcat(buffer, "\r\n");
+    size_t bytesToSend = strlen(buffer);
+
+    StartTx((uint8_t*) buffer, bytesToSend);
+    va_end (args);
 }
 
 void Uart::irqHandler()
@@ -26,7 +48,7 @@ void Uart::irqHandler()
     bool isEventMaskErrorSet	   = getNrfEventStatus(NRF_UART_EVENT_ERROR);
 
     // TODO - fill TX...
-    NRF_LOG_WARNING("............----IRQ()----.............\n");
+    //NRF_LOG_WARNING("............----IRQ()----.............\n");
     //NRF_LOG_FLUSH();
 
     if (isRxdRdyIrqSet && isRxdRdyEvntSet)
@@ -57,7 +79,7 @@ void Uart::irqHandler()
     
     if (isTxdRdyIrqSet && isTxdRdyEvntSet)
     {   
-        setNrfEvent(NRF_UART_EVENT_TXDRDY, StatusDisable);
+        setNrfEvent(NRF_UART_EVENT_TXDRDY, StatusDisable);	    // clear the TXDRDY bit
         if (!fifoTx.isEmpty())      
         {
 	  uint8_t byte = fifoTx.deque();
@@ -124,8 +146,7 @@ bool Uart::getIrqRegStatus(uint32_t mask)
     return (bool) (pUARTx->INTENSET & mask);
 }
 
-Uart::Uart(const UartCommParams_t *commParams, NRF_UART_Type *uartInstance, const uint8_t irqPriority, void (*callback)(Fifo<uint8_t> &pFifo, QueueHandle_t &systemTaskQueue),
-	 QueueHandle_t &queue) 
+Uart::Uart(const UartCommParams_t *commParams, NRF_UART_Type *uartInstance, const uint8_t irqPriority, void (*callback)(Fifo<uint8_t> &pFifo, QueueHandle_t &systemTaskQueue), QueueHandle_t &queue) 
 	 : systemTaskQueue(queue)
 {
     // init comm params

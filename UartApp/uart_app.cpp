@@ -3,19 +3,6 @@
 char parsedInput[50];
 SystemTask::Messages dataToQueue = SystemTask::Messages::invalidInput;
 
-void convertParsedInputToMsg(void)
-{
-    if (!strcmp(parsedInput, "tempOn"))
-    {
-        dataToQueue = SystemTask::Messages::subscribeTempNotifications;
-    }
-    else if (!strcmp(parsedInput, "tempOff"))
-    {
-        dataToQueue = SystemTask::Messages::unsubscribeTempNotifications;
-    }
-
-}
-
 template<typename T>
 void parseUserInput(Fifo<T> &pFifo)
 {
@@ -28,7 +15,7 @@ void parseUserInput(Fifo<T> &pFifo)
     if (endPtr != nullptr)	      
     {
         endBytes = endPtr - startPtr;
-        pFifo.parseBytes(reinterpret_cast<uint8_t*>(parsedInput), endBytes);
+        uint8_t parseBytesRet = pFifo.parseBytes(reinterpret_cast<uint8_t*>(parsedInput), endBytes);
      
         // memcpy(parsedInput, startBuffer, endBytes);
     }
@@ -47,7 +34,7 @@ void parseUserInput(Fifo<T> &pFifo)
         //memcpy(parsedInput + endBytes, buffer, startBytes);
     }
 
-    convertParsedInputToMsg();
+    dataToQueue = convertParsedInputToMsg(parsedInput);
     memset(parsedInput, 0, sizeof(parsedInput));		// reset the buffer 
 }
 
@@ -58,6 +45,7 @@ void uartCallback(Fifo<uint8_t> &pFifo, QueueHandle_t &systemQueue)
     a++;
     parseUserInput(pFifo);
     
+    // TODO - use push message...
     if (dataToQueue != SystemTask::Messages::invalidInput)
     {   
         xQueueSendFromISR(systemQueue, &dataToQueue, 0); // TODO - no instance! -> SystemTask::pushMessage(SystemTask::Messages dataToQueue)

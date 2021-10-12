@@ -12,7 +12,8 @@
 // TODO -- #include "bleApp.hpp"
 //#include "BleCommon.hpp"
 //#include "ble_nus.h"
-#include <NotificationManager.hpp>
+#include "NotificationManager.hpp"
+
 
 class SystemTask 
 {   
@@ -29,6 +30,7 @@ class SystemTask
     static void process(void* arg);
 
     public:
+
     TaskHandle_t taskHandle;
     enum class Messages
     {
@@ -40,8 +42,27 @@ class SystemTask
     //SystemTask(Uart &uart, MCP9808 &tmpSensor, NotificationManager &notificationManager, QueueHandle_t &systemTask, BleUartService &bleService);
     
     SystemTask(Uart &uart, MCP9808 &tmpSensor, NotificationManager &notificationManager, QueueHandle_t &systemTask);
-    void pushMessage(SystemTask::Messages msg);
+    void pushMessage(SystemTask::Messages msg, bool fromISR = true);
     void mainThread();
-
 };
+
+SystemTask::Messages convertParsedInputToMsg(const char *inputToCmp);
+
+#define ENUM_ENTRY(x) { x, #x }
+
+struct Lookup
+{
+    SystemTask::Messages message;
+    const char* name;
+};
+
+using Messages = SystemTask::Messages;
+ 
+static Lookup lookupTable[3] = {
+  ENUM_ENTRY(Messages::subscribeTempNotifications),
+  ENUM_ENTRY(Messages::unsubscribeTempNotifications),
+  ENUM_ENTRY(Messages::invalidInput)
+};
+
+
 #endif

@@ -214,7 +214,9 @@ class Uart
 
     void TxByte(uint8_t byte);
     void TxBlocking(uint8_t *buffer, size_t bytesToSend);
-    void StartTx(uint8_t *buffer, size_t bytesToSend, bool blockingTx);
+    void StartTx(uint8_t *buffer, size_t bytesToSend, bool blockingTx = false);
+    // void PrintUart(const char *bytes);
+    void PrintUart(const char *format, ...);
 
     NRF_UART_Type* const getUartInstance() const	  // TODO - might not need it!
     {

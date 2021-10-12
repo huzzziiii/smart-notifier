@@ -59,20 +59,6 @@ void SystemTask::mainThread()
 {   
     Messages curMsg;
 
-    //// BLE advertising and configuration
-    //ble_stack_init();
-    //gap_params_init();
-    //gatt_init();
-    //services_init();
-    //advertising_init();
-    //conn_params_init();
-
-    ////// Start execution.
-    //////printf("\r\nUART started.\r\n");
-    ////NRF_LOG_INFO("Debug logging for UART over RTT started.");
-    //advertising_start();
-
-
     //_tmpSensor.xferData(temp, 1);
     //_tmpSensor.read();
     // TODO - init peripherals?
@@ -85,7 +71,10 @@ void SystemTask::mainThread()
         if (xQueueReceive(systemTaskQueue, &msg, portMAX_DELAY) == pdPASS)      // wait for the user input over UART (for now!)
         {
 	  curMsg = static_cast<Messages>(msg);		         // TODO - might as well make msg type --> Message
-	  NRF_LOG_INFO("[SystemTask] -- message received: %d\n", curMsg);
+	  //Lookup lookupVal = lookupTable[0];
+	  Lookup lookupVal = lookupTable[msg];
+	  uart.PrintUart("Message received: %s", lookupVal.name); // Messages::subscribeTempNotifications]);
+	  //NRF_LOG_INFO("[SystemTask] -- message received: %d\n", curMsg);
 	  	       
 	  switch(curMsg)
 	  {
@@ -104,12 +93,35 @@ void SystemTask::mainThread()
     }
 }
 
-void SystemTask::pushMessage(SystemTask::Messages dataToQueue)
+SystemTask::Messages convertParsedInputToMsg(const char *inputToCmp)
 {
-    NRF_LOG_WARNING("SystemTask::pushMessage()...\n");
-    NRF_LOG_FLUSH();
+    if (!strcmp(inputToCmp, "tempOn"))
+    {
+        return SystemTask::Messages::subscribeTempNotifications;
+    }
+    else if (!strcmp(inputToCmp, "tempOff"))
+    {
+        return SystemTask::Messages::unsubscribeTempNotifications;
+    }
+    return SystemTask::Messages::invalidInput;
+}
+
+void SystemTask::pushMessage(SystemTask::Messages dataToQueue, bool fromISR)
+{
+    //NRF_LOG_WARNING("SystemTask::pushMessage()...\n");
+    //NRF_LOG_FLUSH();
     BaseType_t xHigherPriorityTaskWoken; // TODO - need?
-    xQueueSendFromISR(systemTaskQueue, &dataToQueue, 0);
+
+    if (fromISR)
+    {
+        xQueueSendFromISR(systemTaskQueue, &dataToQueue, &xHigherPriorityTaskWoken);
+    }
+    else
+    {
+        xQueueSend(systemTaskQueue, &dataToQueue, 0);
+    }
+
+    //portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 
 }
 
