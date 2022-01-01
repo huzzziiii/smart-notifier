@@ -1,5 +1,5 @@
 Output/Release/Obj/Init\ template\ -\ FreeRTOS/fifo.o: \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/Fifo/Src/fifo.cpp \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SWatch-One/smart-watch/s140/ses/Fifo/Src/fifo.cpp \
  Fifo/Inc/fifo.hpp ../../../../../../components/libraries/log/nrf_log.h \
  ../../../../../../components/libraries/util/sdk_common.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdint.h \

@@ -1,6 +1,6 @@
 Output/Release/Obj/Init\ template\ -\ FreeRTOS/custom_service.o: \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/Ble_Final/custom_service.cpp \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/Ble_Final/custom_service.h \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SWatch-One/smart-watch/s140/ses/Ble_Final/custom_service.cpp \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SWatch-One/smart-watch/s140/ses/Ble_Final/custom_service.h \
  ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdint.h \
  ../../../../../../components/softdevice/s140/headers/nrf_svc.h \
@@ -97,11 +97,6 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/custom_service.o: \
  ../../../segger_files/SEGGER/SEGGER_SYSVIEW_ConfDefaults.h \
  ../../../segger_files/Config/SEGGER_SYSVIEW_Conf.h \
  ../../../segger_files/Config/SEGGER_RTT_Conf.h \
- ../../../../../../components/ble/ble_services/ble_nus/ble_nus.h \
- ../../../../../../components/ble/ble_link_ctx_manager/ble_link_ctx_manager.h \
- ../../../../../../components/ble/common/ble_conn_state.h \
- ../../../../../../components/libraries/atomic/nrf_atomic.h \
- ../../../../../../components/libraries/uart/app_uart.h \
  ../../../../../../components/libraries/bsp/bsp_btn_ble.h \
  ../../../../../../components/libraries/bsp/bsp.h \
  ../../../../../../components/boards/boards.h \
@@ -124,14 +119,7 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/custom_service.o: \
  ../../../../../../components/boards/pca10056.h \
  ../../../../../../components/libraries/button/app_button.h \
  ../../../../../../components/libraries/pwr_mgmt/nrf_pwr_mgmt.h \
- ../../../../../../components/libraries/log/nrf_log.h \
- ../../../../../../components/libraries/experimental_section_vars/nrf_section.h \
- ../../../../../../components/libraries/strerror/nrf_strerror.h \
- ../../../../../../components/libraries/log/src/nrf_log_internal.h \
- ../../../../../../components/libraries/log/nrf_log_instance.h \
- ../../../../../../components/libraries/log/nrf_log_types.h \
- ../../../../../../components/libraries/log/nrf_log_types.h \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/Ble_Final/ble_common.h \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SWatch-One/smart-watch/s140/ses/Ble_Final/ble_common.h \
  SystemTask/SystemTask.hpp \
  ../../../../../../external/freertos/source/include/FreeRTOS.h \
  ../../../../../../external/freertos/source/include/projdefs.h \
@@ -145,6 +133,13 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/custom_service.o: \
  ../../../../../../external/freertos/source/include/queue.h \
  ../../../../../../external/freertos/source/include/task.h \
  custom_drivers/Inc/uart.hpp Fifo/Inc/fifo.hpp \
+ ../../../../../../components/libraries/log/nrf_log.h \
+ ../../../../../../components/libraries/experimental_section_vars/nrf_section.h \
+ ../../../../../../components/libraries/strerror/nrf_strerror.h \
+ ../../../../../../components/libraries/log/src/nrf_log_internal.h \
+ ../../../../../../components/libraries/log/nrf_log_instance.h \
+ ../../../../../../components/libraries/log/nrf_log_types.h \
+ ../../../../../../components/libraries/log/nrf_log_types.h \
  ../../../../../../components/libraries/log/nrf_log_ctrl.h \
  ../../../../../../components/libraries/log/src/nrf_log_ctrl_internal.h \
  ../../../../../../components/libraries/log/nrf_log_backend_interface.h \
@@ -174,4 +169,5 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/custom_service.o: \
  ../../../../../../external/freertos/source/include/timers.h \
  ../../../../../../external/freertos/source/include/semphr.h \
  ../../../../../../external/freertos/source/include/queue.h \
- NotificationManager/NotificationManager.hpp ObserverPattern/Observer.hpp
+ NotificationManager/NotificationManager.hpp ObserverPattern/Observer.hpp \
+ BLE_Final/custom_service.h BLE_Final/ble_common.h

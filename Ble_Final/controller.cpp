@@ -53,7 +53,8 @@ void on_write(BleCustSrvInfo *pCust, ble_evt_t const * p_ble_evt)
         bleCustEvent.rxData.rxdBytes = p_evt_write->len;
         
         nrf_gpio_pin_toggle(LED_4);  // TODO - do useful stuff!
-
+        
+        // invoke the custom service data handler
         if (pCust->DataHandler)
         {
 	  pCust->DataHandler(&bleCustEvent);
@@ -103,6 +104,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
     {
         case BLE_GAP_EVT_CONNECTED:
             NRF_LOG_INFO("Connected");
+//NRF_LOG_FLUSH();	    // TODO -- remove!
 
 	  //APP_ERROR_CHECK(NRF_ERROR_INVALID_STATE);
             err_code = bsp_indication_set(BSP_INDICATE_CONNECTED);
@@ -166,12 +168,12 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 /**@brief Function for handling events from the GATT library. */
 void gatt_evt_handler(nrf_ble_gatt_t * p_gatt, nrf_ble_gatt_evt_t const * p_evt)
 {
-    if ((m_conn_handle == p_evt->conn_handle) && (p_evt->evt_id == NRF_BLE_GATT_EVT_ATT_MTU_UPDATED))
-    {
-        m_ble_nus_max_data_len = p_evt->params.att_mtu_effective - OPCODE_LENGTH - HANDLE_LENGTH;
-        NRF_LOG_INFO("Data len is set to 0x%X(%d)", m_ble_nus_max_data_len, m_ble_nus_max_data_len);
-        NRF_LOG_INFO("Connection Handle: %x\n", m_conn_handle);
-    }
+    //if ((m_conn_handle == p_evt->conn_handle) && (p_evt->evt_id == NRF_BLE_GATT_EVT_ATT_MTU_UPDATED))
+    //{
+    //    m_ble_nus_max_data_len = p_evt->params.att_mtu_effective - OPCODE_LENGTH - HANDLE_LENGTH;
+    //    NRF_LOG_INFO("Data len is set to 0x%X(%d)", m_ble_nus_max_data_len, m_ble_nus_max_data_len);
+    //    NRF_LOG_INFO("Connection Handle: %x\n", m_conn_handle);
+    //}
     NRF_LOG_DEBUG("ATT MTU exchange completed. central 0x%x peripheral 0x%x",
                   p_gatt->att_mtu_desired_central,
                   p_gatt->att_mtu_desired_periph);
@@ -364,7 +366,7 @@ static void nrf_qwr_error_handler(uint32_t nrf_error)
 }
 
 
-void BleController::Init()
+void BleController::Init(BleCustDataHndlr bleCustSrvHdlr)
 {   
     ret_code_t         err_code;
 
@@ -381,9 +383,7 @@ void BleController::Init()
     err_code = nrf_ble_qwr_init(&m_qwr, &qwr_init);
     APP_ERROR_CHECK(err_code);
 
-    
-
-    _bleCustomSrv.Init();
+    _bleCustomSrv.Init(bleCustSrvHdlr);
     advertising_init();
     conn_params_init();
     advertising_start();

@@ -1,5 +1,5 @@
 Output/Release/Obj/Init\ template\ -\ FreeRTOS/SEGGER_SYSVIEW_FreeRTOS.o: \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/SeggerFiles/Sample/FreeRTOSV10/SEGGER_SYSVIEW_FreeRTOS.c \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SWatch-One/smart-watch/s140/ses/SeggerFiles/Sample/FreeRTOSV10/SEGGER_SYSVIEW_FreeRTOS.c \
  ../../../../../../external/freertos/source/include/FreeRTOS.h \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stddef.h \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_cprolog.h \
@@ -67,6 +67,6 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/SEGGER_SYSVIEW_FreeRTOS.o: \
  ../../../../../../external/freertos/source/include/mpu_wrappers.h \
  ../../../../../../external/freertos/source/include/task.h \
  ../../../../../../external/freertos/source/include/list.h \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/SeggerFiles/Sample/FreeRTOSV10/SEGGER_SYSVIEW_FreeRTOS.h \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SWatch-One/smart-watch/s140/ses/SeggerFiles/Sample/FreeRTOSV10/SEGGER_SYSVIEW_FreeRTOS.h \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/string.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/string.h

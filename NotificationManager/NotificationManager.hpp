@@ -8,6 +8,9 @@
 #include "Observer.hpp"
 #include "mcp9808.hpp"
 #include "fifo.hpp"
+#include "uart.hpp"
+#include "custom_service.h"
+
 #include <stdbool.h>
 #include <stdarg.h>
 
@@ -25,13 +28,15 @@ struct Notification
     Category category;
 };
 
+class BleCustomService;
+ 
 //template<typename T>
 class NotificationManager : public Observer
 {
     Subject *subscriptions[maxSubscriptions] = {nullptr};	// store references to Subject
     uint8_t subscriptionIdx = 0;
-
-    //Notification _notifications[40];			// TODO - think about using Fifo instead...
+    Uart _uart;
+    BleCustomService &_bleCustSrv;
     Fifo<Notification> _notifications;
 
     public:
@@ -39,11 +44,17 @@ class NotificationManager : public Observer
     
     // constructor
     template<typename ...Args>
-    NotificationManager(Args ...args)
+    NotificationManager(BleCustomService &bleCustSrv, Uart &uart, Args ...args) : _bleCustSrv(bleCustSrv), _uart(uart), _notification{0}
     {
         ((subscriptions[subscriptionIdx] = args), ...);
         subscriptions[subscriptionIdx++]->attach(this);
     }
+
+    //NotificationManager(Uart &uart, Args ...args) : _uart(uart), _notification{0}
+    //{
+    //    ((subscriptions[subscriptionIdx] = args), ...);
+    //    subscriptions[subscriptionIdx++]->attach(this);
+    //}
     
     void printNotificationList();
     void pushNotification();

@@ -1,6 +1,6 @@
 Output/Release/Obj/Init\ template\ -\ FreeRTOS/NotificationManager.o: \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/NotificationManager/NotificationManager.cpp \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/NotificationManager/NotificationManager.hpp \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SWatch-One/smart-watch/s140/ses/NotificationManager/NotificationManager.cpp \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SWatch-One/smart-watch/s140/ses/NotificationManager/NotificationManager.hpp \
  ../../../../../../components/libraries/log/nrf_log.h \
  ../../../../../../components/libraries/util/sdk_common.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdint.h \
@@ -130,4 +130,43 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/NotificationManager.o: \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_typeinfo.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/typeinfo \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/exception \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/exception
+ /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/exception \
+ custom_drivers/Inc/uart.hpp \
+ ../../../../../../modules/nrfx/hal/nrf_gpio.h BLE_Final/custom_service.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
+ ../../../../../../components/softdevice/s140/headers/ble_hci.h \
+ ../../../../../../components/softdevice/s140/headers/ble_ranges.h \
+ ../../../../../../components/softdevice/s140/headers/ble_types.h \
+ ../../../../../../components/softdevice/s140/headers/ble_err.h \
+ ../../../../../../components/ble/ble_advertising/ble_advertising.h \
+ ../../../../../../components/softdevice/s140/headers/ble.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gap.h \
+ ../../../../../../components/softdevice/s140/headers/ble_l2cap.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gatts.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gap.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
+ ../../../../../../components/ble/common/ble_advdata.h \
+ ../../../../../../components/softdevice/s140/headers/ble_hci.h \
+ ../../../../../../components/ble/common/ble_conn_params.h \
+ ../../../../../../components/ble/common/ble_srv_common.h \
+ ../../../../../../components/softdevice/s140/headers/ble_types.h \
+ ../../../../../../components/softdevice/common/nrf_sdh.h \
+ ../../../../../../components/libraries/experimental_section_vars/nrf_section_iter.h \
+ ../../../../../../components/libraries/experimental_section_vars/nrf_section.h \
+ ../../../../../../components/softdevice/common/nrf_sdh_soc.h \
+ ../../../../../../components/softdevice/common/nrf_sdh_ble.h \
+ ../../../../../../components/ble/nrf_ble_gatt/nrf_ble_gatt.h \
+ ../../../../../../components/ble/nrf_ble_qwr/nrf_ble_qwr.h \
+ ../../../../../../components/ble/common/ble_srv_common.h \
+ ../../../../../../components/libraries/timer/app_timer.h \
+ ../../../../../../components/libraries/util/app_error.h \
+ ../../../../../../components/libraries/bsp/bsp_btn_ble.h \
+ ../../../../../../components/libraries/bsp/bsp.h \
+ ../../../../../../components/boards/boards.h \
+ ../../../../../../components/boards/pca10056.h \
+ ../../../../../../components/libraries/button/app_button.h \
+ ../../../../../../components/libraries/pwr_mgmt/nrf_pwr_mgmt.h \
+ BLE_Final/ble_common.h SystemTask/SystemTask.hpp \
+ NotificationManager/NotificationManager.hpp BLE_Final/ble_common.h

@@ -37,9 +37,10 @@ void NotificationManager::pushNotification()
 {
     _notifications.enque(_notification);
 
-    /* TODO 
-    - send notification over to BLE and terminal
-    */
+    // send notification over to BLE and terminal
+    //uint8_t s[] = "t=15";
+    uint8_t *msgToSend = reinterpret_cast<uint8_t*>(_notification.msg);
+    _bleCustSrv.Send(msgToSend);
 }
 
 /*
@@ -60,9 +61,9 @@ void NotificationManager::update(Subject *subject)
         MCP9808 *mcp9808 = dynamic_cast<MCP9808*>(subject);
         uint16_t tmpValue = mcp9808->getCurrentTempInC();
         _notification.category = Category::tempReading;
-        snprintf(_notification.msg, 50, "Current temperature value (C) = %u", tmpValue);
-
-        //NRF_LOG_INFO("__NotifMsg: %s\n", _notification.msg);
+        //snprintf(_notification.msg, 50, "Current temperature value (C) = %u", tmpValue);
+        snprintf(_notification.msg, 50, "t=%uC", tmpValue);
+        _uart.PrintUart(_notification.msg);
 
         pushNotification();
          

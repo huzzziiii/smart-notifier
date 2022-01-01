@@ -1,5 +1,5 @@
 Output/Release/Obj/Init\ template\ -\ FreeRTOS/SEGGER_SYSVIEW_Config_FreeRTOS.o: \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/segger_files/SEGGER_SYSVIEW_Config_FreeRTOS.c \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SWatch-One/segger_files/SEGGER_SYSVIEW_Config_FreeRTOS.c \
  ../../../../../../external/freertos/source/include/FreeRTOS.h \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stddef.h \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_cprolog.h \

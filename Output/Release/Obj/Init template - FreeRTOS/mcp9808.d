@@ -1,5 +1,5 @@
 Output/Release/Obj/Init\ template\ -\ FreeRTOS/mcp9808.o: \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/custom_drivers/Src/mcp9808.cpp \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SWatch-One/smart-watch/s140/ses/custom_drivers/Src/mcp9808.cpp \
  custom_drivers/Inc/mcp9808.hpp custom_drivers/Inc/sensors.hpp \
  ../../../../../../components/libraries/log/nrf_log.h \
  ../../../../../../components/libraries/util/sdk_common.h \

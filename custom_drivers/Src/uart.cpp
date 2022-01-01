@@ -14,12 +14,8 @@ extern "C" {
 }
 
 
-void Uart::PrintUart(const char *format, ...)
+void Uart::PrintUart(const char *format, ...) // TODO ---- change to C++ variadics
 {
-    //char completeStr[100] = {0};
-    //sprintf (completeStr, "%s\n\r", format);
-    //StartTx((uint8_t*) completeStr, strlen(completeStr));
-    //return; 
     char buffer[100] = {0};
     va_list args;
 
@@ -28,8 +24,10 @@ void Uart::PrintUart(const char *format, ...)
     strcat(buffer, "\r\n");
     size_t bytesToSend = strlen(buffer);
 
-    StartTx((uint8_t*) buffer, bytesToSend);
     va_end (args);
+
+    StartTx((uint8_t*) buffer, bytesToSend);
+    
 }
 
 void Uart::irqHandler()
@@ -101,8 +99,7 @@ void Uart::irqHandler()
 
 void Uart::TxByte(uint8_t byte)
 {
-        setNrfEvent(NRF_UART_EVENT_TXDRDY, StatusDisable);
-        pUARTx->TXD = byte;
+    pUARTx->TXD = byte;
 }
 
 void Uart::TxBlocking(uint8_t *buffer, size_t bytesToSend)
@@ -117,10 +114,6 @@ void Uart::TxBlocking(uint8_t *buffer, size_t bytesToSend)
 
 void Uart::StartTx(uint8_t *buffer, size_t bytesToSend, bool blockingTx)
 {
-    //nrf_uart_event_clear(p_instance->p_reg, NRF_UART_EVENT_TXDRDY);
-    //nrf_uart_task_trigger(p_instance->p_reg, NRF_UART_TASK_STARTTX);
-
-    //setNrfEvent(NRF_UART_EVENT_TXDRDY, StatusDisable);
     setNrfEvent(NRF_UART_TASK_STARTTX, StatusEnable);
     
     if (blockingTx)
@@ -130,6 +123,7 @@ void Uart::StartTx(uint8_t *buffer, size_t bytesToSend, bool blockingTx)
     }
     else
     {
+        setNrfEvent(NRF_UART_EVENT_TXDRDY, StatusDisable);
         fifoTx.enqueElems(buffer, bytesToSend);
         uint8_t val = fifoTx.deque();
         TxByte(val);

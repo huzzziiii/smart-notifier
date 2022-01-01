@@ -5,7 +5,7 @@
 
 #define APP_BLE_CONN_CFG_TAG            1                                           /**< A tag identifying the SoftDevice BLE configuration. */
 
-#define DEVICE_NAME                     "Xyp-CUS"				    /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                     "HUZZi-CUS"				    /**< Name of device. Will be included in the advertising data. */
 #define NUS_SERVICE_UUID_TYPE           BLE_UUID_TYPE_VENDOR_BEGIN                  /**< UUID type for the Nordic UART Service (vendor specific). */
 
 #define APP_BLE_OBSERVER_PRIO           3                                           /**< Application's BLE observer priority. You shouldn't need to modify this value. */
@@ -33,10 +33,12 @@
 
 #define BLE_UUID_TYPE_VENDOR_BEGIN	  0x02 /**< Vendor UUID types start at this index (128-bit). */
 
-BLE_NUS_DEF(m_nus, NRF_SDH_BLE_TOTAL_LINK_COUNT);                                   /**< BLE NUS service instance. */
+//BLE_NUS_DEF(m_nus, NRF_SDH_BLE_TOTAL_LINK_COUNT);                                   /**< BLE NUS service instance. */
                                                          /**< GATT module instance. */
                                                          /**< Context for the Queued Write module.*/
 BLE_ADVERTISING_DEF(m_advertising);   
+
+
 
 //static BleCustSrvInfo _bleCustSrvInfo;
 
@@ -80,7 +82,7 @@ class BleController
 
     public:
     BleController(BleCustomService &bleCustomSrv) : _bleCustomSrv(bleCustomSrv) {}
-    void Init();
+    void Init(BleCustDataHndlr custSrvHdlr);
     void InitCommParams();
 };
 

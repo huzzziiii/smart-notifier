@@ -77,8 +77,12 @@ Uart uart(&commParams, NRF_UART0, APP_IRQ_PRIORITY_LOWEST, uartCallback, systemQ
 // Temp sensor
 MCP9808 tmpSensor;
 
+BleCustomService bleCustomService;
+BleController bleController(bleCustomService);
+
 // Notification Manager
-NotificationManager notificationManager(&tmpSensor);
+//NotificationManager notificationManager(uart, &tmpSensor);
+NotificationManager notificationManager(bleCustomService, uart, &tmpSensor);
 
 // system task
 SystemTask systemTask(uart, tmpSensor, notificationManager, systemQueue);
@@ -231,6 +235,7 @@ static void power_management_init(void)
     APP_ERROR_CHECK(err_code);
 }
 
+
 /**@brief Function for application main entry.
  */
 int main()
@@ -238,15 +243,8 @@ int main()
    //SEGGER_SYSVIEW_Conf();
 
     const char *openApp = "SmartWatch.";
-    uart.PrintUart("Welcome to the App");// %s", openApp);
-    
-    BleCustomService bleCustomService(&systemTask);
-    BleController bleController(bleCustomService);
-    bleController.Init();
 
-
-    //SEGGER_SYSVIEW_Start();
-   
+   // uart.PrintUart("Welcome to the %s", openApp);	    // TODO - fix the missed TX'd bytes - make sure the transmission is done before sending a next byte
 
     // Initialize modules  
     auto res = NRF_LOG_INIT(NULL);
@@ -254,9 +252,48 @@ int main()
     NRF_LOG_DEFAULT_BACKENDS_INIT();
 
     /* Initialize clock driver for better time accuracy in FREERTOS */
-    //clock_init();	    - TODO - change to camelCase
+     //clock_init();	    // - TODO - change to camelCase
+    
+    //BleCustomService bleCustomService(&systemTask);
+    //BleCustomService bleCustomService;
+    //BleController bleController(bleCustomService);
+
+    bleController.Init(CustSrvDataHdlr);
 
     initLeds();
+    vTaskStartScheduler();	
+
+    while(1);
+
+    nrf_delay_us(8000000); // 8000000
+
+    int x = 0;
+    //uint8_t data;
+    uint8_t data[] = "t=20";
+
+    // [testing] -- sending data to the service
+    while(1)
+    {
+        nrf_delay_us(5000000);
+   //     if (x % 2 == 0)
+   //     {
+	  //data = 10;
+   //     } else
+   //     {
+	  //data = 5;
+   //     }
+        //bleCustomService.Send(&data);  
+        bleCustomService.Send(data); 
+        x++;
+    }
+
+
+    //SEGGER_SYSVIEW_Start();
+
+
+    
+
+    
 
 
     //TimerHandle_t timerReturn = xTimerCreate("ledTimer", pdMS_TO_TICKS(200), pdTRUE, (void *) 0, cb);
@@ -271,7 +308,7 @@ int main()
     
     //while(1);
 
-    vTaskStartScheduler();		// Start FreeRTOS scheduler
+     vTaskStartScheduler();		// Start FreeRTOS scheduler
 
     
     //uint8_t tmp[40];

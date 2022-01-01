@@ -6,14 +6,20 @@
 #include <FreeRTOS.h>
 #include <task.h>
 #include <queue.h>
-#include <uart.hpp>
+#include "uart.hpp"
 #include "mcp9808.hpp"
 //#include "BleUartService.hpp"
 // TODO -- #include "bleApp.hpp"
 //#include "BleCommon.hpp"
 //#include "ble_nus.h"
 #include "NotificationManager.hpp"
+#include "ble_common.h"
 
+//#include "custom_service.h"
+
+#define ENUM_ENTRY(x) { x, #x }
+
+class NotificationManager;
 
 class SystemTask 
 {   
@@ -48,8 +54,6 @@ class SystemTask
 
 SystemTask::Messages convertParsedInputToMsg(const char *inputToCmp);
 
-#define ENUM_ENTRY(x) { x, #x }
-
 struct Lookup
 {
     SystemTask::Messages message;
@@ -58,11 +62,13 @@ struct Lookup
 
 using Messages = SystemTask::Messages;
  
-static Lookup lookupTable[3] = {
+static Lookup lookupTable[3] = 
+{
   ENUM_ENTRY(Messages::subscribeTempNotifications),
   ENUM_ENTRY(Messages::unsubscribeTempNotifications),
   ENUM_ENTRY(Messages::invalidInput)
 };
 
+void CustSrvDataHdlr(CustEvent *bleCustEvent);
 
 #endif

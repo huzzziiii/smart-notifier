@@ -28,7 +28,7 @@ void MCP9808::readTempInC()			  // TODO - get value in float!
         _tempInC = upperByte << 4 | lowerByte >> 4;
     } 
 
-    NRF_LOG_INFO("_tempInC: %u\n", _tempInC);
+  //NRF_LOG_INFO("_tempInC: %u\n", _tempInC);
     //NRF_LOG_FLUSH();
     int m = 0; // TODO remove
 }
@@ -46,13 +46,15 @@ void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)
         case NRF_DRV_TWI_EVT_DONE:
             if (p_event->xfer_desc.type == NRF_DRV_TWI_XFER_RX)
             {
-	      vTaskNotifyGiveFromISR(obj->taskHandle, &xHigherPriorityTaskWoken); // unlocks the receiver thread by giving a semaphore (ncrementing ulNotifiedValue by 1)
+	      // unlocks the receiver thread by giving a semaphore (incrementing ulNotifiedValue by 1)
+	      vTaskNotifyGiveFromISR(obj->taskHandle, &xHigherPriorityTaskWoken); 
+	      
 	      //obj->readTempInC();	 // TODO - do the parsing in the task! (parsing the data now that the transfer has been completed
-	       m_xfer_done = true; // TODO -- comment out! 
+	       //m_xfer_done = true; // TODO -- comment out! 
             }
 	  else if (p_event->xfer_desc.type == NRF_DRV_TWI_XFER_TX)
 	  {
-	      NRF_LOG_INFO("TX transfer done...\n");
+	      //NRF_LOG_INFO("TX transfer done...\n");
 	       m_xfer_done = true; 
 	  }
             //m_xfer_done = true; 
@@ -77,7 +79,8 @@ uint8_t tmpBuffer[10]; // TODO - remv
     ret_code_t err_code = nrf_drv_twi_init(&m_twi, &i2cConfig, twi_handler, this);
     APP_ERROR_CHECK(err_code);
 
-    nrf_drv_twi_enable(&m_twi);	// enable the interrupt
+    // enable the interrupt
+    nrf_drv_twi_enable(&m_twi);	
     
     size_t heapSize1 = xPortGetFreeHeapSize();
     
@@ -100,14 +103,22 @@ void MCP9808::process(void *instance)
 }
 
 static volatile uint8_t m = 0;
+static bool blockTd = false;
 
 void MCP9808::mainThread()
 {
     xferData(tmpBuffer, 1);  
     vTaskDelay(pdMS_TO_TICKS(2000));
-    
+    uint32_t notifiedValue;
+
     while(true)
     {   
+        // block the thread if notification is unsubscribed
+        if (blockTd)
+        {
+	  xTaskNotifyWait(0, 0, NULL, portMAX_DELAY);
+        }
+
         uint32_t xaf = read();
         
         //NRF_LOG_INFO("READ ret: %d\n", xaf);
@@ -117,13 +128,13 @@ void MCP9808::mainThread()
         uint32_t taskNotify = ulTaskNotifyTake(pdTRUE, portMAX_DELAY);  // blocks the current thread by decrementing ulNotifiedValue to 0 (taking a semaphore)
         if (taskNotify != 0)
         {
-	  NRF_LOG_WARNING("Transmission ended as expected...\n");
+	  //NRF_LOG_WARNING("Transmission ended as expected...\n");
 	  //NRF_LOG_FLUSH();
 	  m++;
         }
         else
         {
-	  NRF_LOG_WARNING("The call to ulTaskNotifyTake timedout!!\n");
+	  //NRF_LOG_WARNING("The call to ulTaskNotifyTake timedout!!\n");
         }
 
         readTempInC();
@@ -178,11 +189,14 @@ void MCP9808::onSubscriberChange(bool resumeThread)
     {
         if (_tempInC != -1)
         {
-	  vTaskResume(taskHandle);
+	  blockTd = false;
+	  xTaskNotify(taskHandle, 0, eNoAction);
+	  // vTaskResume(taskHandle);
         }
     }
     else
     {
-        vTaskSuspend(taskHandle);
+        blockTd = true;
+       // vTaskSuspend(taskHandle);
     }
 }

@@ -4,8 +4,8 @@
   <BookmarkItem objectName="" line="63" column="4" path="/Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/SystemTask/SystemTask.cpp" number="1" extra="gatt_init();" color="5"/>
  </Bookmarks>
  <Breakpoints groups="Breakpoints" active_group="Breakpoints">
-  <BreakpointListItem trigger="" line="100" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="CustomBLE/ble_common.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="129" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="CustomBLE/ble_common.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="100" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="CustomBLE/ble_common.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="129" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="CustomBLE/ble_common.c" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="115" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="163" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="166" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
@@ -23,14 +23,16 @@
   <BreakpointListItem trigger="" line="819" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../../../ble_peripheral/ble_app_template/main.c" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="184" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="main.cpp" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="198" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="main.cpp" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="422" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="main.cpp" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="244" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="main.cpp" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="423" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="main.cpp" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="33" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="SystemTask/SystemTask.cpp" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="68" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="SystemTask/SystemTask.cpp" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="73" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="SystemTask/SystemTask.cpp" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="73" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="SystemTask/SystemTask.cpp" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="13" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="TimerApp/TimerApp.cpp" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="26" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="TimerApp/TimerApp.cpp" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="31" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="TimerApp/TimerApp.cpp" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="58" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="TimerApp/TimerApp.cpp" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="49" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="UartApp/uart_app.cpp" useHWbreakpoint="false"/>
   <Exceptions set="Reset;MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault"/>
  </Breakpoints>
  <ExecutionProfileWindow/>
@@ -66,26 +68,12 @@
   <ProjectSessionItem path="SmartWatch;Init template - FreeRTOS"/>
   <ProjectSessionItem path="SmartWatch;Init template - FreeRTOS;Application"/>
   <ProjectSessionItem path="SmartWatch;Init template - FreeRTOS;BLE_Final"/>
-  <ProjectSessionItem path="SmartWatch;Init template - FreeRTOS;Board Definition"/>
-  <ProjectSessionItem path="SmartWatch;Init template - FreeRTOS;Board Support"/>
-  <ProjectSessionItem path="SmartWatch;Init template - FreeRTOS;Custom BLE Services"/>
   <ProjectSessionItem path="SmartWatch;Init template - FreeRTOS;Custom Drivers"/>
-  <ProjectSessionItem path="SmartWatch;Init template - FreeRTOS;Custom Drivers;Inc"/>
   <ProjectSessionItem path="SmartWatch;Init template - FreeRTOS;Custom Drivers;Src"/>
-  <ProjectSessionItem path="SmartWatch;Init template - FreeRTOS;nRF_Segger_RTT"/>
-  <ProjectSessionItem path="SmartWatch;Init template - FreeRTOS;SystemTask"/>
-  <ProjectSessionItem path="SmartWatch;Init template - FreeRTOS;Third Parties"/>
-  <ProjectSessionItem path="SmartWatch;Init template - FreeRTOS;TimerApp"/>
-  <ProjectSessionItem path="SmartWatch;Init template - FreeRTOS;UartApp"/>
-  <ProjectSessionItem path="SmartWatch;ble_app_hrs_freertos_pca10056_s140"/>
+  <ProjectSessionItem path="SmartWatch;Init template - FreeRTOS;nRF_Libraries"/>
   <ProjectSessionItem path="SmartWatch;ble_app_template_pca10056_s140"/>
-  <ProjectSessionItem path="SmartWatch;ble_app_uart_pca10056_s140"/>
-  <ProjectSessionItem path="SmartWatch;ble_app_uart_pca10056_s140;ble_app_uart_pca10056_s140"/>
-  <ProjectSessionItem path="SmartWatch;ble_app_uart_pca10056_s140;ble_app_uart_pca10056_s140;Application"/>
-  <ProjectSessionItem path="SmartWatch;ble_app_uart_pca10056_s140;ble_app_uart_pca10056_s140;nRF_BLE"/>
-  <ProjectSessionItem path="SmartWatch;ble_app_uart_pca10056_s140;ble_app_uart_pca10056_s140;nRF_BLE_Services"/>
-  <ProjectSessionItem path="SmartWatch;ble_app_uart_pca10056_s140;ble_app_uart_pca10056_s140;nRF_Libraries"/>
-  <ProjectSessionItem path="SmartWatch;ble_app_uart_pca10056_s140;ble_app_uart_pca10056_s140;nRF_SoftDevice"/>
+  <ProjectSessionItem path="SmartWatch;ble_app_template_pca10056_s140;ble_app_template_pca10056_s140"/>
+  <ProjectSessionItem path="SmartWatch;ble_app_template_pca10056_s140;ble_app_template_pca10056_s140;Application"/>
  </Project>
  <Register1>
   <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="ble_app_hrs_freertos_pca10056_s140" decimalNodes="" octalNodes="" unsignedNodes=""/>
@@ -187,19 +175,20 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="148" useTextEdit="1" openedFrom="/Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/ble_peripheral/ble_app_uart/main.c" useBinaryEdit="0" left="0" path="main.cpp" selected="0" top="710" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="BLE_Final/ble_controller.cpp" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="20" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="BLE_Final/ble_controller.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="237" useTextEdit="1" openedFrom="/Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/ble_peripheral/ble_app_uart/main.c" useBinaryEdit="0" left="0" path="main.cpp" selected="1" top="228" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="2" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="controller.cpp" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="9" y="3" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="BLE_Final/controller.h" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="custom_service.cpp" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="1" y="7" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="custom_service.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="3" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="BLE_Final/controller.h" selected="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="7" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="BLE_Final/custom_service.h" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="32" y="16" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="Ble_Final/controller.h" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="23" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="Ble_Final/controller.cpp" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="18" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="Ble_Final/custom_service.h" selected="1" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="Ble_Final/custom_service.cpp" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="HUD {cb07ced7-7d53-4651-a28d-fe1bdec6fe5e} Middle" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="ble_cust_service.cpp" selected="0" top="197" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="16" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="Ble_Final/controller.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="Ble_Final/controller.cpp" selected="0" top="354" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="14" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="Ble_Final/custom_service.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="11" y="60" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="Ble_Final/custom_service.cpp" selected="0" top="23" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="SystemTask/SystemTask.cpp" selected="0" top="91" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="72" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="custom_drivers/Src/uart.cpp" selected="0" top="34" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="94" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/util/app_error_weak.c" selected="0" top="68" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="183" useTextEdit="1" openedFrom="/Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SWatch-One/smart-watch/s140/ses/custom_drivers/Src/uart.cpp" useBinaryEdit="0" left="0" path="custom_drivers/Inc/uart.hpp" selected="0" top="162" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="50" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="UartApp/uart_app.cpp" selected="0" top="29" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="7" y="145" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../ble_peripheral/ble_app_template/main.c" selected="0" top="120" codecName="Default"/>
  </Files>
  <ARMCrossStudioWindow activeProject="Init template - FreeRTOS" fileDialogDefaultFilter="*.c;*.cpp;*.cxx;*.cc;*.h;*.hpp;*.hxx" autoConnectTarget="J-Link" buildConfiguration="Release" sessionSettings="" debugSearchFileMap="C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 5.44/source/thumb_crt0.s&#xa;" fileDialogInitialDirectory="/Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/Ble_Final" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

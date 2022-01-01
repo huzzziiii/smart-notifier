@@ -36,6 +36,8 @@ typedef struct
     BleCusRxData	rxData;
 } CustEvent;
 
+typedef void (*BLE_SRV_HDLR)(CustEvent *bleCustEvent);
+
 typedef void (*BleCustDataHndlr)(CustEvent *p_evt);
 
 

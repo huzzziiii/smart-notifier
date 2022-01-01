@@ -15,13 +15,13 @@
 #include "nrf_ble_gatt.h"
 #include "nrf_ble_qwr.h"
 #include "app_timer.h"
-#include "ble_nus.h"
-#include "app_uart.h"
-#include "app_util_platform.h"
+//#include "ble_nus.h"
+//#include "app_uart.h"
+//#include "app_util_platform.h"
 #include "bsp_btn_ble.h"
 #include "nrf_pwr_mgmt.h"
 #include "sdk_config.h"
-#include "nrf_log.h"
+//#include "nrf_log.h"
 #include <stdint.h>
 #include "ble_common.h"
 #include "SystemTask.hpp"
@@ -90,6 +90,9 @@ void ble_cus_on_ble_evt( ble_evt_t const * p_ble_evt, void * p_context);
 //    //BleCustDataHndlr	    DataHandler;	      /**< Callback for data handling */
 //};
 
+class SystemTask;
+
+
 
 
 class BleCustomService
@@ -98,16 +101,21 @@ class BleCustomService
     CustInitChar bleInitChar;
     //BleCustSrvInfo custSrvInfo;
     SystemTask *_systemTask;
+    BleCustSrvInfo *_pSrvInfo;
 
     public:
-    BleCustomService(SystemTask *systemTask) : _systemTask(systemTask) {}
+    //BleCustomService(SystemTask *systemTask) : _systemTask(systemTask) {}
+    //BleCustomService() = default;
 
     //void Init(BleCustDataHndlr custHandler, CustEventHandler EventHandler);
-    void Init();
+    void Init(BleCustDataHndlr bleCustSrvHdlr);
 
-    uint32_t ServiceInit(BleCustSrvInfo *pSrvInfo, CustInitChar *custInitCharac);
+    //uint32_t ServiceInit(BleCustSrvInfo *pSrvInfo, CustInitChar *custInitCharac);
+    uint32_t ServiceInit(BleCustSrvInfo *pSrvInfo, CustInitChar *custInitCharac, BleCustDataHndlr srvDataHdlr);
+    
     uint32_t AddCustChar();
     BleCustDataHndlr GetDataHdnlr();
+    void Send(uint8_t *data);
     //void CustDataHandler();
 };
 

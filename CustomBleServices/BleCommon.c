@@ -191,7 +191,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             // No implementation needed.
             break;
     }
-    NRF_LOG_FLUSH();
+    //NRF_LOG_FLUSH();
 }
 
 /**@brief Function for the SoftDevice initialization.

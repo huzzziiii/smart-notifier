@@ -1,5 +1,5 @@
 Output/Release/Obj/Init\ template\ -\ FreeRTOS/main.o: \
- /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SmartWatch/pca10056/s140/ses/main.cpp \
+ /Users/huzaifaasif/Projects/BLE/nRF5_SDK_17.0.2_d674dde/examples/Huzzi-Projects/SWatch-One/smart-watch/s140/ses/main.cpp \
  ../../../../../../external/freertos/portable/CMSIS/nrf52/port_cmsis_systick.c \
  ../../../../../../external/freertos/source/include/FreeRTOS.h \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stddef.h \
@@ -142,6 +142,39 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/main.o: \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/exception \
  ../../../../../../modules/nrfx/hal/nrf_gpio.h \
  NotificationManager/NotificationManager.hpp ObserverPattern/Observer.hpp \
+ BLE_Final/custom_service.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
+ ../../../../../../components/softdevice/s140/headers/ble_hci.h \
+ ../../../../../../components/softdevice/s140/headers/ble_ranges.h \
+ ../../../../../../components/softdevice/s140/headers/ble_types.h \
+ ../../../../../../components/softdevice/s140/headers/ble_err.h \
+ ../../../../../../components/ble/ble_advertising/ble_advertising.h \
+ ../../../../../../components/softdevice/s140/headers/ble.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gap.h \
+ ../../../../../../components/softdevice/s140/headers/ble_l2cap.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gatts.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gap.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
+ ../../../../../../components/ble/common/ble_advdata.h \
+ ../../../../../../components/softdevice/s140/headers/ble_hci.h \
+ ../../../../../../components/ble/common/ble_conn_params.h \
+ ../../../../../../components/ble/common/ble_srv_common.h \
+ ../../../../../../components/softdevice/s140/headers/ble_types.h \
+ ../../../../../../components/softdevice/common/nrf_sdh_soc.h \
+ ../../../../../../components/softdevice/common/nrf_sdh_ble.h \
+ ../../../../../../components/ble/nrf_ble_gatt/nrf_ble_gatt.h \
+ ../../../../../../components/ble/nrf_ble_qwr/nrf_ble_qwr.h \
+ ../../../../../../components/ble/common/ble_srv_common.h \
+ ../../../../../../components/libraries/timer/app_timer.h \
+ ../../../../../../components/libraries/bsp/bsp_btn_ble.h \
+ ../../../../../../components/libraries/bsp/bsp.h \
+ ../../../../../../components/boards/boards.h \
+ ../../../../../../components/boards/pca10056.h \
+ ../../../../../../components/libraries/button/app_button.h \
+ ../../../../../../components/libraries/pwr_mgmt/nrf_pwr_mgmt.h \
+ BLE_Final/ble_common.h BLE_Final/ble_common.h \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/algorithm \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_cstdio.h \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/cstdio \
@@ -181,41 +214,10 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/main.o: \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/new \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/cstdlib \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_tempbuf.c \
- ../../../../../../components/softdevice/s140/headers/ble_hci.h \
- ../../../../../../components/ble/common/ble_advdata.h \
- ../../../../../../components/softdevice/s140/headers/ble.h \
- ../../../../../../components/softdevice/s140/headers/ble_err.h \
- ../../../../../../components/softdevice/s140/headers/ble_gap.h \
- ../../../../../../components/softdevice/s140/headers/ble_hci.h \
- ../../../../../../components/softdevice/s140/headers/ble_ranges.h \
- ../../../../../../components/softdevice/s140/headers/ble_types.h \
- ../../../../../../components/softdevice/s140/headers/ble_l2cap.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
- ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatts.h \
- ../../../../../../components/ble/ble_advertising/ble_advertising.h \
- ../../../../../../components/softdevice/s140/headers/ble_gap.h \
- ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
- ../../../../../../components/ble/common/ble_conn_params.h \
- ../../../../../../components/ble/common/ble_srv_common.h \
- ../../../../../../components/softdevice/s140/headers/ble_types.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
- ../../../../../../components/softdevice/common/nrf_sdh_soc.h \
- ../../../../../../components/softdevice/common/nrf_sdh_ble.h \
- ../../../../../../components/ble/nrf_ble_gatt/nrf_ble_gatt.h \
- ../../../../../../components/ble/nrf_ble_qwr/nrf_ble_qwr.h \
- ../../../../../../components/ble/common/ble_srv_common.h \
- ../../../../../../components/libraries/timer/app_timer.h \
  ../../../../../../components/ble/ble_services/ble_nus/ble_nus.h \
  ../../../../../../components/ble/ble_link_ctx_manager/ble_link_ctx_manager.h \
  ../../../../../../components/ble/common/ble_conn_state.h \
  ../../../../../../components/libraries/atomic/nrf_atomic.h \
  ../../../../../../components/libraries/uart/app_uart.h \
- ../../../../../../components/libraries/bsp/bsp_btn_ble.h \
- ../../../../../../components/libraries/bsp/bsp.h \
- ../../../../../../components/boards/boards.h \
- ../../../../../../components/boards/pca10056.h \
- ../../../../../../components/libraries/button/app_button.h \
- ../../../../../../components/libraries/pwr_mgmt/nrf_pwr_mgmt.h \
  UartApp/uart_app.hpp CustomBleServices/BleUartService.hpp \
- BLE_Final/controller.h BLE_Final/custom_service.h BLE_Final/ble_common.h
+ BLE_Final/controller.h BLE_Final/custom_service.h

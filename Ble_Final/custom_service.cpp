@@ -1,34 +1,69 @@
 #include "custom_service.h"
 
+
 BLE_CUS_DEF(m_cust);
 
-static SystemTask *systemTask;
+//static SystemTask *systemTask;
 
-void DataHandler(CustEvent *bleCustEvent)
-{
-    uint8_t rxdBytes[100] = {0};
-    SystemTask::Messages systemMsg;
+// handler for received data over BLE 
+//void DataHandler(CustEvent *bleCustEvent)
+//{
+//    //uint8_t rxdBytes[100] = {0};
+//    //SystemTask::Messages systemMsg;
 
-    for (uint8_t idx = 0; idx < bleCustEvent->rxData.rxdBytes; idx++)
-    {
-        rxdBytes[idx] = bleCustEvent->rxData.rxBuffer[idx];
-    }
+//    //for (uint8_t idx = 0; idx < bleCustEvent->rxData.rxdBytes; idx++)
+//    //{
+//    //    rxdBytes[idx] = bleCustEvent->rxData.rxBuffer[idx];
+//    //}
         
-    uint8_t const *rxData = bleCustEvent->rxData.rxBuffer;
-    char const val = (char ) *rxData;
-    int a;
-    a++;
+//    //uint8_t const *rxData = bleCustEvent->rxData.rxBuffer;
+//    ////char const val = (char ) *rxData;
     
-    systemMsg = convertParsedInputToMsg((char *) rxdBytes);
-    systemTask->pushMessage(systemMsg);
+//    //// get an appropriate message out of the requested bytes
+//    //systemMsg = convertParsedInputToMsg((char *) rxdBytes);
 
-}
+//    //// route the corresponding message to the system task to take an apt action
+//    //systemTask->pushMessage(systemMsg, true);
+//}
 
 // TODO - remove
 BleCustDataHndlr BleCustomService::GetDataHdnlr()
 {
      return this->bleInitChar.DataHandler;
 }
+
+void BleCustomService::Send(uint8_t *data)
+{
+    uint16_t               bytesToTx = 5; //1;
+    ble_gatts_hvx_params_t hvx_params;
+    memset(&hvx_params, 0, sizeof(hvx_params));
+
+        // Send value if connected and notifying
+    if (_pSrvInfo->connectionHandle != BLE_CONN_HANDLE_INVALID)
+    {
+        hvx_params.handle = _pSrvInfo->customValueHandle.value_handle;
+        hvx_params.type   = BLE_GATT_HVX_NOTIFICATION;
+        hvx_params.offset = 0;
+        hvx_params.p_len  = &bytesToTx;
+        hvx_params.p_data = data;  
+        
+        ret_code_t  err_code = sd_ble_gatts_hvx(_pSrvInfo->connectionHandle, &hvx_params);
+        NRF_LOG_INFO("sd_ble_gatts_hvx()");
+
+        if (err_code == BLE_ERROR_GATTS_SYS_ATTR_MISSING)
+        {
+	  err_code = sd_ble_gatts_sys_attr_set(_pSrvInfo->connectionHandle, NULL, 0, 0);
+	  APP_ERROR_CHECK(err_code);
+	  NRF_LOG_INFO("BLE_ERROR_GATTS_SYS_ATTR_MISSING");
+
+	  // resending 
+	  err_code = sd_ble_gatts_hvx(_pSrvInfo->connectionHandle, &hvx_params);
+	  //APP_ERROR_CHECK(err_code); 
+        }
+        APP_ERROR_CHECK(err_code);  
+     }
+}
+
 
 static uint32_t custom_value_char_add(BleCustSrvInfo *p_cus, const CustInitChar * p_cus_init)
 {
@@ -43,7 +78,7 @@ static uint32_t custom_value_char_add(BleCustSrvInfo *p_cus, const CustInitChar 
 
     char_md.char_props.read   = 1;
     char_md.char_props.write  = 1;
-    char_md.char_props.notify = 0; 
+    char_md.char_props.notify = 1; 
     char_md.p_char_user_desc  = NULL;
     char_md.p_char_pf         = NULL;
     char_md.p_user_desc_md    = NULL;
@@ -70,7 +105,8 @@ static uint32_t custom_value_char_add(BleCustSrvInfo *p_cus, const CustInitChar 
     attr_char_value.init_offs = 0;
     attr_char_value.max_len   = sizeof(uint8_t) * 10;	// TODO - modify the max length
 
-    err_code = sd_ble_gatts_characteristic_add(p_cus->serviceHandle, &char_md,
+    err_code = sd_ble_gatts_characteristic_add(p_cus->serviceHandle, 
+				       &char_md,
                                                &attr_char_value,
                                                &p_cus->customValueHandle);
     if (err_code != NRF_SUCCESS)
@@ -82,7 +118,8 @@ static uint32_t custom_value_char_add(BleCustSrvInfo *p_cus, const CustInitChar 
 }
 
 
-uint32_t BleCustomService::ServiceInit(BleCustSrvInfo *pSrvInfo, CustInitChar *custInitCharac)
+// initialize the service
+uint32_t BleCustomService::ServiceInit(BleCustSrvInfo *pSrvInfo, CustInitChar *custInitCharac, BleCustDataHndlr srvDataHdlr)
 {
     //if (pCustom == NULL || pCustInit == NULL)
     //{
@@ -91,9 +128,12 @@ uint32_t BleCustomService::ServiceInit(BleCustSrvInfo *pSrvInfo, CustInitChar *c
     uint32_t   errorCode;
     ble_uuid_t bleUuid;
 
+    _pSrvInfo = pSrvInfo;
+
     // Initialize service structure
-    pSrvInfo->connectionHandle               = BLE_CONN_HANDLE_INVALID;
-    pSrvInfo->DataHandler = DataHandler;
+    pSrvInfo->connectionHandle = BLE_CONN_HANDLE_INVALID;
+        //pSrvInfo->DataHandler = DataHandler;
+    pSrvInfo->DataHandler = srvDataHdlr;
 
     // Add Custom Service UUID
     ble_uuid128_t baseUuid = {CUSTOM_SERVICE_UUID_BASE};
@@ -112,7 +152,7 @@ uint32_t BleCustomService::ServiceInit(BleCustSrvInfo *pSrvInfo, CustInitChar *c
 
     // Add Custom Value characteristic
     return custom_value_char_add(pSrvInfo, custInitCharac);
-    return errorCode;
+//    return errorCode;
 }
 
 static void nrf_qwr_error_handler(uint32_t nrf_error)
@@ -122,13 +162,13 @@ static void nrf_qwr_error_handler(uint32_t nrf_error)
 
 
 NRF_BLE_QWR_DEF(m_qwr);  // TODO needed??
-void BleCustomService::Init()
+void BleCustomService::Init(BleCustDataHndlr srvDataHdlr)
 {
     ret_code_t         err_code;
     nrf_ble_qwr_init_t qwr_init = {0};
     CustInitChar	   custInitCharac;
 
-    systemTask = _systemTask;
+    //systemTask = _systemTask;
   
     ////BleCustInit_t     cus_init;
 
@@ -138,12 +178,10 @@ void BleCustomService::Init()
     err_code = nrf_ble_qwr_init(&m_qwr, &qwr_init);
     APP_ERROR_CHECK(err_code);
 
-
-
     // Initialize CUS Service init structure to zero.
     //memset(&cus_init, 0, sizeof(cus_init));
 	
-    err_code = ServiceInit(&m_cust, &custInitCharac);
+    err_code = ServiceInit(&m_cust, &custInitCharac, srvDataHdlr);
     APP_ERROR_CHECK(err_code);
 
 }
