@@ -12,7 +12,7 @@
 /*
     - include protection guard for the buffer in case BLE service also accesses it
 */
-constexpr uint8_t fifoSize = 65; // 17; // (16) +1 to accomodate for a NULL terminator
+constexpr uint8_t fifoSize = 65; // 17; // (16)  // +1 to accomodate for a NULL terminator
 
  typedef enum 
  {
@@ -45,40 +45,14 @@ class Fifo
 		         mask(fifoSize - 2)
     {}
 
-//    template<typename T>
-//Fifo<T>::Fifo() : 
-//		         bufferSize(fifoSize), 
-//		         _readIdx(0), 
-//		         _writeIdx(0),
-//		         _startIdx(0),
-//		         mask(fifoSize - 1),
-//		         _buffer{0}
-//{
-//    //if (bufferSize % 2 != 0)
-//    //{
-//    //    NRF_LOG_WARNING("Fifo size needs to be power of 2 for now...\n");
-//    //    return;
-//    //}
-//   // NRF_LOG_INFO("Fifo of size %d is created\n", bufferSize);
-//   // NRF_LOG_FLUSH();
-//}
-
-
-    //void enque(const T byte);
 
     void printFifo() const
     {
-        //NRF_LOG_FLUSH();
-        //NRF_LOG_INFO("Template Type: %s\n", __PRETTY_FUNCTION__);
-        //NRF_LOG_FLUSH();
-
-   //     for (uint8_t idx = 0; idx < fifoSize; idx++)
-   //     {
-	  //NRF_LOG_INFO("%
-   //     }
+        // TODO
     }
 
     uint8_t const getReadIdx() const;
+
     void resetStartIdx()
     {
         _startIdx = _writeIdx;
@@ -96,16 +70,8 @@ class Fifo
     
     T deque()
     {
-   // TODO --     if (isEmpty())
-   //     {
-	  ////NRF_LOG_WARNING("Nothing to read from the queue - _readIdx: %d, _writeIdx: %d\n", _readIdx, _writeIdx);
-	  //return fifoIsEmpty;
-   //     }
-
-        //NRF_LOG_DEBUG("Reading %u at index %u\n", _buffer[_readIdx], _readIdx);
         if (isEmpty())
         {
-	  // NRF_LOG_WARNING("Nothing to read from the queue - _readIdx: %d, _writeIdx: %d\n", _readIdx, _writeIdx);
 	  return fifoIsEmpty;
         }
 
@@ -113,27 +79,15 @@ class Fifo
         
         ++_readIdx &= mask;
 
-
-   //     if (value == '\r')
-   //     {	  
-	  //++_readIdx &= mask;
-   //     }
-
-        //value = _buffer[_readIdx++];
-        //_readIdx &= mask;
-
         return value;
     }
 
     void enque(T item)    
     {
-         //NRF_LOG_INFO("[ENQUE] Writing at index %u\n", _writeIdx);
-        //NRF_LOG_FLUSH();
-
         _buffer[_writeIdx++] = item;
         _writeIdx &= mask;
 
-        _isFull = (_writeIdx - _readIdx == fifoSize - 2);    
+        _isFull = ((_writeIdx - _readIdx) == fifoSize - 2);    
     }
     
     void enqueElems(T *buffer, uint8_t size)
@@ -157,20 +111,6 @@ class Fifo
     uint8_t parseBytes(T *buffer, uint8_t bytesToCopy, char delimiter = '\r')
     {
         uint8_t count = 0;
-        //uint8_t bytesOffset = startIdx + bytesToCopy;
-
-   //     if (startIdx > (fifoSize - 1))
-   //     {
-	  //return indexOutOfBounds;
-   //     }
-   //     else if (isEmpty())
-   //     {
-	  //return fifoIsEmpty;
-   //     }
-   //     else if (bytesToCopy >= fifoSize)
-   //     {
-	  //return invalidRequestForBytes;
-   //     }
     
         while (count < bytesToCopy)
         {

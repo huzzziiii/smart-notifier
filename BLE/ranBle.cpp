@@ -365,7 +365,7 @@ int32_t add_custom_chars(ble_cus_t *p_cus, const ble_cus_init_t *p_cus_init)
 
 /**@brief Function for initializing services that will be used by the application.
  */
- void services_init(void)
+ void services_sinit(void)
 {
     uint32_t           err_code;
     ble_nus_init_t     nus_init;

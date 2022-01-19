@@ -3,45 +3,35 @@
 
 BLE_CUS_DEF(m_cust);
 
-//static SystemTask *systemTask;
-
-// handler for received data over BLE 
-//void DataHandler(CustEvent *bleCustEvent)
-//{
-//    //uint8_t rxdBytes[100] = {0};
-//    //SystemTask::Messages systemMsg;
-
-//    //for (uint8_t idx = 0; idx < bleCustEvent->rxData.rxdBytes; idx++)
-//    //{
-//    //    rxdBytes[idx] = bleCustEvent->rxData.rxBuffer[idx];
-//    //}
-        
-//    //uint8_t const *rxData = bleCustEvent->rxData.rxBuffer;
-//    ////char const val = (char ) *rxData;
-    
-//    //// get an appropriate message out of the requested bytes
-//    //systemMsg = convertParsedInputToMsg((char *) rxdBytes);
-
-//    //// route the corresponding message to the system task to take an apt action
-//    //systemTask->pushMessage(systemMsg, true);
-//}
-
-// TODO - remove
-BleCustDataHndlr BleCustomService::GetDataHdnlr()
-{
-     return this->bleInitChar.DataHandler;
-}
 
 void BleCustomService::Send(uint8_t *data)
 {
     uint16_t               bytesToTx = 5; //1;
     ble_gatts_hvx_params_t hvx_params;
     memset(&hvx_params, 0, sizeof(hvx_params));
+    ClientContext *clientContext;
+    int connHandle;
+    
+    if (!_pSrvInfo->isNotificationEnabled)
+    {
+        return;
+    }
+    //int err_code = blcm_link_ctx_get(_pSrvInfo->p_link_ctx_storage, _pSrvInfo->connectionHandle, (void **) &clientContext);
+    //if (err_code != NRF_SUCCESS)
+    //{
+    //    NRF_LOG_ERROR("Link context for 0x%02X connection handle could not be fetched.");
+    //}
+
+    //// TODO - define isNotificationEnabled in _pSrvInfo struct ....
+    //if (!clientContext->isNotificationEnabled)
+    //{
+    //    return;	    // TODO -- make Send() return of int
+    //}
 
         // Send value if connected and notifying
     if (_pSrvInfo->connectionHandle != BLE_CONN_HANDLE_INVALID)
     {
-        hvx_params.handle = _pSrvInfo->customValueHandle.value_handle;
+        hvx_params.handle = _pSrvInfo->rxCustomValueHandle.value_handle;
         hvx_params.type   = BLE_GATT_HVX_NOTIFICATION;
         hvx_params.offset = 0;
         hvx_params.p_len  = &bytesToTx;
@@ -58,8 +48,9 @@ void BleCustomService::Send(uint8_t *data)
 
 	  // resending 
 	  err_code = sd_ble_gatts_hvx(_pSrvInfo->connectionHandle, &hvx_params);
-	  //APP_ERROR_CHECK(err_code); 
+	  //APP_ERROR_CHECK(err_code);   
         }
+        nrf_gpio_pin_toggle(LED_2); 
         APP_ERROR_CHECK(err_code);  
      }
 }
@@ -108,7 +99,7 @@ static uint32_t custom_value_char_add(BleCustSrvInfo *p_cus, const CustInitChar 
     err_code = sd_ble_gatts_characteristic_add(p_cus->serviceHandle, 
 				       &char_md,
                                                &attr_char_value,
-                                               &p_cus->customValueHandle);
+                                               &p_cus->rxCustomValueHandle);
     if (err_code != NRF_SUCCESS)
     {
         return err_code;
@@ -167,10 +158,6 @@ void BleCustomService::Init(BleCustDataHndlr srvDataHdlr)
     ret_code_t         err_code;
     nrf_ble_qwr_init_t qwr_init = {0};
     CustInitChar	   custInitCharac;
-
-    //systemTask = _systemTask;
-  
-    ////BleCustInit_t     cus_init;
 
     // Initialize Queued Write Module.
     qwr_init.error_handler = nrf_qwr_error_handler;

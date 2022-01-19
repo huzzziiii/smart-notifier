@@ -61,7 +61,6 @@ void NotificationManager::update(Subject *subject)
         MCP9808 *mcp9808 = dynamic_cast<MCP9808*>(subject);
         uint16_t tmpValue = mcp9808->getCurrentTempInC();
         _notification.category = Category::tempReading;
-        //snprintf(_notification.msg, 50, "Current temperature value (C) = %u", tmpValue);
         snprintf(_notification.msg, 50, "t=%uC", tmpValue);
         _uart.PrintUart(_notification.msg);
 

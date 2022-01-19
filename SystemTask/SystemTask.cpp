@@ -2,17 +2,10 @@
 #include "Observer.hpp"
 #include "Subject.hpp" // TODO ---
 
-
-//#include "bleApp.hpp"
-//#include "BleUartService.hpp"
-//static uint8_t ringBuffer[8] = {QueueEmpty};		// todo
-
 /* todo -
  - what to do in enque() once queue == full?
     - override the data or wait till some vacancy?
 */
-//SystemTask::SystemTask(Uart &pUart, MCP9808 &tmpSensor, NotificationManager &notificationManager, QueueHandle_t &systemQueue, BleUartService &bleService) : 
-//		   uart(pUart), _tmpSensor(tmpSensor), _notificationManager(notificationManager), systemTaskQueue(systemQueue), _bleService(bleService)
 
 SystemTask *_systemTask;
 
@@ -30,19 +23,6 @@ SystemTask::SystemTask(Uart &pUart, MCP9808 &tmpSensor, NotificationManager &not
       
     size_t heapSize2 = xPortGetFreeHeapSize();
     size_t heapTaken = heapSize1 - heapSize2;
-
-    // BLE advertising and configuration
-    //ble_stack_init();
-    //gap_params_init();
-    //gatt_init();
-    //services_init();
-    //advertising_init();
-    //conn_params_init();
-
-    // Start execution.
-    //printf("\r\nUART started.\r\n");
-    //NRF_LOG_INFO("Debug logging for UART over RTT started.");
-    //advertising_start();
 }
 
 void SystemTask::process(void *instance)
@@ -51,9 +31,6 @@ void SystemTask::process(void *instance)
     pInstance->mainThread();
 }
 
-static uint8_t temp[40]; // TODO - remove
-static uint16_t xaf = 0;
-static int count = 0;
 
 void CustSrvDataHdlr(CustEvent *bleCustEvent)
 {
@@ -83,22 +60,14 @@ void CustSrvDataHdlr(CustEvent *bleCustEvent)
 void SystemTask::mainThread()
 {   
     Messages curMsg;
-
-    //_tmpSensor.xferData(temp, 1);
-    //_tmpSensor.read();
-    // TODO - init peripherals?
-    
-        count++;
-        //xaf = _tmpSensor.read();
-        //vTaskDelay(pdMS_TO_TICKS(1000));
+  
     while(true)
     {
         if (xQueueReceive(systemTaskQueue, &msg, portMAX_DELAY) == pdPASS)      // wait for the user input over UART (for now!)
         {
-	  curMsg = static_cast<Messages>(msg);		         // TODO - might as well make msg type --> Message
+	  curMsg = static_cast<Messages>(msg);		        
 	  Lookup lookupVal = lookupTable[msg];
-	  uart.PrintUart("Message received: %s", lookupVal.name); // Messages::subscribeTempNotifications]);
-	  //NRF_LOG_INFO("[SystemTask] -- message received: %d\n", curMsg);
+	  uart.PrintUart("Message received: %s", lookupVal.name); 
 	  	       
 	  switch(curMsg)
 	  {
@@ -132,8 +101,6 @@ SystemTask::Messages convertParsedInputToMsg(const char *inputToCmp)
 
 void SystemTask::pushMessage(SystemTask::Messages dataToQueue, bool fromISR)
 {
-    //NRF_LOG_WARNING("SystemTask::pushMessage()...\n");
-    //NRF_LOG_FLUSH();
     BaseType_t xHigherPriorityTaskWoken = pdFALSE; // TODO - need?
 
     if (fromISR)

@@ -1,7 +1,7 @@
 #ifndef BLE_COMMON_H
 #define BLE_COMMON_H
 
-//#include "controller.h"
+#include "ble_link_ctx_manager.h"
 
 typedef struct
 {
@@ -28,6 +28,7 @@ NRF_SDH_BLE_OBSERVER(_name ## _obs,                                             
 
 typedef struct BleCust_s BleCustSrvInfo;
 
+
 typedef struct
 {
     //BleCustSrvInfo	*pCustSrvInfo; 
@@ -49,21 +50,11 @@ struct BleCust_s
     uint16_t                      connectionHandle;                    /**< Handle of the current connection (as provided by the BLE stack, is BLE_CONN_HANDLE_INVALID if not in a connection). */
     uint8_t                       uuidType;
     BleCustDataHndlr	    DataHandler;	      /**< Callback for data handling */
+    ble_gatts_char_handles_t		    txCustomValueHandle;
+    ble_gatts_char_handles_t		    rxCustomValueHandle;
+    blcm_link_ctx_storage_t	    *p_link_ctx_storage;
+    bool isNotificationEnabled;
 };
-
-//typedef struct
-//{
-//    //BleCustSrvInfo	*pCustSrvInfo; 
-//    BleCusEvtType	eventType;
-//    uint16_t	connectionHandle;
-//    BleCusRxData	rxData;
-//} CustEvent;
-
-
-
-
-//typedef void (*BleCustDataHndlr)(CustEvent *p_evt);
-
 
 
 #endif 

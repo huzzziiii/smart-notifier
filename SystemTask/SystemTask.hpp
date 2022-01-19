@@ -8,10 +8,6 @@
 #include <queue.h>
 #include "uart.hpp"
 #include "mcp9808.hpp"
-//#include "BleUartService.hpp"
-// TODO -- #include "bleApp.hpp"
-//#include "BleCommon.hpp"
-//#include "ble_nus.h"
 #include "NotificationManager.hpp"
 #include "ble_common.h"
 
@@ -31,7 +27,6 @@ class SystemTask
     MCP9808 &_tmpSensor;
 
     NotificationManager &_notificationManager;
-    //BleUartService &_bleService;
 
     static void process(void* arg);
 
@@ -45,8 +40,6 @@ class SystemTask
         invalidInput
     };
     static Messages messages;
-    //SystemTask(Uart &uart, MCP9808 &tmpSensor, NotificationManager &notificationManager, QueueHandle_t &systemTask, BleUartService &bleService);
-    
     SystemTask(Uart &uart, MCP9808 &tmpSensor, NotificationManager &notificationManager, QueueHandle_t &systemTask);
     void pushMessage(SystemTask::Messages msg, bool fromISR = true);
     void mainThread();

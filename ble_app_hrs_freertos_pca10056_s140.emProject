@@ -9,12 +9,6 @@
     c_preprocessor_definitions="DEBUG; DEBUG_NRF"
     gcc_optimization_level="Debug" />
   <configuration Name="Common" gcc_cplusplus_language_standard="c++11" />
-  <import file_name="../../../../../peripheral/uart/pca10056/blank/ses/uart_pca10056.emProject" />
-  <import file_name="../../../../../peripheral/twi_sensor/pca10056/blank/ses/twi_sensor_pca10056.emProject" />
-  <import file_name="../../../../../ble_peripheral/ble_app_uart/pca10056/s140/ses/ble_app_uart_pca10056_s140.emProject" />
-  <import file_name="../../../../../peripheral/blinky_freertos/pca10056/blank/ses/blinky_FreeRTOS_pca10056.emProject" />
-  <import file_name="../../../../../ble_peripheral/ble_app_template/pca10056/s140/ses/ble_app_template_pca10056_s140.emProject" />
-  <import file_name="../../../../../ble_peripheral/ble_app_hrs_freertos/pca10056/s140/ses/ble_app_hrs_freertos_pca10056_s140.emProject" />
   <project Name="Init template - FreeRTOS">
     <configuration
       Name="Common"
@@ -269,48 +263,10 @@
       <file file_name="ObserverPattern/Observer.cpp" />
       <file file_name="ObserverPattern/Subject.cpp" />
     </folder>
-    <folder Name="Custom BLE Services">
-      <file file_name="CustomBleServices/BleUartService.cpp">
-        <configuration Name="Release" build_exclude_from_build="Yes" />
-      </file>
-      <file file_name="CustomBleServices/BleUartService.hpp">
-        <configuration Name="Release" build_exclude_from_build="Yes" />
-      </file>
-      <file file_name="CustomBleServices/BleCommon.c">
-        <configuration Name="Release" build_exclude_from_build="Yes" />
-      </file>
-      <file file_name="CustomBleServices/BleCommon.h">
-        <configuration Name="Release" build_exclude_from_build="Yes" />
-      </file>
-      <file file_name="CustomBleServices/Tutorial_BleUartService.cpp">
-        <configuration Name="Release" build_exclude_from_build="Yes" />
-      </file>
-      <file file_name="CustomBleServices/Tutorial_BleUartService.hpp">
-        <configuration Name="Release" build_exclude_from_build="Yes" />
-      </file>
-      <configuration Name="Release" build_exclude_from_build="Yes" />
-      <configuration Name="Debug" build_exclude_from_build="Yes" />
-    </folder>
     <folder Name="TimerApp">
       <file file_name="TimerApp/TimerApp.cpp" />
       <file file_name="TimerApp/TimerApp.hpp" />
       <configuration Name="Release" build_exclude_from_build="Yes" />
-      <configuration Name="Debug" build_exclude_from_build="Yes" />
-    </folder>
-    <folder Name="BLE">
-      <file file_name="BLE/bleApp.hpp">
-        <configuration Name="Release" build_exclude_from_build="Yes" />
-      </file>
-      <file file_name="BLE/ranBle.cpp">
-        <configuration Name="Release" build_exclude_from_build="Yes" />
-      </file>
-      <file file_name="BLE/bleApp.cpp">
-        <configuration Name="Release" build_exclude_from_build="Yes" />
-      </file>
-      <configuration Name="Release" build_exclude_from_build="Yes" />
-      <file file_name="BLE/ranBle.hpp">
-        <configuration Name="Release" build_exclude_from_build="Yes" />
-      </file>
       <configuration Name="Debug" build_exclude_from_build="Yes" />
     </folder>
     <file file_name="SeggerFiles/SEGGER/SEGGER_SYSVIEW.c">

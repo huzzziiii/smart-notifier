@@ -169,4 +169,7 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/SystemTask.o: \
  ../../../../../../components/boards/pca10056.h \
  ../../../../../../components/libraries/button/app_button.h \
  ../../../../../../components/libraries/pwr_mgmt/nrf_pwr_mgmt.h \
+ ../../../../../../components/ble/ble_link_ctx_manager/ble_link_ctx_manager.h \
+ ../../../../../../components/ble/common/ble_conn_state.h \
+ ../../../../../../components/libraries/atomic/nrf_atomic.h \
  BLE_Final/ble_common.h SystemTask/SystemTask.hpp BLE_Final/ble_common.h

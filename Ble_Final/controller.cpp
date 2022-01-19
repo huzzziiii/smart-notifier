@@ -15,6 +15,9 @@ static void on_connect(BleCustSrvInfo *p_cus, ble_evt_t const * p_ble_evt)
     ret_code_t err_code = nrf_ble_qwr_conn_handle_assign(&m_qwr, m_conn_handle);
     APP_ERROR_CHECK(err_code);
     p_cus->connectionHandle = p_ble_evt->evt.gap_evt.conn_handle;
+    
+    // indicate the connection by lighting up LED 3
+    nrf_gpio_pin_clear(LED_3); 
 }
 
 /**@brief Function for handling the Disconnect event.
@@ -26,6 +29,7 @@ static void on_disconnect(BleCustSrvInfo *p_cus, ble_evt_t const * p_ble_evt)
 {
     UNUSED_PARAMETER(p_ble_evt);
     p_cus->connectionHandle = BLE_CONN_HANDLE_INVALID;
+    nrf_gpio_pin_set(LED_3);
 }
 
 /**@brief Function for handling the Write event.
@@ -35,31 +39,54 @@ static void on_disconnect(BleCustSrvInfo *p_cus, ble_evt_t const * p_ble_evt)
  */
 void on_write(BleCustSrvInfo *pCust, ble_evt_t const * p_ble_evt)
 {
-    
     CustEvent bleCustEvent;
+    ClientContext *clientContext;
     memset(&bleCustEvent, sizeof(CustEvent), 0);
-    
-    //bleCustEvent.pCust = pCust;
+    ble_gatts_evt_write_t const * p_evt_write = &p_ble_evt->evt.gatts_evt.params.write;
 
-    ble_gatts_evt_write_t const *p_evt_write = &p_ble_evt->evt.gatts_evt.params.write;
-    
-    //int len = p_ble_evt->params.rx_data.length;  // p_evt->params.rx_data.length
- 
-    // Check if the handle passed with the event matches the Custom Value Characteristic handle.
-    if (p_evt_write->handle == pCust->customValueHandle.value_handle)
+    int err_code = blcm_link_ctx_get(pCust->p_link_ctx_storage,
+                                 p_ble_evt->evt.gatts_evt.conn_handle,
+                                 (void **) &clientContext);
+    if (err_code != NRF_SUCCESS)
     {
+        NRF_LOG_ERROR("Link context for 0x%02X connection handle could not be fetched.",
+                      p_ble_evt->evt.gatts_evt.conn_handle);
+    }
+
+    // Check if the handle passed with the event matches the Custom Value Characteristic handle ==> NOTE: CCCD characteristic is 2 bytes
+    if ( (p_evt_write->handle == pCust->rxCustomValueHandle.cccd_handle) && (p_evt_write->len == 2))
+    {
+        if (!clientContext)
+        {
+	  if (ble_srv_is_notification_enabled(p_evt_write->data))
+	  {
+	      clientContext->isNotificationEnabled = true;
+	      pCust->isNotificationEnabled = true;
+	      bleCustEvent.eventType               = bleCusEvtCommStarted;
+	      nrf_gpio_pin_clear(LED_1);
+
+	  }
+	  else
+	  {
+	      clientContext->isNotificationEnabled = false;
+	      bleCustEvent.eventType               = bleCusEvtCommStopped;
+	  }
+        }
+       
+     } // received data over BLE
+     else if ( (p_evt_write->handle == pCust->rxCustomValueHandle.value_handle) && pCust->DataHandler != NULL)
+     {
         bleCustEvent.eventType = bleCusEvtRxData;
         bleCustEvent.rxData.rxBuffer = p_evt_write->data;
         bleCustEvent.rxData.rxdBytes = p_evt_write->len;
-        
-        nrf_gpio_pin_toggle(LED_4);  // TODO - do useful stuff!
-        
+
+        nrf_gpio_pin_toggle(LED_4); 
+
         // invoke the custom service data handler
-        if (pCust->DataHandler)
-        {
-	  pCust->DataHandler(&bleCustEvent);
-        }
-    }
+        pCust->DataHandler(&bleCustEvent);
+        
+     }
+
 }
 
 void ble_cus_on_ble_evt( ble_evt_t const * p_ble_evt, void * p_context)
@@ -104,7 +131,6 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
     {
         case BLE_GAP_EVT_CONNECTED:
             NRF_LOG_INFO("Connected");
-//NRF_LOG_FLUSH();	    // TODO -- remove!
 
 	  //APP_ERROR_CHECK(NRF_ERROR_INVALID_STATE);
             err_code = bsp_indication_set(BSP_INDICATE_CONNECTED);
@@ -181,7 +207,7 @@ void gatt_evt_handler(nrf_ble_gatt_t * p_gatt, nrf_ble_gatt_evt_t const * p_evt)
 
 
 /**@brief Function for initializing the GATT library. */
-void gatt_init(void)
+void InitGatt(void)
 {
     ret_code_t err_code;
 
@@ -197,7 +223,7 @@ void gatt_init(void)
  * @details This function will set up all the necessary GAP (Generic Access Profile) parameters of
  *          the device. It also sets the permissions and appearance.
  */
- void gap_params_init(void)
+ void InitGapParams(void)
 {
     uint32_t                err_code;
     ble_gap_conn_params_t   gap_conn_params;
@@ -246,7 +272,7 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
 }
 /**@brief Function for initializing the Advertising functionality.
  */
- void advertising_init(void)
+ void AdvertisingInit(void)
 {
     uint32_t               err_code;
     ble_advertising_init_t init;
@@ -309,7 +335,7 @@ static void on_conn_params_evt(ble_conn_params_evt_t * p_evt)
 
 /**@brief Function for initializing the Connection Parameters module.
  */
-void conn_params_init(void)
+void InitConnectionParams(void)
 {
     uint32_t               err_code;
     ble_conn_params_init_t cp_init;
@@ -333,7 +359,7 @@ void conn_params_init(void)
  *
  * @details This function initializes the SoftDevice and the BLE event interrupt.
  */
- void ble_stack_init(void)
+ void InitBleStack(void)
 {
     ret_code_t err_code;
 
@@ -354,7 +380,7 @@ void conn_params_init(void)
     NRF_SDH_BLE_OBSERVER(m_ble_observer, APP_BLE_OBSERVER_PRIO, ble_evt_handler, NULL);
 }
 
-void advertising_start(void)
+void StartAdvertising(void)
 {
     uint32_t err_code = ble_advertising_start(&m_advertising, BLE_ADV_MODE_FAST);
     APP_ERROR_CHECK(err_code);
@@ -370,23 +396,22 @@ void BleController::Init(BleCustDataHndlr bleCustSrvHdlr)
 {   
     ret_code_t         err_code;
 
-    ble_stack_init();
-    gap_params_init();
-    gatt_init();
+    InitBleStack();
+    InitGapParams();
+    InitGatt();
 
-     nrf_ble_qwr_init_t qwr_init = {0};
-    //BleCustInit_t     cus_init;
+    nrf_ble_qwr_init_t qwrInit = {0};
 
-    // Initialize Queued Write Module.
-    qwr_init.error_handler = nrf_qwr_error_handler;
+    // init nRF Queued Write Module
+    qwrInit.error_handler = nrf_qwr_error_handler;
 
-    err_code = nrf_ble_qwr_init(&m_qwr, &qwr_init);
+    err_code = nrf_ble_qwr_init(&m_qwr, &qwrInit);
     APP_ERROR_CHECK(err_code);
-
-    _bleCustomSrv.Init(bleCustSrvHdlr);
-    advertising_init();
-    conn_params_init();
-    advertising_start();
     
+    // init the custom service
+    _bleCustomSrv.Init(bleCustSrvHdlr);
 
+    AdvertisingInit();
+    InitConnectionParams();
+    StartAdvertising();
 }

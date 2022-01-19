@@ -1,16 +1,5 @@
 #include "Subject.hpp"
 
-//int Subject::GetObserverIdx(Observer *obs)
-//{
-//    for (uint8_t idx = 0; idx < observerMaxSize; idx++)
-//    {
-//        if (observerList[idx] == obs)
-//        {
-//	  return idx;
-//        }	
-//    }
-//    return -1;
-//}
 
 /*
 @brief: attach an observer to the subject for notifications i.e subscribing

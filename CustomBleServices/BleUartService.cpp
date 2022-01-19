@@ -470,7 +470,7 @@ void advertising_start(void)
 
 //NRF_BLE_QWR_DEF(m_qwr); 
 BLE_NUS_DEF(m_nus, NRF_SDH_BLE_TOTAL_LINK_COUNT);  
-void services_init(void)
+void services_inxit(void)
 {
     uint32_t           err_code;
     ble_nus_init_t     nus_init;

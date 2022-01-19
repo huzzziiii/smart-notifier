@@ -117,22 +117,44 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/main.o: \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdlib.h \
  ../../../../../../components/libraries/balloc/nrf_balloc.h \
  ../../../../../../components/libraries/log/nrf_log_default_backends.h \
- custom_drivers/Inc/mcp9808.hpp custom_drivers/Inc/sensors.hpp \
- ../../../../../../integration/nrfx/legacy/nrf_drv_twi.h \
- ../../../../../../modules/nrfx/drivers/include/nrfx_twim.h \
- ../../../../../../modules/nrfx/drivers/include/nrfx_twi_twim.h \
- ../../../../../../modules/nrfx/hal/nrf_twim.h \
- ../../../../../../modules/nrfx/drivers/include/nrfx_twi.h \
- ../../../../../../modules/nrfx/hal/nrf_twi.h NrfLogger/Inc/NrfLogger.hpp \
- ../../../../../../external/freertos/source/include/stream_buffer.h \
- ObserverPattern/Subject.hpp ObserverPattern/Observer.hpp \
- ObserverPattern/Subject.hpp TimerApp/TimerApp.hpp \
- ../../../../../../external/freertos/source/include/timers.h \
- ../../../../../../external/freertos/source/include/task.h \
- ../../../../../../external/freertos/source/include/semphr.h \
- ../../../../../../external/freertos/source/include/queue.h \
- ../../../../../../external/freertos/source/include/queue.h \
- SystemTask/SystemTask.hpp custom_drivers/Inc/uart.hpp Fifo/Inc/fifo.hpp \
+ ../../../../../../components/softdevice/s140/headers/ble_hci.h \
+ ../../../../../../components/ble/common/ble_advdata.h \
+ ../../../../../../components/softdevice/s140/headers/ble.h \
+ ../../../../../../components/softdevice/s140/headers/ble_err.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gap.h \
+ ../../../../../../components/softdevice/s140/headers/ble_hci.h \
+ ../../../../../../components/softdevice/s140/headers/ble_ranges.h \
+ ../../../../../../components/softdevice/s140/headers/ble_types.h \
+ ../../../../../../components/softdevice/s140/headers/ble_l2cap.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gatts.h \
+ ../../../../../../components/ble/ble_advertising/ble_advertising.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gap.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
+ ../../../../../../components/ble/common/ble_conn_params.h \
+ ../../../../../../components/ble/common/ble_srv_common.h \
+ ../../../../../../components/softdevice/s140/headers/ble_types.h \
+ ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
+ ../../../../../../components/softdevice/common/nrf_sdh_soc.h \
+ ../../../../../../components/softdevice/common/nrf_sdh_ble.h \
+ ../../../../../../components/ble/nrf_ble_gatt/nrf_ble_gatt.h \
+ ../../../../../../components/ble/nrf_ble_qwr/nrf_ble_qwr.h \
+ ../../../../../../components/ble/common/ble_srv_common.h \
+ ../../../../../../components/libraries/timer/app_timer.h \
+ ../../../../../../components/ble/ble_services/ble_nus/ble_nus.h \
+ ../../../../../../components/ble/ble_link_ctx_manager/ble_link_ctx_manager.h \
+ ../../../../../../components/ble/common/ble_conn_state.h \
+ ../../../../../../components/libraries/atomic/nrf_atomic.h \
+ ../../../../../../components/libraries/uart/app_uart.h \
+ ../../../../../../components/libraries/bsp/bsp_btn_ble.h \
+ ../../../../../../components/libraries/bsp/bsp.h \
+ ../../../../../../components/boards/boards.h \
+ ../../../../../../modules/nrfx/hal/nrf_gpio.h \
+ ../../../../../../components/boards/pca10056.h \
+ ../../../../../../components/libraries/button/app_button.h \
+ ../../../../../../components/libraries/pwr_mgmt/nrf_pwr_mgmt.h \
+ custom_drivers/Inc/uart.hpp Fifo/Inc/fifo.hpp \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/typeinfo \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_prolog.h \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/debug/_debug.h \
@@ -140,84 +162,24 @@ Output/Release/Obj/Init\ template\ -\ FreeRTOS/main.o: \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/typeinfo \
  /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/exception \
  /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/exception \
- ../../../../../../modules/nrfx/hal/nrf_gpio.h \
+ NrfLogger/Inc/NrfLogger.hpp \
+ ../../../../../../integration/nrfx/legacy/nrf_drv_twi.h \
+ ../../../../../../modules/nrfx/drivers/include/nrfx_twim.h \
+ ../../../../../../modules/nrfx/drivers/include/nrfx_twi_twim.h \
+ ../../../../../../modules/nrfx/hal/nrf_twim.h \
+ ../../../../../../modules/nrfx/drivers/include/nrfx_twi.h \
+ ../../../../../../modules/nrfx/hal/nrf_twi.h \
+ ../../../../../../external/freertos/source/include/stream_buffer.h \
+ ../../../../../../external/freertos/source/include/queue.h \
+ ../../../../../../external/freertos/source/include/task.h \
+ UartApp/uart_app.hpp SystemTask/SystemTask.hpp \
+ custom_drivers/Inc/mcp9808.hpp custom_drivers/Inc/sensors.hpp \
+ ObserverPattern/Subject.hpp ObserverPattern/Observer.hpp \
+ ObserverPattern/Subject.hpp TimerApp/TimerApp.hpp \
+ ../../../../../../external/freertos/source/include/timers.h \
+ ../../../../../../external/freertos/source/include/semphr.h \
+ ../../../../../../external/freertos/source/include/queue.h \
  NotificationManager/NotificationManager.hpp ObserverPattern/Observer.hpp \
- BLE_Final/custom_service.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
- ../../../../../../components/softdevice/s140/headers/ble_hci.h \
- ../../../../../../components/softdevice/s140/headers/ble_ranges.h \
- ../../../../../../components/softdevice/s140/headers/ble_types.h \
- ../../../../../../components/softdevice/s140/headers/ble_err.h \
- ../../../../../../components/ble/ble_advertising/ble_advertising.h \
- ../../../../../../components/softdevice/s140/headers/ble.h \
- ../../../../../../components/softdevice/s140/headers/ble_gap.h \
- ../../../../../../components/softdevice/s140/headers/ble_l2cap.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatt.h \
- ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
- ../../../../../../components/softdevice/s140/headers/ble_gatts.h \
- ../../../../../../components/softdevice/s140/headers/ble_gap.h \
- ../../../../../../components/softdevice/s140/headers/ble_gattc.h \
- ../../../../../../components/ble/common/ble_advdata.h \
- ../../../../../../components/softdevice/s140/headers/ble_hci.h \
- ../../../../../../components/ble/common/ble_conn_params.h \
- ../../../../../../components/ble/common/ble_srv_common.h \
- ../../../../../../components/softdevice/s140/headers/ble_types.h \
- ../../../../../../components/softdevice/common/nrf_sdh_soc.h \
- ../../../../../../components/softdevice/common/nrf_sdh_ble.h \
- ../../../../../../components/ble/nrf_ble_gatt/nrf_ble_gatt.h \
- ../../../../../../components/ble/nrf_ble_qwr/nrf_ble_qwr.h \
- ../../../../../../components/ble/common/ble_srv_common.h \
- ../../../../../../components/libraries/timer/app_timer.h \
- ../../../../../../components/libraries/bsp/bsp_btn_ble.h \
- ../../../../../../components/libraries/bsp/bsp.h \
- ../../../../../../components/boards/boards.h \
- ../../../../../../components/boards/pca10056.h \
- ../../../../../../components/libraries/button/app_button.h \
- ../../../../../../components/libraries/pwr_mgmt/nrf_pwr_mgmt.h \
- BLE_Final/ble_common.h BLE_Final/ble_common.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/algorithm \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_cstdio.h \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/cstdio \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_algo.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_algobase.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_cstddef.h \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/cstddef \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_cstring.h \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/cstring \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/using/cstring \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/climits \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/climits \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/limits.h \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/limits.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_cstdlib.h \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/cstdlib \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_cmath.h \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/cmath \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/math.h \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/math.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_pair.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/type_traits.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/type_manips.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_move_construct_fwk.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_iterator_base.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_ptrs_specialize.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_algobase.c \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_function_base.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_iterator.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_heap.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_heap.c \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_algo.c \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_tempbuf.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_uninitialized.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_construct.h \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_new.h \
- /Applications/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/new \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/cstdlib \
- /Users/huzaifaasif/Library/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/STLport/stlport/stl/_tempbuf.c \
- ../../../../../../components/ble/ble_services/ble_nus/ble_nus.h \
- ../../../../../../components/ble/ble_link_ctx_manager/ble_link_ctx_manager.h \
- ../../../../../../components/ble/common/ble_conn_state.h \
- ../../../../../../components/libraries/atomic/nrf_atomic.h \
- ../../../../../../components/libraries/uart/app_uart.h \
- UartApp/uart_app.hpp CustomBleServices/BleUartService.hpp \
- BLE_Final/controller.h BLE_Final/custom_service.h
+ BLE_Final/custom_service.h BLE_Final/ble_common.h BLE_Final/ble_common.h \
+ CustomBleServices/BleUartService.hpp BLE_Final/controller.h \
+ BLE_Final/custom_service.h
