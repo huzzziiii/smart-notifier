@@ -1,5 +1,5 @@
 # Notifier App
-The app acts a Notifier that keeps the user updated with the relevant information over serial terminal as well as nRF Connect App over BLE. The data that's displayed depends on what the user has subscribed to, and there are corresponding commands for those.
+The app acts a Notifier that keeps the user updated with the relevant information over serial terminal as well as [nRF Connect App](https://apps.apple.com/us/app/nrf-connect-for-mobile/id1054362403) over BLE. The data that's displayed depends on what the user has subscribed to, and there are corresponding commands for those.
 
 ## User Interfacing
 User can interface with the app over UART and [nRF Connect App](https://apps.apple.com/us/app/nrf-connect-for-mobile/id1054362403), which acts as a central and talks to the peripheral (nRF52 DK) running the FW.
