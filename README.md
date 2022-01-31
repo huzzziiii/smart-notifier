@@ -1,7 +1,7 @@
 # Notifier App
 The app acts a Notifier that keeps the user updated with the relevant information over serial terminal as well as [nRF Connect App](https://apps.apple.com/us/app/nrf-connect-for-mobile/id1054362403) over BLE. The data that's displayed depends on what the user has subscribed to through the supported commands.
 
-## User Interfacing
+## Supported Commands
 User can interface with the app over UART and [nRF Connect App](https://apps.apple.com/us/app/nrf-connect-for-mobile/id1054362403), which acts as a central and talks to the peripheral (nRF52 DK) running the FW.
 
 Following are the currently supported commands:
@@ -20,7 +20,7 @@ This pattern is used for scalability: for X amount of sensors to be used (in the
 
 <img width="1008" alt="Screen Shot 2022-01-18 at 4 23 51 PM" src="https://user-images.githubusercontent.com/15020079/150040221-4bba6b52-3282-4a55-ad7a-98a3c334a869.png">
 
-## Results
+## User Interfacing
 1) UART terminal with supported user commands alongside the view from Logic Analyzer
 
 <img width="842" alt="Screen Shot 2022-01-30 at 4 58 04 PM" src="https://user-images.githubusercontent.com/15020079/151725771-1c1c237f-89f9-4c7b-bf38-b054c9bb4dc2.png">
