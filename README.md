@@ -11,7 +11,6 @@ Following are the currently supported commands:
 | tempOff     | unsubscribes the temperature sensor from the `Notification` class: user would no longer see any updated temperature values
 | tempOn  | subscribes the temperature sensor to the `Notification`: user would receive notifications containing temperature values in C°
 
-
 ## Observer Pattern
 The sensor class forms a concrete Subject that stores a reference to the Observer which in our case is the Notification class. 
 
@@ -20,6 +19,15 @@ As soon as there's a sensor data ready to be pushed to a notification list, it i
 This pattern is used for scalability: for X amount of sensors to be used (in the future), each of which could be attached by the `Notification` class. And there's always flexibility to unsubscribe any sensor from the Notification class.
 
 <img width="1008" alt="Screen Shot 2022-01-18 at 4 23 51 PM" src="https://user-images.githubusercontent.com/15020079/150040221-4bba6b52-3282-4a55-ad7a-98a3c334a869.png">
+
+## Results
+1) UART terminal with supported user commands alongside the view from Logic Analyzer
+
+<img width="842" alt="Screen Shot 2022-01-30 at 4 58 04 PM" src="https://user-images.githubusercontent.com/15020079/151725771-1c1c237f-89f9-4c7b-bf38-b054c9bb4dc2.png">
+
+1.1) Zoomed-in view of one sample
+<img width="1394" alt="Screen Shot 2022-01-30 at 5 06 49 PM" src="https://user-images.githubusercontent.com/15020079/151726045-053e584e-599d-4ecf-88bc-398743ea22ff.png">
+
 
 
 ## Todo
