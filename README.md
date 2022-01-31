@@ -25,7 +25,7 @@ This pattern is used for scalability: for X amount of sensors to be used (in the
 
 <img width="842" alt="Screen Shot 2022-01-30 at 4 58 04 PM" src="https://user-images.githubusercontent.com/15020079/151725771-1c1c237f-89f9-4c7b-bf38-b054c9bb4dc2.png">
 
-1.1) Zoomed-in view of one sample
+Following is a zoomed-in view of a sensor reading
 <img width="1394" alt="Screen Shot 2022-01-30 at 5 06 49 PM" src="https://user-images.githubusercontent.com/15020079/151726045-053e584e-599d-4ecf-88bc-398743ea22ff.png">
 
 
